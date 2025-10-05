@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :notices, except: [:show]
     resources :pricing_plans, except: [:show]
     resources :trusted_brands, except: [:show]
+    resources :special_offers, except: [:show]
   end
 
   # Public routes

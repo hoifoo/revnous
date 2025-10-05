@@ -22,6 +22,8 @@ class CaseStudiesController < ApplicationController
     # Get unique values for filters
     @industries = CaseStudy.distinct.pluck(:industry).compact
     @product_features_list = CaseStudy.distinct.pluck(:product_features).compact
+
+    @special_offer = SpecialOffer.for_page('case_studies').first
   end
 
   def show

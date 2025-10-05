@@ -1,0 +1,67 @@
+<div class="max-w-7xl mx-auto">
+  <div class="flex justify-between items-center mb-8">
+    <h1 class="text-3xl font-bold text-gray-900">Special Offers</h1>
+    <%= link_to new_admin_special_offer_path, class: "px-4 py-2 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition font-medium" do %>
+      Create New Offer
+    <% end %>
+  </div>
+
+  <% if @special_offers.any? %>
+    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subtitle</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Placements</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <% @special_offers.each do |offer| %>
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4">
+                <div class="text-sm font-medium text-gray-900"><%= offer.title %></div>
+              </td>
+              <td class="px-6 py-4">
+                <div class="text-sm text-gray-500"><%= offer.subtitle %></div>
+              </td>
+              <td class="px-6 py-4">
+                <div class="flex flex-wrap gap-1">
+                  <% offer.placement_tags_list.each do |tag| %>
+                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                      <%= tag %>
+                    </span>
+                  <% end %>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <% if offer.active %>
+                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                    Active
+                  </span>
+                <% else %>
+                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
+                    Inactive
+                  </span>
+                <% end %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <%= link_to "Edit", edit_admin_special_offer_path(offer), class: "text-pink-600 hover:text-pink-900 mr-4" %>
+                <%= button_to "Delete", admin_special_offer_path(offer), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-900" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <%= paginate @special_offers, theme: 'twitter-bootstrap-4' if @special_offers.total_pages > 1 %>
+  <% else %>
+    <div class="bg-white rounded-lg shadow-md p-12 text-center">
+      <p class="text-gray-500 mb-4">No special offers yet</p>
+      <%= link_to "Create your first offer", new_admin_special_offer_path, class: "px-4 py-2 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition font-medium" %>
+    </div>
+  <% end %>
+</div>

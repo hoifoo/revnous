@@ -63,34 +63,43 @@
 </div>
 <% end %>
 
-<!-- Shopify Plus Offer Section -->
+<!-- Special Offer Section -->
+<% if @special_offer %>
 <div class="bg-white py-16">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <div class="bg-black rounded-2xl p-16 flex items-center justify-center">
         <div class="text-center">
-          <svg class="w-48 h-48 mx-auto text-white" viewBox="0 0 200 200" fill="currentColor">
-            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" class="text-6xl font-bold">
-              Shopify+
-            </text>
-          </svg>
+          <% if @special_offer.logo_text.present? %>
+            <svg class="w-48 h-48 mx-auto text-white" viewBox="0 0 200 200" fill="currentColor">
+              <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" class="text-6xl font-bold">
+                <%= @special_offer.logo_text %>
+              </text>
+            </svg>
+          <% end %>
         </div>
       </div>
       <div>
-        <p class="text-xs font-semibold text-pink-600 uppercase tracking-wide mb-4">EXCLUSIVE OFFER</p>
-        <h2 class="text-4xl font-bold text-gray-900 mb-6">Recently upgraded to Shopify Plus?</h2>
-        <p class="text-lg text-gray-600 mb-6">
-          Receive free lifetime access to Revnous's checkout functionality ($1200 annual value). Want to unlock
-          the full Revnous suite for free? Connect with us, learn and get your offer.
-        </p>
-        <p class="text-sm text-gray-500 mb-6">*Terms apply</p>
-        <a href="https://calendar.app.google/ExeXXoFRYB52hu5S8" target="_blank" class="inline-block px-6 py-3 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition font-medium">
-          Get the offer
-        </a>
+        <% if @special_offer.subtitle.present? %>
+          <p class="text-xs font-semibold text-pink-600 uppercase tracking-wide mb-4"><%= @special_offer.subtitle %></p>
+        <% end %>
+        <h2 class="text-4xl font-bold text-gray-900 mb-6"><%= @special_offer.title %></h2>
+        <% if @special_offer.description.present? %>
+          <p class="text-lg text-gray-600 mb-6"><%= @special_offer.description %></p>
+        <% end %>
+        <% if @special_offer.terms_text.present? %>
+          <p class="text-sm text-gray-500 mb-6"><%= @special_offer.terms_text %></p>
+        <% end %>
+        <% if @special_offer.cta_url.present? %>
+          <a href="<%= @special_offer.cta_url %>" target="_blank" class="inline-block px-6 py-3 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition font-medium">
+            <%= @special_offer.cta_text || 'Get the offer' %>
+          </a>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
+<% end %>
 
 <!-- Bottom CTA Section -->
 <div class="bg-gradient-to-br from-pink-600 to-purple-700 py-16 relative overflow-hidden">

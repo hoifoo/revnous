@@ -422,3 +422,31 @@ trusted_brands_data.each do |brand_data|
 end
 
 puts "Created #{TrustedBrand.count} trusted brands"
+
+# Clear existing special offers
+SpecialOffer.destroy_all
+
+# Create special offers
+special_offers_data = [
+  {
+    title: "Recently upgraded to Shopify Plus?",
+    subtitle: "EXCLUSIVE OFFER",
+    description: "Receive free lifetime access to Revnous's checkout functionality ($1200 annual value). Want to unlock the full Revnous suite for free? Connect with us, learn and get your offer.",
+    terms_text: "*Terms apply",
+    cta_text: "Get the offer",
+    cta_url: "https://calendar.app.google/ExeXXoFRYB52hu5S8",
+    logo_text: "Shopify+",
+    active: true,
+    placement_tags: [ "pricing" ]
+  }
+]
+
+special_offers_data.each do |offer_data|
+  placement_tags = offer_data.delete(:placement_tags)
+  offer = SpecialOffer.create!(offer_data)
+  offer.placement_tags_list = placement_tags if placement_tags
+  offer.save!
+  puts "Created special offer: #{offer.title}"
+end
+
+puts "Created #{SpecialOffer.count} special offers"
