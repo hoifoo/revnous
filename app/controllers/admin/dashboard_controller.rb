@@ -8,5 +8,6 @@ class Admin::DashboardController < Admin::BaseController
     @notices_count = Notice.count
     @active_notice = Notice.active_notice
     @pricing_plans_count = PricingPlan.count
+    @trusted_brands_count = TrustedBrand.count
   end
 end

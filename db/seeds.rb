@@ -402,3 +402,23 @@ pricing_plans_data.each do |plan_data|
 end
 
 puts "Created #{PricingPlan.count} pricing plans"
+
+# Clear existing trusted brands
+TrustedBrand.destroy_all
+
+# Create trusted brands
+trusted_brands_data = [
+  { name: "HEXCLAD", font_style: "bold", position: 1 },
+  { name: "TRUE CLASSIC", font_style: "bold", position: 2 },
+  { name: "David", font_style: "serif", position: 3 },
+  { name: "RIDGE", font_style: "bold", position: 4 },
+  { name: "/kit·sch/", font_style: "light", position: 5 },
+  { name: "PRINCE", font_style: "bold", position: 6 }
+]
+
+trusted_brands_data.each do |brand_data|
+  TrustedBrand.create!(brand_data)
+  puts "Created trusted brand: #{brand_data[:name]}"
+end
+
+puts "Created #{TrustedBrand.count} trusted brands"

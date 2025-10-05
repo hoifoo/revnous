@@ -4,7 +4,7 @@
 </div>
 
 <!-- Stats Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 mb-8">
   <div class="bg-white rounded-lg shadow p-6">
     <div class="flex items-center justify-between">
       <div>
@@ -88,6 +88,23 @@
     </div>
     <div class="mt-4">
       <%= link_to "Manage Plans", admin_pricing_plans_path, class: "text-sm text-green-600 hover:text-green-700" %>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg shadow p-6">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-gray-600">Trusted Brands</p>
+        <p class="text-3xl font-bold text-gray-900 mt-2"><%= @trusted_brands_count %></p>
+      </div>
+      <div class="bg-indigo-100 rounded-full p-3">
+        <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+        </svg>
+      </div>
+    </div>
+    <div class="mt-4">
+      <%= link_to "Manage Brands", admin_trusted_brands_path, class: "text-sm text-indigo-600 hover:text-indigo-700" %>
     </div>
   </div>
 </div>
@@ -187,6 +204,30 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
           </svg>
           <span class="font-medium text-gray-700 group-hover:text-gray-900">Manage Pricing Plans</span>
+        </div>
+        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      <% end %>
+
+      <%= link_to new_admin_trusted_brand_path, class: "flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition group" do %>
+        <div class="flex items-center">
+          <svg class="w-5 h-5 text-indigo-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+          </svg>
+          <span class="font-medium text-gray-700 group-hover:text-gray-900">Add Trusted Brand</span>
+        </div>
+        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      <% end %>
+
+      <%= link_to admin_trusted_brands_path, class: "flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition group" do %>
+        <div class="flex items-center">
+          <svg class="w-5 h-5 text-purple-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+          </svg>
+          <span class="font-medium text-gray-700 group-hover:text-gray-900">Manage Trusted Brands</span>
         </div>
         <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>

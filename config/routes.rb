@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :blogs, except: [:show]
     resources :notices, except: [:show]
     resources :pricing_plans, except: [:show]
+    resources :trusted_brands, except: [:show]
   end
 
   # Public routes

@@ -1,0 +1,78 @@
+<%= form_with(model: [:admin, trusted_brand], class: "space-y-6") do |form| %>
+  <% if trusted_brand.errors.any? %>
+    <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+      <h3 class="font-medium">Please fix the following errors:</h3>
+      <ul class="list-disc list-inside mt-2">
+        <% trusted_brand.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, "Brand Name", class: "block text-sm font-medium text-gray-700 mb-2" %>
+    <%= form.text_field :name, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500", placeholder: "e.g., HEXCLAD, David, TRUE CLASSIC" %>
+  </div>
+
+  <div>
+    <%= form.label :font_style, "Font Style", class: "block text-sm font-medium text-gray-700 mb-2" %>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <% TrustedBrand::FONT_STYLES.each do |value, css_class| %>
+        <label class="relative flex flex-col items-center cursor-pointer p-4 border-2 rounded-lg hover:border-pink-300 transition <%= 'border-pink-600 bg-pink-50' if trusted_brand.font_style == value %>">
+          <%= form.radio_button :font_style, value, class: "sr-only" %>
+          <span class="<%= css_class %> text-gray-900 mb-2">Aa</span>
+          <span class="text-xs text-gray-600 capitalize"><%= value %></span>
+        </label>
+      <% end %>
+    </div>
+  </div>
+
+  <div>
+    <%= form.label :position, "Display Order", class: "block text-sm font-medium text-gray-700 mb-2" %>
+    <%= form.number_field :position, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" %>
+    <p class="text-xs text-gray-500 mt-1">Lower numbers appear first</p>
+  </div>
+
+  <!-- Preview -->
+  <div class="p-6 bg-gray-50 rounded-lg">
+    <h3 class="text-sm font-medium text-gray-700 mb-4">Preview</h3>
+    <div class="flex justify-center">
+      <span id="brand-preview" class="<%= trusted_brand.css_classes %> text-gray-900">
+        <%= trusted_brand.name.present? ? trusted_brand.name : "BRAND NAME" %>
+      </span>
+    </div>
+  </div>
+
+  <div class="flex justify-end gap-4 pt-6 border-t border-gray-200">
+    <%= link_to "Cancel", admin_trusted_brands_path, class: "px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition font-medium" %>
+    <%= form.submit class: "px-4 py-2 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition font-medium" %>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const nameInput = document.querySelector('input[name="trusted_brand[name]"]');
+    const fontStyleInputs = document.querySelectorAll('input[name="trusted_brand[font_style]"]');
+    const preview = document.getElementById('brand-preview');
+
+    const fontClasses = {
+      <% TrustedBrand::FONT_STYLES.each do |value, css_class| %>
+        '<%= value %>': '<%= css_class %>',
+      <% end %>
+    };
+
+    function updatePreview() {
+      const name = nameInput.value || 'BRAND NAME';
+      const selectedStyle = document.querySelector('input[name="trusted_brand[font_style]"]:checked')?.value || 'bold';
+
+      preview.textContent = name;
+      preview.className = fontClasses[selectedStyle] + ' text-gray-900';
+    }
+
+    nameInput?.addEventListener('input', updatePreview);
+    fontStyleInputs.forEach(input => {
+      input.addEventListener('change', updatePreview);
+    });
+  });
+</script>

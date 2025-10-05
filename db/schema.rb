@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_05_100826) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_05_101953) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -285,6 +285,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_05_100826) do
     t.index ["data_type"], name: "index_system_configurations_on_data_type"
     t.index ["key"], name: "index_system_configurations_on_key", unique: true
     t.index ["updated_by_id"], name: "index_system_configurations_on_updated_by_id"
+  end
+
+  create_table "trusted_brands", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "font_style", default: "bold"
+    t.integer "position", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["position"], name: "index_trusted_brands_on_position"
   end
 
   create_table "users", force: :cascade do |t|
