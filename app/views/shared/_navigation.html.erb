@@ -1,0 +1,179 @@
+<header class="bg-white border-b border-gray-200 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <a href="/" class="text-2xl font-bold text-gray-900">Revnous</a>
+      </div>
+
+      <!-- Navigation Menu -->
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="<%= case_studies_path %>" class="text-gray-700 hover:text-gray-900 font-medium">Case Studies</a>
+        <a href="#" class="text-gray-700 hover:text-gray-900 font-medium">Partners</a>
+
+        <!-- Services Dropdown -->
+        <div class="relative services-dropdown">
+          <button class="text-gray-700 hover:text-gray-900 font-medium flex items-center gap-1">
+            Services
+            <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+        </div>
+
+        <a href="<%= blogs_path %>" class="text-gray-700 hover:text-gray-900 font-medium">Blog</a>
+        <a href="<%= pricing_path %>" class="text-gray-700 hover:text-gray-900 font-medium">Pricing</a>
+      </nav>
+
+      <!-- CTA Buttons -->
+      <div class="flex items-center space-x-4">
+        <a href="https://apps.shopify.com/pricing-schedule" target="_blank" class="px-4 py-2 text-gray-900 font-medium hover:text-gray-700 transition">
+          Start a Free Trial
+        </a>
+        <a href="https://calendar.app.google/ExeXXoFRYB52hu5S8" target="_blank" class="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition font-medium">
+          Book a demo
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services Mega Menu -->
+  <div class="services-mega-menu hidden absolute left-0 right-0 top-16 bg-white border-b border-gray-200 shadow-lg z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-3 gap-8">
+        <!-- Revenue Optimization -->
+        <a href="<%= services_path %>#revenue-optimization" class="group p-6 rounded-lg hover:bg-gradient-to-br hover:from-pink-50 hover:to-purple-50 transition">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-pink-600 to-purple-600 rounded-lg flex items-center justify-center text-white">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-2 group-hover:text-pink-600 transition">Revenue Optimization</h3>
+              <p class="text-sm text-gray-600">Maximize your store's revenue potential with data-driven strategies</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Shopify App Setup -->
+        <a href="<%= services_path %>#shopify-setup" class="group p-6 rounded-lg hover:bg-gradient-to-br hover:from-pink-50 hover:to-purple-50 transition">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-pink-600 to-purple-600 rounded-lg flex items-center justify-center text-white">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-2 group-hover:text-pink-600 transition">Shopify App Setup</h3>
+              <p class="text-sm text-gray-600">Seamless integration and configuration of your Revnous apps</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Strategic Consulting -->
+        <a href="<%= services_path %>#consulting" class="group p-6 rounded-lg hover:bg-gradient-to-br hover:from-pink-50 hover:to-purple-50 transition">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-pink-600 to-purple-600 rounded-lg flex items-center justify-center text-white">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-2 group-hover:text-pink-600 transition">Strategic Consulting</h3>
+              <p class="text-sm text-gray-600">Expert guidance on pricing strategies and revenue growth</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Campaign Management -->
+        <a href="<%= services_path %>#campaign-management" class="group p-6 rounded-lg hover:bg-gradient-to-br hover:from-pink-50 hover:to-purple-50 transition">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-pink-600 to-purple-600 rounded-lg flex items-center justify-center text-white">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-2 group-hover:text-pink-600 transition">Campaign Management</h3>
+              <p class="text-sm text-gray-600">End-to-end management of promotional campaigns and testing</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Analytics & Reporting -->
+        <a href="<%= services_path %>#analytics" class="group p-6 rounded-lg hover:bg-gradient-to-br hover:from-pink-50 hover:to-purple-50 transition">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-pink-600 to-purple-600 rounded-lg flex items-center justify-center text-white">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-2 group-hover:text-pink-600 transition">Analytics & Reporting</h3>
+              <p class="text-sm text-gray-600">Comprehensive insights and performance tracking</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Ongoing Support -->
+        <a href="<%= services_path %>#support" class="group p-6 rounded-lg hover:bg-gradient-to-br hover:from-pink-50 hover:to-purple-50 transition">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-pink-600 to-purple-600 rounded-lg flex items-center justify-center text-white">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-2 group-hover:text-pink-600 transition">Ongoing Support</h3>
+              <p class="text-sm text-gray-600">Dedicated support and optimization for sustained success</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- View All Services CTA -->
+      <div class="mt-8 pt-8 border-t border-gray-200 text-center">
+        <a href="<%= services_path %>" class="inline-flex items-center text-pink-600 font-semibold hover:text-pink-700">
+          View All Services
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const dropdown = document.querySelector('.services-dropdown');
+    const megaMenu = document.querySelector('.services-mega-menu');
+    const chevron = dropdown.querySelector('svg');
+
+    dropdown.addEventListener('mouseenter', function() {
+      megaMenu.classList.remove('hidden');
+      chevron.style.transform = 'rotate(180deg)';
+    });
+
+    dropdown.addEventListener('mouseleave', function() {
+      setTimeout(() => {
+        if (!megaMenu.matches(':hover')) {
+          megaMenu.classList.add('hidden');
+          chevron.style.transform = 'rotate(0deg)';
+        }
+      }, 100);
+    });
+
+    megaMenu.addEventListener('mouseenter', function() {
+      megaMenu.classList.remove('hidden');
+      chevron.style.transform = 'rotate(180deg)';
+    });
+
+    megaMenu.addEventListener('mouseleave', function() {
+      megaMenu.classList.add('hidden');
+      chevron.style.transform = 'rotate(0deg)';
+    });
+  });
+</script>

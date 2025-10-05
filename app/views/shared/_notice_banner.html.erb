@@ -1,0 +1,16 @@
+<% if @active_notice %>
+  <div class="<%= @active_notice.background_classes %> text-white py-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-center gap-2 text-sm">
+        <span class="font-medium"><%= @active_notice.message %></span>
+        <% if @active_notice.link_url.present? %>
+          <% if @active_notice.link_url.start_with?('http') %>
+            <%= link_to @active_notice.link_text, @active_notice.link_url, target: "_blank", class: "underline hover:no-underline" %>
+          <% else %>
+            <%= link_to @active_notice.link_text, @active_notice.link_url, class: "underline hover:no-underline" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

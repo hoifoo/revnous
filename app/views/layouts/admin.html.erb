@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Admin - Revnous</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  </head>
+
+  <body class="bg-gray-100">
+    <!-- Admin Header -->
+    <header class="bg-gray-900 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center space-x-8">
+            <%= link_to "Revnous Admin", admin_root_path, class: "text-xl font-bold" %>
+            <nav class="hidden md:flex items-center space-x-6">
+              <%= link_to "Dashboard", admin_root_path, class: "hover:text-gray-300" %>
+              <%= link_to "Case Studies", admin_case_studies_path, class: "hover:text-gray-300" %>
+              <%= link_to "Blogs", admin_blogs_path, class: "hover:text-gray-300" %>
+              <%= link_to "Notices", admin_notices_path, class: "hover:text-gray-300" %>
+              <%= link_to "Pricing Plans", admin_pricing_plans_path, class: "hover:text-gray-300" %>
+            </nav>
+          </div>
+          <div class="flex items-center space-x-4">
+            <span class="text-sm text-gray-300"><%= current_user.email %></span>
+            <%= link_to "View Site", root_path, target: "_blank", class: "px-4 py-2 bg-pink-600 rounded-md hover:bg-pink-700 transition text-sm font-medium" %>
+            <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "px-4 py-2 bg-gray-700 rounded-md hover:bg-gray-600 transition text-sm font-medium" %>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Flash Messages -->
+    <% if notice %>
+      <div class="bg-green-50 border-l-4 border-green-500 p-4 mx-auto max-w-7xl mt-4">
+        <p class="text-green-700"><%= notice %></p>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="bg-red-50 border-l-4 border-red-500 p-4 mx-auto max-w-7xl mt-4">
+        <p class="text-red-700"><%= alert %></p>
+      </div>
+    <% end %>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <%= yield %>
+    </main>
+  </body>
+</html>

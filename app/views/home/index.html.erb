@@ -1,0 +1,171 @@
+<%= render "shared/notice_banner" %>
+
+<!-- Hero Section -->
+<div class="bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900 text-white py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <h1 class="text-5xl lg:text-7xl font-bold mb-6">
+        Maximize Your Revenue with<br>Strategic Sales Campaigns
+      </h1>
+      <p class="text-xl lg:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+        Join thousands of eCommerce brands using Revnous to increase conversions, boost AOV, and drive sustainable growth.
+      </p>
+      <div class="flex justify-center gap-4">
+        <a href="https://apps.shopify.com/pricing-schedule" target="_blank" class="px-8 py-4 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition font-medium text-lg">
+          Start Free Trial
+        </a>
+        <a href="https://calendar.app.google/ExeXXoFRYB52hu5S8" target="_blank" class="px-8 py-4 bg-transparent border-2 border-white text-white rounded-md hover:bg-white hover:text-gray-900 transition font-medium text-lg">
+          Book a Demo
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Stats Section -->
+<div class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+      <div>
+        <h3 class="text-5xl font-bold text-pink-600 mb-2">$1B+</h3>
+        <p class="text-gray-600 text-lg">Revenue Generated</p>
+      </div>
+      <div>
+        <h3 class="text-5xl font-bold text-pink-600 mb-2">66,000+</h3>
+        <p class="text-gray-600 text-lg">Brands Trust Us</p>
+      </div>
+      <div>
+        <h3 class="text-5xl font-bold text-pink-600 mb-2">35%</h3>
+        <p class="text-gray-600 text-lg">Average AOV Increase</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Featured Case Studies Section -->
+<div class="bg-gray-50 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-2">SUCCESS STORIES</p>
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">Why Brands Choose Revnous</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        See how leading eCommerce brands have increased conversions and revenue with strategic sales campaigns
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+      <% @featured_case_studies.each do |case_study| %>
+        <%= link_to case_study_path(case_study), class: "block bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition group" do %>
+          <div class="aspect-[4/3] bg-gray-100 overflow-hidden">
+            <% if case_study.image.attached? %>
+              <%= image_tag case_study.image,
+                  alt: case_study.name,
+                  class: "w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              %>
+            <% else %>
+              <div class="w-full h-full flex items-center justify-center bg-gray-200">
+                <span class="text-gray-400">No image</span>
+              </div>
+            <% end %>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-xs font-semibold text-pink-600 uppercase tracking-wide"><%= case_study.product_features %></span>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2"><%= case_study.name %></h3>
+            <p class="text-gray-600 text-sm mb-4"><%= case_study.description.truncate(100) %></p>
+            <div class="flex items-center gap-4 text-sm">
+              <div class="flex items-center gap-1">
+                <svg class="w-4 h-4 text-pink-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
+                </svg>
+                <span class="text-gray-700 font-medium"><%= case_study.conversion_rate %></span>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="text-center">
+      <%= link_to case_studies_path, class: "inline-flex items-center px-6 py-3 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition font-medium" do %>
+        View All Case Studies
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- Features Section -->
+<div class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">Strategic Sales Campaigns That Work</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Proven strategies to increase conversions without sacrificing brand value
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="text-center p-6">
+        <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">Flash Sales</h3>
+        <p class="text-gray-600">Create urgency with limited-time offers that drive immediate action</p>
+      </div>
+
+      <div class="text-center p-6">
+        <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">Strategic Discounts</h3>
+        <p class="text-gray-600">Optimize discount presentation using the Rule of 100 for maximum impact</p>
+      </div>
+
+      <div class="text-center p-6">
+        <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">Segmented Offers</h3>
+        <p class="text-gray-600">Target specific customer segments with personalized promotions</p>
+      </div>
+
+      <div class="text-center p-6">
+        <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">A/B Testing</h3>
+        <p class="text-gray-600">Data-driven optimization to find the perfect discount strategy</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA Section -->
+<div class="bg-gradient-to-br from-pink-600 to-purple-700 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-4xl font-bold text-white mb-4">Ready to Boost Your Revenue?</h2>
+    <p class="text-xl text-white mb-8">
+      Join 66,000+ brands already using Revnous to drive sustainable growth
+    </p>
+    <div class="flex justify-center gap-4">
+      <a href="https://apps.shopify.com/pricing-schedule" target="_blank" class="px-8 py-4 bg-black text-white rounded-md hover:bg-gray-900 transition font-medium text-lg">
+        Start Free Trial
+      </a>
+      <a href="https://calendar.app.google/ExeXXoFRYB52hu5S8" target="_blank" class="px-8 py-4 bg-white text-gray-900 rounded-md hover:bg-gray-100 transition font-medium text-lg">
+        Book a Demo
+      </a>
+    </div>
+  </div>
+</div>

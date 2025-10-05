@@ -1,0 +1,88 @@
+<div class="flex justify-between items-center mb-8">
+  <div>
+    <h1 class="text-3xl font-bold text-gray-900">Blog Posts</h1>
+    <p class="text-gray-600 mt-2">Manage your blog content</p>
+  </div>
+  <%= link_to new_admin_blog_path, class: "px-6 py-3 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition font-medium inline-flex items-center" do %>
+    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+    </svg>
+    New Blog Post
+  <% end %>
+</div>
+
+<div class="bg-white rounded-lg shadow overflow-hidden">
+  <table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
+      <tr>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Author</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Published</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+      <% @blogs.each do |blog| %>
+        <tr class="hover:bg-gray-50">
+          <td class="px-6 py-4">
+            <div class="flex items-center">
+              <% if blog.image.attached? %>
+                <%= image_tag blog.image, class: "h-10 w-10 rounded object-cover mr-3" %>
+              <% else %>
+                <div class="h-10 w-10 rounded bg-gray-200 mr-3"></div>
+              <% end %>
+              <div>
+                <div class="font-medium text-gray-900"><%= blog.title.truncate(50) %></div>
+                <div class="text-xs text-gray-500"><%= blog.slug %></div>
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+            <%= blog.author %>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+            <%= blog.category %>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+            <%= blog.published_at&.strftime("%b %d, %Y") %>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="flex items-center gap-2">
+              <% if blog.published_at && blog.published_at <= Time.current %>
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                  Published
+                </span>
+              <% else %>
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                  Draft
+                </span>
+              <% end %>
+              <% if blog.featured %>
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                  Featured
+                </span>
+              <% end %>
+            </div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+            <%= link_to blog_path(blog.slug), target: "_blank", class: "text-blue-600 hover:text-blue-900" do %>
+              View
+            <% end %>
+            <%= link_to edit_admin_blog_path(blog), class: "text-indigo-600 hover:text-indigo-900" do %>
+              Edit
+            <% end %>
+            <%= link_to admin_blog_path(blog), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-900" do %>
+              Delete
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="mt-6">
+  <%= paginate @blogs %>
+</div>
