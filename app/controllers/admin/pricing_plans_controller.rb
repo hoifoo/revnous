@@ -47,7 +47,7 @@ class Admin::PricingPlansController < Admin::BaseController
   def pricing_plan_params
     params.require(:pricing_plan).permit(
       :name, :price, :billing_period, :description, :order_limit,
-      :cta_text, :cta_url, :trial_text, :is_popular, :shopify_plus_only, :position
+      :cta_text, :cta_url, :trial_text, :is_popular, :shopify_plus_only, :position, :product_id
     )
   end
 

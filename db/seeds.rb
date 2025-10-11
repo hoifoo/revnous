@@ -215,6 +215,7 @@ blogs_data = [
     excerpt: "Discover data-backed strategies to maximize your Black Friday revenue without sacrificing your brand value. Learn from retailers who doubled their conversions.",
     content: "Black Friday represents the single biggest opportunity for eCommerce brands to drive revenue, but it's also when most brands make critical mistakes that damage their long-term profitability.\n\nOur research shows that the average Black Friday discount of 17.5% led to near-doubling of conversions. But here's what most retailers miss: the timing, presentation, and customer segmentation matter just as much as the discount itself.\n\nSuccessful Black Friday campaigns share three key characteristics:\n\n1. Strategic Discount Levels: Not too deep (erodes margins), not too shallow (fails to convert)\n2. Urgency Creation: Limited-time offers that create genuine FOMO\n3. Targeted Segmentation: Different offers for different customer segments\n\nOne fashion retailer we studied generated 17% of their entire monthly revenue in just 6 hours by implementing these principles. They didn't offer the deepest discounts - they offered the most strategically timed and presented ones.\n\nThe key takeaway? Stop competing on price alone. Compete on value, urgency, and customer experience.",
     featured: true,
+    featured_on_home: true,
     image_url: "https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=800&h=600&fit=crop"
   },
   {
@@ -235,6 +236,7 @@ blogs_data = [
     excerpt: "Why '$20 off' converts better than '20% off' for some products, and vice versa. The neuroscience behind discount perception.",
     content: "Here's a simple question that most eCommerce brands get wrong: should you advertise '20% off' or '$20 off'?\n\nThe answer depends on your price point, and it's rooted in behavioral psychology.\n\nThe Rule of 100 states:\n- For products under $100: percentage discounts appear larger\n- For products over $100: absolute dollar discounts appear larger\n\nWhy? Because our brains compare discount numbers to the base number 100.\n\n'20% off' sounds better than '$15 off' because 20 > 15.\n'$30 off' sounds better than '15% off' because 30 > 15.\n\nOne electronics retailer applied this principle across their entire catalog and saw a 22% increase in conversion rates, leading to a 19% revenue lift - with zero change to their actual discount levels.\n\nThis isn't manipulation; it's communication optimization. You're presenting the same value in the way that resonates most with how humans process numerical information.\n\nThe lesson? Test your discount framing. The difference between '25% off' and '$25 off' could be thousands in revenue.",
     featured: true,
+    featured_on_home: true,
     image_url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
   },
   {
@@ -275,6 +277,7 @@ blogs_data = [
     excerpt: "Stop guessing which discounts work best. Here's how to systematically test and optimize your promotional strategy.",
     content: "Most brands guess at their discount strategy. The best brands test it systematically.\n\nHere's our proven A/B testing framework for promotional optimization:\n\nTest 1: Discount Type\nVariant A: 20% off\nVariant B: $20 off\nMetric: Conversion rate by price point\n\nTest 2: Discount Depth\nVariant A: 15% off\nVariant B: 25% off\nMetric: Revenue and margin impact\n\nTest 3: Promotional Format\nVariant A: Site-wide sale\nVariant B: Tiered discounts ($10 off $50, $25 off $100)\nMetric: Average order value\n\nTest 4: Messaging\nVariant A: 'Save 20%'\nVariant B: 'Members Save 20%'\nMetric: Perceived value and conversion\n\nOne fashion retailer ran this exact sequence and discovered:\n- 15% off for new customers (vs 20%): Same conversion, +5% margin\n- $20 off $150 for returning customers: +31% conversion vs percentage discount\n- 'Member Exclusive' messaging: +18% conversion vs generic discount\n\nThe result: 31% overall conversion lift while maintaining margins.\n\nThe key lesson: every audience is different. What works for one brand may not work for yours. Test everything.",
     featured: true,
+    featured_on_home: true,
     image_url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
   },
   {
@@ -310,10 +313,72 @@ end
 
 puts "Created #{Blog.count} blog posts with images"
 
-# Clear existing pricing plans
+# Clear existing products and pricing plans
+Product.destroy_all
 PricingPlan.destroy_all
 
-# Create pricing plans
+# Create products
+products_data = [
+  {
+    name: "Revnous for Shopify",
+    product_type: "Shopify App",
+    url: "https://apps.shopify.com/pricing-schedule",
+    short_description: "Complete revenue optimization platform for Shopify stores",
+    description: "Revnous for Shopify is the most powerful revenue optimization app that helps eCommerce brands increase conversions, boost AOV, and drive sustainable growth through strategic sales campaigns, post-purchase upsells, and checkout customization.",
+    featured: true,
+    featured_on_home: true,
+    active: true,
+    position: 1,
+    cover_photo_url: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=800&fit=crop",
+    logo_url: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=200&h=200&fit=crop"
+  }
+]
+
+products_data.each do |product_data|
+  cover_photo_url = product_data.delete(:cover_photo_url)
+  logo_url = product_data.delete(:logo_url)
+
+  product = Product.create!(product_data)
+
+  # Attach cover photo
+  if cover_photo_url
+    begin
+      downloaded_cover = URI.open(cover_photo_url)
+      product.cover_photo.attach(
+        io: downloaded_cover,
+        filename: "#{product.name.parameterize}-cover.jpg",
+        content_type: "image/jpeg"
+      )
+      puts "Attached cover photo for #{product.name}"
+    rescue => e
+      puts "Failed to attach cover photo for #{product.name}: #{e.message}"
+    end
+  end
+
+  # Attach logo
+  if logo_url
+    begin
+      downloaded_logo = URI.open(logo_url)
+      product.logo.attach(
+        io: downloaded_logo,
+        filename: "#{product.name.parameterize}-logo.jpg",
+        content_type: "image/jpeg"
+      )
+      puts "Attached logo for #{product.name}"
+    rescue => e
+      puts "Failed to attach logo for #{product.name}: #{e.message}"
+    end
+  end
+
+  puts "Created product: #{product.name}"
+end
+
+puts "Created #{Product.count} products"
+
+# Get the Shopify app product
+shopify_app = Product.find_by(name: "Revnous for Shopify")
+
+# Create pricing plans linked to the product
 pricing_plans_data = [
   {
     name: "Post Purchase",
@@ -326,6 +391,7 @@ pricing_plans_data = [
     is_popular: false,
     shopify_plus_only: true,
     position: 1,
+    product_id: shopify_app.id,
     features: [
       "Unlimited offers",
       "Smart funnels",
@@ -346,6 +412,7 @@ pricing_plans_data = [
     is_popular: true,
     shopify_plus_only: true,
     position: 2,
+    product_id: shopify_app.id,
     features: [
       "Customized checkout",
       "Trust badges",
@@ -366,6 +433,7 @@ pricing_plans_data = [
     is_popular: false,
     shopify_plus_only: false,
     position: 3,
+    product_id: shopify_app.id,
     features: [
       "Optimized cart drawer",
       "Subscription upsells",
@@ -387,6 +455,7 @@ pricing_plans_data = [
     is_popular: false,
     shopify_plus_only: false,
     position: 4,
+    product_id: shopify_app.id,
     features: [
       "You pay $0 till upfront—we handle it"
     ]
@@ -450,3 +519,59 @@ special_offers_data.each do |offer_data|
 end
 
 puts "Created #{SpecialOffer.count} special offers"
+
+# Clear existing partners
+Partner.destroy_all
+
+# Create partners
+partners_data = [
+  {
+    name: "Shopify",
+    website_url: "https://www.shopify.com",
+    description: "Leading e-commerce platform powering millions of businesses worldwide",
+    active: true,
+    position: 1
+  },
+  {
+    name: "Stripe",
+    website_url: "https://stripe.com",
+    description: "Payment processing platform trusted by businesses of all sizes",
+    active: true,
+    position: 2
+  },
+  {
+    name: "Amazon",
+    website_url: "https://www.amazon.com",
+    description: "Global e-commerce and cloud computing leader",
+    active: true,
+    position: 3
+  },
+  {
+    name: "Google",
+    website_url: "https://www.google.com",
+    description: "Technology leader in search, advertising, and cloud services",
+    active: true,
+    position: 4
+  },
+  {
+    name: "Meta",
+    website_url: "https://www.meta.com",
+    description: "Social technology company connecting billions of people worldwide",
+    active: true,
+    position: 5
+  },
+  {
+    name: "Salesforce",
+    website_url: "https://www.salesforce.com",
+    description: "Customer relationship management platform leader",
+    active: true,
+    position: 6
+  }
+]
+
+partners_data.each do |partner_data|
+  Partner.create!(partner_data)
+  puts "Created partner: #{partner_data[:name]}"
+end
+
+puts "Created #{Partner.count} partners"

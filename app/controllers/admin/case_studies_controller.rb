@@ -45,7 +45,8 @@ class Admin::CaseStudiesController < Admin::BaseController
     params.require(:case_study).permit(
       :name, :industry, :product_features, :ad_active,
       :description, :conversion_rate, :revenue_increase,
-      :challenge, :solution, :results, :image_url, :image
+      :challenge, :solution, :results, :image_url, :image,
+      product_ids: []
     )
   end
 end

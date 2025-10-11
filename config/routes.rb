@@ -6,9 +6,11 @@ Rails.application.routes.draw do
     resources :case_studies, except: [:show]
     resources :blogs, except: [:show]
     resources :notices, except: [:show]
+    resources :products, except: [:show]
     resources :pricing_plans, except: [:show]
     resources :trusted_brands, except: [:show]
     resources :special_offers, except: [:show]
+    resources :partners, except: [:show]
   end
 
   # Public routes

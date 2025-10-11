@@ -1,4 +1,6 @@
 class PricingPlan < ApplicationRecord
+  belongs_to :product, optional: true
+
   validates :name, presence: true
   validates :position, presence: true, numericality: { only_integer: true }
 

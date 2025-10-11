@@ -1,4 +1,6 @@
 class SpecialOffer < ApplicationRecord
+  has_and_belongs_to_many :products
+
   validates :title, presence: true
 
   PLACEMENT_OPTIONS = %w[pricing home services case_studies blogs].freeze

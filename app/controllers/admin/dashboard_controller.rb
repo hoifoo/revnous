@@ -7,7 +7,11 @@ class Admin::DashboardController < Admin::BaseController
     @active_case_studies_count = CaseStudy.where(ad_active: true).count
     @notices_count = Notice.count
     @active_notice = Notice.active_notice
+    @products_count = Product.count
+    @active_products_count = Product.active.count
     @pricing_plans_count = PricingPlan.count
     @trusted_brands_count = TrustedBrand.count
+    @partners_count = Partner.count
+    @active_partners_count = Partner.active.count
   end
 end

@@ -47,7 +47,8 @@ class Admin::SpecialOffersController < Admin::BaseController
   def special_offer_params
     params.require(:special_offer).permit(
       :title, :subtitle, :description, :terms_text,
-      :cta_text, :cta_url, :logo_text, :active
+      :cta_text, :cta_url, :logo_text, :active,
+      product_ids: []
     )
   end
 

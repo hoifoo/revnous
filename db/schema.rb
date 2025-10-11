@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_05_103321) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_11_092354) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -92,6 +92,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_05_103321) do
     t.boolean "featured"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "featured_on_home", default: false, null: false
+    t.index ["featured_on_home"], name: "index_blogs_on_featured_on_home"
+  end
+
+  create_table "blogs_products", id: false, force: :cascade do |t|
+    t.bigint "blog_id", null: false
+    t.bigint "product_id", null: false
+    t.index ["blog_id", "product_id"], name: "index_blogs_products_on_blog_id_and_product_id"
+    t.index ["product_id", "blog_id"], name: "index_blogs_products_on_product_id_and_blog_id"
   end
 
   create_table "case_studies", force: :cascade do |t|
@@ -108,6 +117,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_05_103321) do
     t.text "results"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "case_studies_products", id: false, force: :cascade do |t|
+    t.bigint "case_study_id", null: false
+    t.bigint "product_id", null: false
+    t.index ["case_study_id", "product_id"], name: "index_case_studies_products_on_case_study_id_and_product_id"
+    t.index ["product_id", "case_study_id"], name: "index_case_studies_products_on_product_id_and_case_study_id"
   end
 
   create_table "contribution_receipts", force: :cascade do |t|
@@ -255,6 +271,25 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_05_103321) do
     t.index ["user_id"], name: "index_notification_logs_on_user_id"
   end
 
+  create_table "partners", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "website_url"
+    t.text "description"
+    t.boolean "active", default: true, null: false
+    t.integer "position", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["active"], name: "index_partners_on_active"
+    t.index ["position"], name: "index_partners_on_position"
+  end
+
+  create_table "partners_products", id: false, force: :cascade do |t|
+    t.bigint "partner_id", null: false
+    t.bigint "product_id", null: false
+    t.index ["partner_id", "product_id"], name: "index_partners_products_on_partner_id_and_product_id"
+    t.index ["product_id", "partner_id"], name: "index_partners_products_on_product_id_and_partner_id"
+  end
+
   create_table "pricing_plans", force: :cascade do |t|
     t.string "name", null: false
     t.decimal "price", precision: 10, scale: 2
@@ -270,7 +305,34 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_05_103321) do
     t.text "features"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "product_id"
     t.index ["position"], name: "index_pricing_plans_on_position"
+    t.index ["product_id"], name: "index_pricing_plans_on_product_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "product_type"
+    t.string "url"
+    t.text "short_description"
+    t.text "description"
+    t.boolean "featured", default: false, null: false
+    t.boolean "featured_on_home", default: false, null: false
+    t.boolean "active", default: true, null: false
+    t.integer "position", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["active"], name: "index_products_on_active"
+    t.index ["featured"], name: "index_products_on_featured"
+    t.index ["featured_on_home"], name: "index_products_on_featured_on_home"
+    t.index ["position"], name: "index_products_on_position"
+  end
+
+  create_table "products_special_offers", id: false, force: :cascade do |t|
+    t.bigint "special_offer_id", null: false
+    t.bigint "product_id", null: false
+    t.index ["product_id", "special_offer_id"], name: "idx_on_product_id_special_offer_id_4278b602be"
+    t.index ["special_offer_id", "product_id"], name: "idx_on_special_offer_id_product_id_302ad04826"
   end
 
   create_table "special_offers", force: :cascade do |t|
@@ -354,5 +416,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_05_103321) do
   add_foreign_key "membership_verifications", "users", column: "verifier_id"
   add_foreign_key "monthly_donation_uploads", "users", column: "uploaded_by_id"
   add_foreign_key "notification_logs", "users"
+  add_foreign_key "pricing_plans", "products"
   add_foreign_key "system_configurations", "users", column: "updated_by_id"
 end

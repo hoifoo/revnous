@@ -1,5 +1,6 @@
 class Blog < ApplicationRecord
   has_one_attached :image
+  has_and_belongs_to_many :products
 
   validates :title, :content, presence: true
   validates :slug, uniqueness: true, allow_nil: true
@@ -8,6 +9,7 @@ class Blog < ApplicationRecord
 
   scope :published, -> { where("published_at <= ?", Time.current).order(published_at: :desc) }
   scope :featured, -> { where(featured: true) }
+  scope :featured_on_home, -> { where(featured_on_home: true) }
 
   private
 

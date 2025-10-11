@@ -1,6 +1,7 @@
 class PricingController < ApplicationController
   def index
-    @pricing_plans = PricingPlan.ordered
+    @products = Product.active.ordered.includes(:pricing_plans)
+    @pricing_plans = PricingPlan.where(product_id: nil).ordered
     @trusted_brands = TrustedBrand.ordered
     @special_offer = SpecialOffer.for_page('pricing').first
   end

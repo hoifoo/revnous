@@ -43,7 +43,7 @@
 </div>
 
 <!-- Featured Case Studies Section -->
-<div class="bg-gray-50 py-16">
+<div class="bg-white py-16 border-t border-gray-200">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-2">SUCCESS STORIES</p>
@@ -97,6 +97,22 @@
     </div>
   </div>
 </div>
+
+<!-- Trusted Brands Section -->
+<% if @trusted_brands.any? %>
+<div class="bg-gray-50 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <p class="text-center text-sm text-gray-600 mb-8">Trusted by 66,000+ brands</p>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center opacity-60">
+      <% @trusted_brands.each do |brand| %>
+        <div class="flex justify-center">
+          <span class="<%= brand.css_classes %> text-gray-900"><%= brand.name %></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
 
 <!-- Features Section -->
 <div class="bg-white py-16">
@@ -152,6 +168,150 @@
   </div>
 </div>
 
+<!-- Featured Products Section -->
+<% if @featured_products.any? %>
+<div class="bg-white py-16 border-t border-gray-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-2">OUR PRODUCTS</p>
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">Powerful Tools for Your Business</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Discover our suite of products designed to help you maximize revenue and grow your business
+      </p>
+    </div>
+
+    <div class="space-y-16">
+      <% @featured_products.each_with_index do |product, index| %>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center <%= 'lg:flex-row-reverse' if index.odd? %>">
+          <!-- Product Info Column -->
+          <div class="<%= 'lg:order-2' if index.odd? %>">
+            <% if product.logo.attached? %>
+              <div class="mb-6">
+                <%= image_tag product.logo, class: "h-16 w-auto object-contain" %>
+              </div>
+            <% end %>
+
+            <h3 class="text-4xl font-bold text-gray-900 mb-4">
+              <%= product.name %>
+            </h3>
+
+            <% if product.product_type.present? %>
+              <span class="inline-block px-3 py-1 bg-pink-100 text-pink-700 text-xs font-semibold rounded-full uppercase tracking-wide mb-4">
+                <%= product.product_type %>
+              </span>
+            <% end %>
+
+            <% if product.description.present? %>
+              <p class="text-lg text-gray-600 mb-6">
+                <%= product.description %>
+              </p>
+            <% elsif product.short_description.present? %>
+              <p class="text-lg text-gray-600 mb-6">
+                <%= product.short_description %>
+              </p>
+            <% end %>
+
+            <div class="flex gap-4">
+              <%= link_to pricing_path, class: "inline-flex items-center px-6 py-3 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition font-medium" do %>
+                View Pricing
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              <% end %>
+
+              <% if product.url.present? %>
+                <a href="<%= product.url %>" target="_blank" class="inline-flex items-center px-6 py-3 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition font-medium">
+                  Learn More
+                  <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                </a>
+              <% end %>
+            </div>
+          </div>
+
+          <!-- Product Cover Photo Column -->
+          <div class="<%= 'lg:order-1' if index.odd? %>">
+            <% if product.cover_photo.attached? %>
+              <div class="rounded-lg overflow-hidden shadow-xl">
+                <%= image_tag product.cover_photo, alt: product.name, class: "w-full h-full object-cover" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<!-- Featured Blogs Section -->
+<% if @featured_blogs.any? %>
+<div class="bg-gray-50 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-2">LATEST INSIGHTS</p>
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">From Our Blog</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Expert tips and proven strategies to grow your eCommerce business
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-<%= [@featured_blogs.count, 3].min %> gap-8 mb-8">
+      <% @featured_blogs.each do |blog| %>
+        <%= link_to blog_path(blog.slug), class: "block bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition group" do %>
+          <div class="aspect-[16/10] bg-gray-100 overflow-hidden">
+            <% if blog.image.attached? %>
+              <%= image_tag blog.image,
+                  alt: blog.title,
+                  class: "w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              %>
+            <% else %>
+              <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-pink-100 to-purple-100">
+                <span class="text-gray-400">No image</span>
+              </div>
+            <% end %>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <% if blog.category.present? %>
+                <span class="px-3 py-1 bg-pink-100 text-pink-700 text-xs font-semibold rounded-full uppercase tracking-wide">
+                  <%= blog.category %>
+                </span>
+              <% end %>
+              <span class="text-xs text-gray-500">
+                <%= blog.published_at.strftime("%b %d, %Y") %>
+              </span>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-pink-600 transition">
+              <%= blog.title %>
+            </h3>
+            <p class="text-gray-600 text-sm mb-4">
+              <%= blog.excerpt&.truncate(120) %>
+            </p>
+            <div class="flex items-center text-pink-600 font-medium text-sm">
+              Read more
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="text-center">
+      <%= link_to blogs_path, class: "inline-flex items-center px-6 py-3 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition font-medium" do %>
+        View All Blog Posts
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
+
 <!-- Special Offer Section -->
 <% if @special_offer %>
 <div class="bg-white py-16">
@@ -185,6 +345,43 @@
           </a>
         <% end %>
       </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<!-- Partners Section -->
+<% if @partners.any? %>
+<div class="bg-gray-50 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-2">OUR PARTNERS</p>
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">Trusted by Industry Leaders</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Working with the best partners to deliver exceptional results
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-<%= [@partners.count, 6].min %> gap-8 items-center">
+      <% @partners.each do |partner| %>
+        <% if partner.website_url.present? %>
+          <a href="<%= partner.website_url %>" target="_blank" class="flex justify-center items-center p-6 bg-white rounded-lg hover:shadow-lg transition group" title="<%= partner.name %>">
+            <% if partner.logo.attached? %>
+              <%= image_tag partner.logo, alt: partner.name, class: "h-16 w-auto max-w-full object-contain grayscale group-hover:grayscale-0 transition" %>
+            <% else %>
+              <span class="text-xl font-bold text-gray-700 group-hover:text-gray-900"><%= partner.name %></span>
+            <% end %>
+          </a>
+        <% else %>
+          <div class="flex justify-center items-center p-6 bg-white rounded-lg" title="<%= partner.name %>">
+            <% if partner.logo.attached? %>
+              <%= image_tag partner.logo, alt: partner.name, class: "h-16 w-auto max-w-full object-contain grayscale" %>
+            <% else %>
+              <span class="text-xl font-bold text-gray-700"><%= partner.name %></span>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </div>
