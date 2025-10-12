@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get "services", to: "services#index"
   resources :case_studies, only: [:index, :show]
   resources :blogs, only: [:index, :show], path: "blog"
+  post "contact", to: "contacts#create"
+  get "altcha/challenge", to: "altcha_challenges#create", as: :altcha_challenge
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

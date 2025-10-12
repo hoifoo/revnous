@@ -23,6 +23,7 @@
 
         <a href="<%= blogs_path %>" class="text-gray-700 hover:text-gray-900 font-medium">Blog</a>
         <a href="<%= pricing_path %>" class="text-gray-700 hover:text-gray-900 font-medium">Pricing</a>
+        <a href="<%= root_path %>#contact-us" class="text-gray-700 hover:text-gray-900 font-medium">Contact Us</a>
       </nav>
 
       <!-- CTA Buttons -->
@@ -174,6 +175,25 @@
     megaMenu.addEventListener('mouseleave', function() {
       megaMenu.classList.add('hidden');
       chevron.style.transform = 'rotate(0deg)';
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href*="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href.includes('#')) {
+          const targetId = href.split('#')[1];
+          const targetElement = document.getElementById(targetId);
+
+          if (targetElement) {
+            e.preventDefault();
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        }
+      });
     });
   });
 </script>

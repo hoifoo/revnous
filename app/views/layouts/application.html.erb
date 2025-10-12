@@ -24,6 +24,19 @@
 
   <body class="flex flex-col min-h-screen">
     <%= render "shared/navigation" %>
+
+    <!-- Flash Messages -->
+    <% if notice %>
+      <div class="bg-green-50 border-l-4 border-green-500 p-4 mx-auto max-w-7xl mt-4">
+        <p class="text-green-700"><%= notice %></p>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="bg-red-50 border-l-4 border-red-500 p-4 mx-auto max-w-7xl mt-4">
+        <p class="text-red-700"><%= alert %></p>
+      </div>
+    <% end %>
+
     <main class="flex-1">
       <%= yield %>
     </main>
