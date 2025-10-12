@@ -13,5 +13,6 @@ class Admin::DashboardController < Admin::BaseController
     @trusted_brands_count = TrustedBrand.count
     @partners_count = Partner.count
     @active_partners_count = Partner.active.count
+    @newsletter_subscribers_count = NewsletterSubscriber.active.count
   end
 end

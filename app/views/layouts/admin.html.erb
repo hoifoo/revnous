@@ -6,6 +6,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= favicon_link_tag "/favicon.ico" %>
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
 
@@ -15,7 +17,9 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
           <div class="flex items-center space-x-8">
-            <%= link_to "Revnous Admin", admin_root_path, class: "text-xl font-bold" %>
+            <%= link_to admin_root_path, class: "flex items-center" do %>
+              <%= image_tag "logo.png", alt: "Revnous Admin", class: "h-20 w-auto brightness-0 invert" %>
+            <% end %>
             <nav class="hidden md:flex items-center space-x-6">
               <%= link_to "Dashboard", admin_root_path, class: "hover:text-gray-300" %>
               <%= link_to "Case Studies", admin_case_studies_path, class: "hover:text-gray-300" %>

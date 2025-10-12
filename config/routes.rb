@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :trusted_brands, except: [:show]
     resources :special_offers, except: [:show]
     resources :partners, except: [:show]
+    resources :newsletter_subscribers, except: [:show]
   end
 
   # Public routes
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
   resources :case_studies, only: [:index, :show]
   resources :blogs, only: [:index, :show], path: "blog"
   post "contact", to: "contacts#create"
+  post "newsletter", to: "newsletters#create", as: :newsletter_subscription
   get "altcha/challenge", to: "altcha_challenges#create", as: :altcha_challenge
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -141,6 +141,23 @@
       <span class="text-sm text-gray-600"><%= @active_partners_count %> active</span>
     </div>
   </div>
+
+  <div class="bg-white rounded-lg shadow p-6">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-gray-600">Newsletter Subscribers</p>
+        <p class="text-3xl font-bold text-gray-900 mt-2"><%= @newsletter_subscribers_count %></p>
+      </div>
+      <div class="bg-cyan-100 rounded-full p-3">
+        <svg class="w-6 h-6 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+      </div>
+    </div>
+    <div class="mt-4">
+      <%= link_to "Manage Subscribers", admin_newsletter_subscribers_path, class: "text-sm text-cyan-600 hover:text-cyan-700" %>
+    </div>
+  </div>
 </div>
 
 <!-- Quick Actions -->
@@ -286,6 +303,18 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
           </svg>
           <span class="font-medium text-gray-700 group-hover:text-gray-900">Manage Partners</span>
+        </div>
+        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      <% end %>
+
+      <%= link_to admin_newsletter_subscribers_path, class: "flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition group" do %>
+        <div class="flex items-center">
+          <svg class="w-5 h-5 text-cyan-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+          </svg>
+          <span class="font-medium text-gray-700 group-hover:text-gray-900">Manage Newsletter Subscribers</span>
         </div>
         <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
