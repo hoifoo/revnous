@@ -6,15 +6,18 @@ set :repo_url, "git@github.com:hoifoo/revnous.git"
 # Default deploy_to directory
 set :deploy_to, "/var/www/revnous"
 
-# rbenv configuration
-set :rbenv_type, :user
-set :rbenv_ruby, "3.4.2"
+ # rbenv configuration
+ set :rbenv_type, :user
+ set :rbenv_ruby, "3.4.2"
+ # rbenv binary is installed system-wide at /usr/bin/rbenv, but versions live under $HOME/.rbenv
+ set :rbenv_path, "$HOME/.rbenv"        # for version directory validation
+ set :rbenv_prefix, "/usr/bin/rbenv exec" # for executing commands via the correct binary
 
 # Keep release history
 set :keep_releases, 5
 
 # Linked files and directories
-append :linked_files, "config/master.key", "config/application.yml"
+append :linked_files, "config/application.yml", "config/master.key"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "storage"
 
 # Yarn
@@ -31,6 +34,12 @@ set :puma_env,        fetch(:rails_env, :production)
 set :puma_access_log, "#{shared_path}/log/puma.access.log"
 set :puma_error_log,  "#{shared_path}/log/puma.error.log"
 set :puma_init_active_record, true
+# Use user-level systemd for Puma (matches current working state)
+set :puma_systemctl_user, true
+
+# NGINX configuration (override in stage if needed)
+set :nginx_site_name, "revnous"
+set :nginx_server_name, "_" # replace with your domain when ready
 
 namespace :deploy do
   desc "Restart application"

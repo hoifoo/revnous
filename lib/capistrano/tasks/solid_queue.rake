@@ -4,7 +4,17 @@ namespace :solid_queue do
 
   task :restart do
     on roles(:app) do
-      execute :sudo, :systemctl, :restart, fetch(:solid_queue_unit)
+      # Try user-level systemd first (no sudo)
+      begin
+        execute :systemctl, "--user", :restart, fetch(:solid_queue_unit)
+      rescue SSHKit::Command::Failed
+        # Fallback to system-level via sudo
+        begin
+          execute :sudo, :systemctl, :restart, fetch(:solid_queue_unit)
+        rescue SSHKit::Command::Failed
+          warn "solid_queue:restart skipped (no permission or unit not found)"
+        end
+      end
     end
   end
 
