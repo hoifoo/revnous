@@ -109,8 +109,8 @@ production:
   primary: &primary_production
     <<: *default
     database: revnous_web_production
-    username: web
-    password: <%= ENV["WEB_DATABASE_PASSWORD"] %>
+    username: <%= ENV["DATABASE_USERNAME"] %>
+    password: <%= ENV["DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production
     database: revnous_web_production_cache

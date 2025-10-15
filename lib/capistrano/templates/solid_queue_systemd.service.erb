@@ -1,0 +1,18 @@
+[Unit]
+Description=Solid Queue for revnous
+After=network.target
+
+[Service]
+Type=simple
+User=<%= fetch(:user, "deploy") %>
+WorkingDirectory=<%= fetch(:deploy_to) %>/current
+Environment=RAILS_ENV=<%= fetch(:rails_env, "production") %>
+EnvironmentFile=<%= fetch(:deploy_to) %>/shared/.env.systemd
+ExecStart=<%= fetch(:rbenv_prefix) %> bundle exec ruby bin/jobs
+Restart=always
+RestartSec=5
+StandardOutput=append:<%= fetch(:deploy_to) %>/shared/log/solid_queue.log
+StandardError=append:<%= fetch(:deploy_to) %>/shared/log/solid_queue.error.log
+
+[Install]
+WantedBy=multi-user.target

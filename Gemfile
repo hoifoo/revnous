@@ -64,6 +64,14 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+
+  # Capistrano-based SSH deployments (tools only; not loaded in production runtime)
+  gem "capistrano", "~> 3.18", require: false
+  gem "capistrano-rails", require: false
+  gem "capistrano-bundler", require: false
+  gem "capistrano-rbenv", require: false
+  gem "capistrano3-puma", require: false
+  gem "capistrano-yarn", require: false
 end
 
 group :test do
