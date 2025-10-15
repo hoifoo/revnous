@@ -3,7 +3,7 @@ upstream <%= fetch(:nginx_site_name) %>_puma {
 }
 server {
   listen 80;
-  server_name <%= fetch(:nginx_server_name) %>;
+  server_name <%= Array(fetch(:nginx_server_name)).join(' ') %>;
 
   root <%= current_path %>/public;
 

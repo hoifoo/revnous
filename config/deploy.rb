@@ -39,7 +39,7 @@ set :puma_systemctl_user, true
 
 # NGINX configuration (override in stage if needed)
 set :nginx_site_name, "revnous"
-set :nginx_server_name, "_" # replace with your domain when ready
+set :nginx_server_name, [ "www.example.com", "revnous.com" ] # replace with your domain when ready
 
 namespace :deploy do
   desc "Restart application"
