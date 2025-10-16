@@ -17,7 +17,7 @@ set :deploy_to, "/var/www/revnous"
 set :keep_releases, 5
 
 # Linked files and directories
-append :linked_files, "config/application.yml", "config/master.key"
+append :linked_files, "config/application.yml", "config/master.key", "config/puma.rb"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "storage"
 
 # Yarn
