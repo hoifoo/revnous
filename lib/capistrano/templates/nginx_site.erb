@@ -1,8 +1,9 @@
 upstream <%= fetch(:nginx_site_name) %>_puma {
   server unix:<%= shared_path %>/tmp/sockets/puma.sock fail_timeout=0;
 }
+
+# Main server block (SSL will be added by Certbot)
 server {
-  listen 80;
   server_name <%= Array(fetch(:nginx_server_name)).join(' ') %>;
 
   root <%= current_path %>/public;
@@ -18,6 +19,7 @@ server {
 
   location @puma {
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
     proxy_set_header Host $http_host;
     proxy_redirect off;
     proxy_pass http://<%= fetch(:nginx_site_name) %>_puma;
@@ -25,4 +27,7 @@ server {
 
   client_max_body_size 25M;
   keepalive_timeout 10;
+
+  listen 80;
+  # Certbot will add SSL listen directives and certificates here
 }
