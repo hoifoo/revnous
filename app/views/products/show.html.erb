@@ -1,0 +1,184 @@
+<%= render "shared/notice_banner" %>
+
+<!-- Hero Section -->
+<div class="bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900 text-white py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Content Column -->
+      <div>
+        <% if @product.logo.attached? %>
+          <div class="mb-6">
+            <%= image_tag @product.logo, class: "h-20 w-auto" %>
+          </div>
+        <% end %>
+
+        <% if @product.product_type.present? %>
+          <span class="inline-block px-4 py-1.5 bg-pink-600 text-white text-sm font-semibold rounded-full uppercase tracking-wide mb-6">
+            <%= @product.product_type %>
+          </span>
+        <% end %>
+
+        <h1 class="text-5xl lg:text-6xl font-bold mb-6"><%= @product.name %></h1>
+
+        <% if @product.short_description.present? %>
+          <p class="text-xl text-gray-300 mb-8">
+            <%= @product.short_description %>
+          </p>
+        <% end %>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="https://calendar.app.google/ExeXXoFRYB52hu5S8" target="_blank" class="inline-flex items-center justify-center px-8 py-4 bg-pink-600 text-white text-lg font-semibold rounded-lg hover:bg-pink-700 transition shadow-lg hover:shadow-xl">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            Schedule a Demo
+          </a>
+
+          <%= link_to pricing_url_for(@product), class: "inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white text-lg font-semibold rounded-lg hover:bg-white hover:text-gray-900 transition" do %>
+            View Pricing
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Image Column -->
+      <div>
+        <% if @product.cover_photo.attached? %>
+          <div class="rounded-lg overflow-hidden shadow-2xl">
+            <%= image_tag @product.cover_photo, alt: @product.name, class: "w-full h-full object-cover" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Product Description Section -->
+<% if @product.description.present? %>
+<div class="bg-white py-20">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-4xl font-bold text-gray-900 mb-8">About <%= @product.name %></h2>
+    <div class="prose prose-lg max-w-none">
+      <%= simple_format(@product.description) %>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<!-- Pricing Plans Preview -->
+<% if @pricing_plans.any? %>
+<div class="bg-gray-50 py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">Choose Your Plan</h2>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        Flexible pricing options to match your business needs
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-<%= [@pricing_plans.count, 4].min %> gap-6 mb-12">
+      <% @pricing_plans.take(4).each do |plan| %>
+        <div class="bg-white border-2 <%= plan.is_popular ? 'border-pink-600' : 'border-gray-200' %> rounded-lg p-6 <%= plan.is_popular ? '' : 'hover:border-pink-600' %> transition relative">
+          <% if plan.is_popular %>
+            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 px-3 py-1 bg-pink-600 text-white text-xs font-semibold rounded-full">
+              MOST POPULAR
+            </div>
+          <% end %>
+
+          <div class="mb-4">
+            <span class="text-xs font-semibold text-pink-600 uppercase tracking-wide"><%= plan.name %></span>
+            <div class="mt-2">
+              <% if plan.free_plan? %>
+                <span class="text-4xl font-bold text-gray-900">Free</span>
+              <% else %>
+                <span class="text-4xl font-bold text-gray-900">$<%= plan.price %></span>
+                <span class="text-gray-600">/<%= plan.billing_period %></span>
+              <% end %>
+            </div>
+            <% if plan.order_limit.present? %>
+              <p class="text-sm text-gray-600 mt-2">for <%= plan.order_limit %></p>
+            <% end %>
+          </div>
+
+          <% if plan.description.present? %>
+            <p class="text-xs text-gray-600 mb-4"><%= plan.description %></p>
+          <% end %>
+
+          <ul class="space-y-3 mb-6">
+            <% plan.features_list.take(5).each do |feature| %>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-pink-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-sm text-gray-700"><%= feature %></span>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="text-center">
+      <%= link_to pricing_url_for(@product), class: "inline-flex items-center px-8 py-4 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition font-medium text-lg" do %>
+        View All Pricing Plans
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<!-- Trusted Brands Section -->
+<% if @trusted_brands.any? %>
+<div class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <p class="text-center text-sm text-gray-600 mb-8">Trusted by 66,000+ brands</p>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center opacity-60">
+      <% @trusted_brands.each do |brand| %>
+        <div class="flex justify-center">
+          <span class="<%= brand.css_classes %> text-gray-900"><%= brand.name %></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<!-- CTA Section -->
+<div class="bg-gradient-to-br from-pink-600 to-purple-700 py-20">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-4xl lg:text-5xl font-bold text-white mb-6">Ready to Transform Your Revenue?</h2>
+    <p class="text-xl text-white mb-8">
+      Schedule a personalized demo to see how <%= @product.name %> can help your business grow
+    </p>
+
+    <div class="flex flex-col sm:flex-row justify-center gap-4 mb-6">
+      <a href="https://calendar.app.google/ExeXXoFRYB52hu5S8" target="_blank" class="inline-flex items-center justify-center px-10 py-5 bg-black text-white text-lg font-semibold rounded-lg hover:bg-gray-900 transition shadow-xl">
+        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+        Schedule a Demo
+      </a>
+
+      <% if @product.url.present? %>
+        <a href="<%= @product.url %>" target="_blank" class="inline-flex items-center justify-center px-10 py-5 bg-white text-gray-900 text-lg font-semibold rounded-lg hover:bg-gray-100 transition shadow-xl">
+          Start Free Trial
+          <svg class="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </a>
+      <% end %>
+    </div>
+
+    <p class="text-sm text-white opacity-90">
+      By continuing, you agree to our
+      <%= link_to "Terms of Service", terms_of_service_url_for(@product), class: "text-white underline hover:opacity-100", target: "_blank" %>
+      and
+      <%= link_to "Privacy Policy", privacy_policy_url_for(@product), class: "text-white underline hover:opacity-100", target: "_blank" %>
+    </p>
+  </div>
+</div>

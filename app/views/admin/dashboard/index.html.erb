@@ -158,6 +158,23 @@
       <%= link_to "Manage Subscribers", admin_newsletter_subscribers_path, class: "text-sm text-cyan-600 hover:text-cyan-700" %>
     </div>
   </div>
+
+  <div class="bg-white rounded-lg shadow p-6">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-gray-600">Legal Documents</p>
+        <p class="text-3xl font-bold text-gray-900 mt-2"><%= @legal_documents_count %></p>
+      </div>
+      <div class="bg-red-100 rounded-full p-3">
+        <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+      </div>
+    </div>
+    <div class="mt-4">
+      <span class="text-sm text-gray-600"><%= @active_legal_documents_count %> active</span>
+    </div>
+  </div>
 </div>
 
 <!-- Quick Actions -->
@@ -315,6 +332,30 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
           </svg>
           <span class="font-medium text-gray-700 group-hover:text-gray-900">Manage Newsletter Subscribers</span>
+        </div>
+        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      <% end %>
+
+      <%= link_to new_admin_legal_document_path, class: "flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition group" do %>
+        <div class="flex items-center">
+          <svg class="w-5 h-5 text-red-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+          </svg>
+          <span class="font-medium text-gray-700 group-hover:text-gray-900">New Legal Document</span>
+        </div>
+        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      <% end %>
+
+      <%= link_to admin_legal_documents_path, class: "flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition group" do %>
+        <div class="flex items-center">
+          <svg class="w-5 h-5 text-red-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+          <span class="font-medium text-gray-700 group-hover:text-gray-900">Manage Legal Documents</span>
         </div>
         <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>

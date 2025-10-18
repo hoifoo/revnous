@@ -1,0 +1,75 @@
+<%= form_with(model: [:admin, @legal_document], class: "space-y-6") do |form| %>
+  <% if @legal_document.errors.any? %>
+    <div class="bg-red-50 border-l-4 border-red-500 p-4">
+      <h3 class="text-sm font-medium text-red-800 mb-2">
+        <%= pluralize(@legal_document.errors.count, "error") %> prohibited this document from being saved:
+      </h3>
+      <ul class="list-disc list-inside text-sm text-red-700">
+        <% @legal_document.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="md:col-span-2">
+      <%= form.label :title, class: "block text-sm font-medium text-gray-700 mb-2" %>
+      <%= form.text_field :title, class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-transparent", placeholder: "e.g., Privacy Policy" %>
+    </div>
+
+    <div>
+      <%= form.label :document_type, class: "block text-sm font-medium text-gray-700 mb-2" %>
+      <%= form.select :document_type,
+          options_for_select(LegalDocument::DOCUMENT_TYPES.map { |type| [type.humanize, type] }, @legal_document.document_type),
+          { prompt: "Select document type" },
+          class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-transparent" %>
+    </div>
+
+    <div>
+      <%= form.label :product_id, "Product (Optional)", class: "block text-sm font-medium text-gray-700 mb-2" %>
+      <%= form.select :product_id,
+          options_for_select([["Global (No Product)", nil]] + Product.ordered.map { |p| [p.name, p.id] }, @legal_document.product_id),
+          {},
+          class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-transparent" %>
+      <p class="text-sm text-gray-500 mt-1">Leave as "Global" for site-wide documents, or select a product for product-specific terms</p>
+    </div>
+
+    <div>
+      <%= form.label :version, class: "block text-sm font-medium text-gray-700 mb-2" %>
+      <%= form.text_field :version, class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-transparent", placeholder: "e.g., 1.0, 2.0" %>
+    </div>
+
+    <div>
+      <%= form.label :effective_date, class: "block text-sm font-medium text-gray-700 mb-2" %>
+      <%= form.date_field :effective_date, class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-transparent" %>
+      <p class="text-sm text-gray-500 mt-1">When this document takes effect</p>
+    </div>
+
+    <div>
+      <%= form.label :slug, class: "block text-sm font-medium text-gray-700 mb-2" %>
+      <%= form.text_field :slug, class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-transparent", placeholder: "auto-generated if blank" %>
+      <p class="text-sm text-gray-500 mt-1">URL-friendly version of title</p>
+    </div>
+
+    <div class="md:col-span-2">
+      <%= form.label :active, class: "block text-sm font-medium text-gray-700 mb-2" %>
+      <div class="flex items-center">
+        <%= form.check_box :active, class: "h-5 w-5 text-pink-600 focus:ring-pink-500 border-gray-300 rounded" %>
+        <span class="ml-2 text-sm text-gray-600">Mark as active (visible to users)</span>
+      </div>
+      <p class="text-sm text-gray-500 mt-1">Only active documents are shown to users</p>
+    </div>
+  </div>
+
+  <div>
+    <%= form.label :content, class: "block text-sm font-medium text-gray-700 mb-2" %>
+    <%= form.text_area :content, rows: 20, class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-transparent font-mono text-sm", placeholder: "Enter the full text of the legal document..." %>
+    <p class="text-sm text-gray-500 mt-1">Supports line breaks and paragraphs. Write in plain text with clear sections.</p>
+  </div>
+
+  <div class="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200">
+    <%= link_to "Cancel", admin_legal_documents_path, class: "px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition font-medium" %>
+    <%= form.submit class: "px-6 py-2 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition font-medium cursor-pointer" %>
+  </div>
+<% end %>

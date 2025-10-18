@@ -1,4 +1,8 @@
 class ContactsController < ApplicationController
+  def index
+    # Show the contact form page
+  end
+
   def create
     # Verify ALTCHA payload first
     unless verify_altcha_payload

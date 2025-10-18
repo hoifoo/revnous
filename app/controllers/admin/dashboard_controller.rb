@@ -14,5 +14,7 @@ class Admin::DashboardController < Admin::BaseController
     @partners_count = Partner.count
     @active_partners_count = Partner.active.count
     @newsletter_subscribers_count = NewsletterSubscriber.active.count
+    @legal_documents_count = LegalDocument.count
+    @active_legal_documents_count = LegalDocument.active.count
   end
 end

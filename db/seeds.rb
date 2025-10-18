@@ -575,3 +575,309 @@ partners_data.each do |partner_data|
 end
 
 puts "Created #{Partner.count} partners"
+
+# Clear existing legal documents
+LegalDocument.destroy_all
+
+# Get the Shopify app product
+shopify_product = Product.find_by(name: "Revnous for Shopify")
+
+# Create legal documents
+legal_documents_data = [
+  {
+    title: "Privacy Policy",
+    slug: "privacy-policy",
+    document_type: "privacy_policy",
+    product_id: shopify_product&.id,
+    content: "Last Updated: January 1, 2025
+
+Introduction
+
+Revnous Inc. ('we', 'our', 'us') is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our services, including our website and Shopify applications.
+
+Information We Collect
+
+We collect information that you provide directly to us when you:
+- Create an account or use our services
+- Make purchases or transactions
+- Contact us for support
+- Subscribe to our newsletter
+- Participate in surveys or promotions
+
+This information may include:
+- Name and contact information (email address, phone number)
+- Business information (company name, website)
+- Payment information (processed securely through third-party payment processors)
+- Usage data and analytics
+- Communication preferences
+
+How We Use Your Information
+
+We use the information we collect to:
+- Provide, maintain, and improve our services
+- Process transactions and send related information
+- Send administrative information, updates, and security alerts
+- Respond to your comments, questions, and customer service requests
+- Send marketing communications (with your consent)
+- Monitor and analyze usage trends and preferences
+- Detect, prevent, and address technical issues and fraudulent activity
+- Comply with legal obligations
+
+Information Sharing and Disclosure
+
+We do not sell your personal information. We may share your information with:
+
+Service Providers: Third-party vendors who perform services on our behalf (payment processing, data analysis, email delivery, hosting services)
+Business Transfers: In connection with any merger, sale of company assets, or acquisition
+Legal Requirements: When required by law or to protect our rights, property, or safety
+With Your Consent: When you authorize us to share information with third parties
+
+Shopify App Data Usage
+
+If you use our Shopify applications, we collect and process data in accordance with Shopify's API Terms of Service, including:
+- Store and product information
+- Order and transaction data
+- Customer information (as permitted by Shopify)
+- Usage analytics and performance metrics
+
+We use this data solely to provide and improve our services. We do not use customer data for advertising purposes or share it with third parties except as described in this policy.
+
+Data Security
+
+We implement appropriate technical and organizational measures to protect your information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet or electronic storage is 100% secure.
+
+Data Retention
+
+We retain your information for as long as necessary to provide our services, comply with legal obligations, resolve disputes, and enforce our agreements. When you delete your account, we will delete or anonymize your personal information within 90 days.
+
+Your Rights and Choices
+
+Depending on your location, you may have certain rights regarding your personal information:
+- Access and receive a copy of your personal information
+- Correct or update inaccurate information
+- Delete your personal information
+- Object to or restrict processing of your information
+- Data portability
+- Withdraw consent (where processing is based on consent)
+
+To exercise these rights, please contact us at privacy@revnous.com.
+
+Cookies and Tracking Technologies
+
+We use cookies, web beacons, and similar tracking technologies to collect information about your browsing activities. You can control cookies through your browser settings, though disabling cookies may limit your use of certain features.
+
+International Data Transfers
+
+Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place to protect your information in accordance with this Privacy Policy.
+
+Children's Privacy
+
+Our services are not directed to individuals under 16 years of age. We do not knowingly collect personal information from children under 16. If you believe we have collected information from a child under 16, please contact us immediately.
+
+Changes to This Privacy Policy
+
+We may update this Privacy Policy from time to time. We will notify you of material changes by posting the new policy on our website and updating the 'Last Updated' date. Your continued use of our services after changes constitutes acceptance of the updated policy.
+
+Contact Us
+
+If you have questions about this Privacy Policy or our privacy practices, please contact us at:
+
+Email: privacy@revnous.com
+Address: Revnous Inc., [Your Address]
+Website: www.revnous.com
+
+For EU residents, you may also contact our Data Protection Officer at dpo@revnous.com.",
+    active: true,
+    version: "1.0",
+    effective_date: Date.new(2025, 1, 1)
+  },
+  {
+    title: "Terms of Service",
+    slug: "terms-of-service",
+    document_type: "terms_of_service",
+    product_id: shopify_product&.id,
+    content: "Last Updated: January 1, 2025
+
+1. Acceptance of Terms
+
+By accessing or using Revnous services ('Services'), you agree to be bound by these Terms of Service ('Terms'). If you do not agree to these Terms, do not use our Services.
+
+2. Description of Services
+
+Revnous provides revenue optimization software and services for eCommerce businesses, including:
+- Shopify applications for sales campaigns and pricing management
+- Analytics and reporting tools
+- Strategic consulting services
+- Campaign management services
+
+3. Account Registration and Security
+
+To use certain features of our Services, you must register for an account. You agree to:
+- Provide accurate, current, and complete information
+- Maintain and update your account information
+- Maintain the security of your account credentials
+- Notify us immediately of any unauthorized access
+- Be responsible for all activities under your account
+
+You must be at least 18 years old and have the authority to enter into these Terms on behalf of your business.
+
+4. Subscription and Billing
+
+4.1 Subscription Plans
+Our Services are offered through various subscription plans with different features and pricing. Current pricing is available on our website and in the Shopify App Store.
+
+4.2 Billing
+- Subscriptions are billed in advance on a monthly or annual basis
+- All fees are non-refundable except as required by law
+- Prices are subject to change with 30 days' notice
+- You authorize us to charge your payment method for all fees
+
+4.3 Free Trials
+We may offer free trials for certain Services. At the end of the trial period, your subscription will automatically convert to a paid subscription unless you cancel before the trial ends.
+
+4.4 Cancellation
+You may cancel your subscription at any time. Cancellation takes effect at the end of your current billing period. You will retain access to paid features until the end of the billing period.
+
+5. Acceptable Use
+
+You agree to use our Services only for lawful purposes and in accordance with these Terms. You agree NOT to:
+- Violate any applicable laws or regulations
+- Infringe on intellectual property rights
+- Transmit malicious code, viruses, or harmful components
+- Attempt to gain unauthorized access to our systems
+- Interfere with or disrupt the Services
+- Use the Services for fraudulent or deceptive purposes
+- Scrape, harvest, or collect user data without authorization
+- Resell or redistribute the Services without authorization
+
+6. Intellectual Property Rights
+
+6.1 Our Property
+All intellectual property rights in the Services, including software, content, trademarks, and logos, are owned by Revnous or our licensors. These Terms do not grant you any rights to our intellectual property except as expressly stated.
+
+6.2 Your Content
+You retain ownership of any content you submit through our Services ('Your Content'). By submitting Your Content, you grant us a worldwide, non-exclusive, royalty-free license to use, store, and process Your Content solely to provide the Services.
+
+6.3 Feedback
+If you provide feedback or suggestions about our Services, we may use that feedback without any obligation to you.
+
+7. Data and Privacy
+
+Your use of our Services is also governed by our Privacy Policy, which is incorporated into these Terms by reference. You are responsible for complying with all applicable data protection laws when using our Services.
+
+For Shopify App Users: We process store and customer data in accordance with Shopify's API Terms of Service and applicable data protection laws.
+
+8. Third-Party Services
+
+Our Services may integrate with third-party platforms (like Shopify, payment processors, etc.). Your use of third-party services is subject to their respective terms and conditions. We are not responsible for third-party services or their availability.
+
+9. Disclaimer of Warranties
+
+THE SERVICES ARE PROVIDED 'AS IS' AND 'AS AVAILABLE' WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+
+We do not warrant that:
+- The Services will be uninterrupted, secure, or error-free
+- The results obtained from the Services will be accurate or reliable
+- Any defects in the Services will be corrected
+
+10. Limitation of Liability
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, REVNOUS SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFITS, LOST REVENUE, LOST DATA, OR BUSINESS INTERRUPTION ARISING FROM YOUR USE OF OR INABILITY TO USE THE SERVICES.
+
+OUR TOTAL LIABILITY TO YOU FOR ALL CLAIMS ARISING FROM THESE TERMS OR THE SERVICES SHALL NOT EXCEED THE AMOUNT YOU PAID US IN THE 12 MONTHS PRECEDING THE CLAIM.
+
+Some jurisdictions do not allow limitations on implied warranties or liability for incidental or consequential damages, so some of these limitations may not apply to you.
+
+11. Indemnification
+
+You agree to indemnify, defend, and hold harmless Revnous and its officers, directors, employees, and agents from any claims, liabilities, damages, losses, and expenses (including reasonable attorneys' fees) arising from:
+- Your use of the Services
+- Your violation of these Terms
+- Your violation of any rights of another party
+- Your Content
+
+12. Term and Termination
+
+12.1 Term
+These Terms remain in effect while you use our Services.
+
+12.2 Termination by You
+You may terminate these Terms by canceling your account and discontinuing use of the Services.
+
+12.3 Termination by Us
+We may suspend or terminate your access to the Services at any time for:
+- Violation of these Terms
+- Fraudulent, illegal, or harmful activity
+- Extended periods of inactivity
+- Any reason with 30 days' notice
+
+12.4 Effect of Termination
+Upon termination:
+- Your right to use the Services immediately ceases
+- We may delete Your Content and account data
+- Provisions that by their nature should survive will survive termination
+
+13. Modifications to Services and Terms
+
+13.1 Service Changes
+We reserve the right to modify, suspend, or discontinue any part of the Services at any time with reasonable notice.
+
+13.2 Terms Changes
+We may update these Terms from time to time. Material changes will be communicated via email or a notice on our website. Your continued use of the Services after changes constitutes acceptance of the updated Terms.
+
+14. General Provisions
+
+14.1 Governing Law
+These Terms are governed by the laws of [Your Jurisdiction], without regard to conflict of law provisions.
+
+14.2 Dispute Resolution
+Any disputes arising from these Terms shall be resolved through binding arbitration in accordance with [Arbitration Rules], except that either party may seek injunctive relief in court.
+
+14.3 Entire Agreement
+These Terms, together with our Privacy Policy, constitute the entire agreement between you and Revnous regarding the Services.
+
+14.4 Severability
+If any provision of these Terms is found unenforceable, the remaining provisions will remain in full effect.
+
+14.5 Waiver
+Our failure to enforce any provision of these Terms does not constitute a waiver of that provision.
+
+14.6 Assignment
+You may not assign these Terms without our prior written consent. We may assign these Terms without restriction.
+
+15. Contact Information
+
+For questions about these Terms, please contact us at:
+
+Email: legal@revnous.com
+Address: Revnous Inc., [Your Address]
+Website: www.revnous.com
+
+16. Apple App Store Additional Terms
+
+If you access our Services through the Apple App Store, you agree to:
+- These Terms are between you and Revnous, not Apple
+- Apple has no obligation to provide support services
+- Apple is not responsible for product warranties
+- Apple is not responsible for addressing claims related to the app
+- Apple and its subsidiaries are third-party beneficiaries of these Terms
+
+17. Shopify App Store Additional Terms
+
+If you install our app through the Shopify App Store:
+- You agree to comply with Shopify's API Terms of Service
+- We process store data in accordance with Shopify's requirements
+- Shopify may terminate our app distribution, affecting your access
+- Billing is processed through Shopify's billing system",
+    active: true,
+    version: "1.0",
+    effective_date: Date.new(2025, 1, 1)
+  }
+]
+
+legal_documents_data.each do |document_data|
+  LegalDocument.create!(document_data)
+  puts "Created legal document: #{document_data[:title]}"
+end
+
+puts "Created #{LegalDocument.count} legal documents"

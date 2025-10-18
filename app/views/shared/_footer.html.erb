@@ -5,9 +5,9 @@
       <div>
         <h3 class="text-sm font-semibold uppercase tracking-wider mb-4">Product</h3>
         <ul class="space-y-3">
+          <li><%= link_to "Products", products_path, class: "text-gray-400 hover:text-white transition" %></li>
           <li><%= link_to "Case Studies", case_studies_path, class: "text-gray-400 hover:text-white transition" %></li>
           <li><%= link_to "Services", services_path, class: "text-gray-400 hover:text-white transition" %></li>
-          <li><%= link_to "Pricing", pricing_path, class: "text-gray-400 hover:text-white transition" %></li>
           <li><a href="https://apps.shopify.com/pricing-schedule" target="_blank" class="text-gray-400 hover:text-white transition">Shopify App</a></li>
         </ul>
       </div>
@@ -18,7 +18,7 @@
         <ul class="space-y-3">
           <li><%= link_to "Blog", blogs_path, class: "text-gray-400 hover:text-white transition" %></li>
           <li><a href="https://calendar.app.google/ExeXXoFRYB52hu5S8" target="_blank" class="text-gray-400 hover:text-white transition">Book a Demo</a></li>
-          <li><%= link_to "Contact Us", root_path(anchor: "contact-us"), class: "text-gray-400 hover:text-white transition" %></li>
+          <li><%= link_to "Contact Us", contact_us_path, class: "text-gray-400 hover:text-white transition" %></li>
         </ul>
       </div>
 
@@ -47,8 +47,11 @@
     <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
       <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 mb-4 md:mb-0">
         <p class="text-sm text-gray-400">© 2025 Revnous Inc. All Rights Reserved</p>
-        <div class="flex space-x-4">
+        <div class="flex flex-wrap gap-x-4 gap-y-2">
           <a href="mailto:contact@revnous.com" class="text-gray-400 hover:text-white transition text-sm">Contact</a>
+          <%= link_to "Privacy Policy", privacy_policy_path, class: "text-gray-400 hover:text-white transition text-sm" %>
+          <%= link_to "Terms of Service", terms_of_service_path, class: "text-gray-400 hover:text-white transition text-sm" %>
+          <a href="#" id="cookie-settings-link" class="text-gray-400 hover:text-white transition text-sm">Cookie Settings</a>
         </div>
       </div>
 

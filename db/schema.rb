@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_12_172040) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_18_160134) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -177,6 +177,24 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_12_172040) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_donations_on_user_id"
+  end
+
+  create_table "legal_documents", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "slug", null: false
+    t.text "content"
+    t.string "document_type", null: false
+    t.boolean "active", default: true, null: false
+    t.string "version", default: "1.0"
+    t.date "effective_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "product_id"
+    t.index ["active"], name: "index_legal_documents_on_active"
+    t.index ["document_type"], name: "index_legal_documents_on_document_type"
+    t.index ["product_id", "document_type"], name: "index_legal_docs_on_product_and_type"
+    t.index ["product_id"], name: "index_legal_documents_on_product_id"
+    t.index ["slug"], name: "index_legal_documents_on_slug", unique: true
   end
 
   create_table "membership_applications", force: :cascade do |t|
@@ -418,6 +436,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_12_172040) do
   add_foreign_key "donation_reminders", "users"
   add_foreign_key "donation_schedules", "users"
   add_foreign_key "donations", "users"
+  add_foreign_key "legal_documents", "products"
   add_foreign_key "membership_applications", "users"
   add_foreign_key "membership_applications", "users", column: "recruiter_id"
   add_foreign_key "membership_decisions", "membership_applications"

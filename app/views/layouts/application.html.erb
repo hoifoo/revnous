@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6ZPXSBZYL8"></script>
+    <!-- Google tag (gtag.js) with Consent Mode -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
 
+      // Set default consent to denied
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'wait_for_update': 500
+      });
+
+      gtag('js', new Date());
       gtag('config', 'G-6ZPXSBZYL8');
     </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6ZPXSBZYL8"></script>
+
     <title><%= content_for(:title) || "Revnous - Why Brands are Choosing Us" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -48,5 +56,6 @@
       <%= yield %>
     </main>
     <%= render "shared/footer" %>
+    <%= render "shared/cookie_consent" %>
   </body>
 </html>

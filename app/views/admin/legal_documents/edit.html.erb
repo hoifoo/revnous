@@ -1,0 +1,13 @@
+<div class="mb-8">
+  <div class="flex items-center gap-2 text-sm text-gray-600 mb-4">
+    <%= link_to "Legal Documents", admin_legal_documents_path, class: "hover:text-pink-600" %>
+    <span>/</span>
+    <span class="text-gray-900">Edit</span>
+  </div>
+  <h1 class="text-3xl font-bold text-gray-900">Edit Legal Document</h1>
+  <p class="text-gray-600 mt-2">Update <%= @legal_document.title %></p>
+</div>
+
+<div class="bg-white rounded-lg shadow p-8">
+  <%= render "form", legal_document: @legal_document %>
+</div>

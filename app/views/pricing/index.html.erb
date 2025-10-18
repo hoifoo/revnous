@@ -101,6 +101,13 @@
                   <p class="text-xs text-gray-600 mb-4"><%= plan.description %></p>
                 <% end %>
 
+                <p class="text-xs text-gray-500 mb-4">
+                  By signing up, you agree to our
+                  <%= link_to "Terms of Service", terms_of_service_url_for(product), class: "text-pink-600 hover:text-pink-700 underline", target: "_blank" %>
+                  and
+                  <%= link_to "Privacy Policy", privacy_policy_url_for(product), class: "text-pink-600 hover:text-pink-700 underline", target: "_blank" %>
+                </p>
+
                 <ul class="space-y-3">
                   <% plan.features_list.each do |feature| %>
                     <li class="flex items-start">
@@ -187,7 +194,7 @@
       <p class="text-xl text-white mb-8">
         Start your free trial or get in touch with us to schedule a demo.
       </p>
-      <div class="flex gap-4">
+      <div class="flex gap-4 mb-4">
         <a href="https://calendar.app.google/ExeXXoFRYB52hu5S8" target="_blank" class="px-6 py-3 bg-black text-white rounded-md hover:bg-gray-900 transition font-medium">
           Book a demo
         </a>
@@ -195,6 +202,12 @@
           Try 30-Days Free
         </a>
       </div>
+      <p class="text-sm text-white opacity-80">
+        By continuing, you agree to our
+        <%= link_to "Terms of Service", terms_of_service_path, class: "text-white underline hover:opacity-100", target: "_blank" %>
+        and
+        <%= link_to "Privacy Policy", privacy_policy_path, class: "text-white underline hover:opacity-100", target: "_blank" %>
+      </p>
     </div>
   </div>
 </div>

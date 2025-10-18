@@ -1,0 +1,107 @@
+<div class="flex justify-between items-center mb-8">
+  <div>
+    <h1 class="text-3xl font-bold text-gray-900">Legal Documents</h1>
+    <p class="text-gray-600 mt-2">Manage privacy policies and terms of service</p>
+  </div>
+  <%= link_to new_admin_legal_document_path, class: "px-6 py-3 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition font-medium inline-flex items-center" do %>
+    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+    </svg>
+    New Legal Document
+  <% end %>
+</div>
+
+<div class="bg-white rounded-lg shadow overflow-hidden">
+  <table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
+      <tr>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Version</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Effective Date</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+      <% @legal_documents.each do |document| %>
+        <tr class="hover:bg-gray-50">
+          <td class="px-6 py-4">
+            <div>
+              <div class="font-medium text-gray-900"><%= document.title %></div>
+              <div class="text-xs text-gray-500"><%= document.slug %></div>
+            </div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm">
+            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full <%= document.privacy_policy? ? 'bg-blue-100 text-blue-800' : 'bg-purple-100 text-purple-800' %>">
+              <%= document.human_document_type %>
+            </span>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+            <% if document.product %>
+              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                <%= document.product.name %>
+              </span>
+            <% else %>
+              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
+                Global
+              </span>
+            <% end %>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+            <%= document.version %>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+            <%= document.effective_date&.strftime("%b %d, %Y") %>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <% if document.active %>
+              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                Active
+              </span>
+            <% else %>
+              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
+                Inactive
+              </span>
+            <% end %>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+            <% if document.product %>
+              <% product_slug = document.product.name.parameterize %>
+              <% if document.privacy_policy? %>
+                <%= link_to product_privacy_policy_path(product_slug: product_slug), target: "_blank", class: "text-blue-600 hover:text-blue-900" do %>
+                  View
+                <% end %>
+              <% else %>
+                <%= link_to product_terms_of_service_path(product_slug: product_slug), target: "_blank", class: "text-blue-600 hover:text-blue-900" do %>
+                  View
+                <% end %>
+              <% end %>
+            <% else %>
+              <% if document.privacy_policy? %>
+                <%= link_to privacy_policy_path, target: "_blank", class: "text-blue-600 hover:text-blue-900" do %>
+                  View
+                <% end %>
+              <% else %>
+                <%= link_to terms_of_service_path, target: "_blank", class: "text-blue-600 hover:text-blue-900" do %>
+                  View
+                <% end %>
+              <% end %>
+            <% end %>
+            <%= link_to edit_admin_legal_document_path(document), class: "text-indigo-600 hover:text-indigo-900" do %>
+              Edit
+            <% end %>
+            <%= link_to admin_legal_document_path(document), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-900" do %>
+              Delete
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="mt-6">
+  <%= paginate @legal_documents %>
+</div>

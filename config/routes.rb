@@ -12,16 +12,29 @@ Rails.application.routes.draw do
     resources :special_offers, except: [:show]
     resources :partners, except: [:show]
     resources :newsletter_subscribers, except: [:show]
+    resources :legal_documents, except: [:show]
   end
 
   # Public routes
-  get "pricing", to: "pricing#index"
   get "services", to: "services#index"
+  resources :products, only: [:index, :show]
   resources :case_studies, only: [:index, :show]
   resources :blogs, only: [:index, :show], path: "blog"
+  get "contact-us", to: "contacts#index", as: :contact_us
   post "contact", to: "contacts#create"
   post "newsletter", to: "newsletters#create", as: :newsletter_subscription
   get "altcha/challenge", to: "altcha_challenges#create", as: :altcha_challenge
+
+  # Global legal documents
+  get "privacy-policy", to: "legal_documents#privacy_policy", as: :privacy_policy
+  get "terms-of-service", to: "legal_documents#terms_of_service", as: :terms_of_service
+
+  # Product-scoped routes
+  scope "/products/:product_slug" do
+    get "pricing", to: "pricing#product_pricing", as: :product_pricing
+    get "privacy-policy", to: "legal_documents#product_privacy_policy", as: :product_privacy_policy
+    get "terms-of-service", to: "legal_documents#product_terms_of_service", as: :product_terms_of_service
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
