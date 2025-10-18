@@ -103,22 +103,55 @@
     <script type="module" src="https://cdn.jsdelivr.net/npm/altcha/dist/altcha.min.js"></script>
 
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
+      // Wait for custom element to be defined
+      if (customElements && customElements.whenDefined) {
+        customElements.whenDefined('altcha-widget').then(() => {
+          console.log('ALTCHA widget is ready');
+          setupAltchaListener();
+        });
+      } else {
+        // Fallback for older browsers
+        document.addEventListener('DOMContentLoaded', setupAltchaListener);
+      }
+
+      function setupAltchaListener() {
         const submitBtn = document.getElementById('submit-btn');
         const altchaWidget = document.querySelector('altcha-widget');
 
-        // Listen for ALTCHA verification events
-        if (altchaWidget) {
-          altchaWidget.addEventListener('statechange', (event) => {
-            // Enable button when ALTCHA is verified
-            if (event.detail.state === 'verified') {
-              submitBtn.disabled = false;
-            } else {
-              submitBtn.disabled = true;
-            }
-          });
+        console.log('Setting up ALTCHA listener');
+        console.log('Submit button:', submitBtn);
+        console.log('ALTCHA widget:', altchaWidget);
+
+        if (!submitBtn) {
+          console.error('Submit button not found!');
+          return;
         }
-      });
+
+        if (!altchaWidget) {
+          console.error('ALTCHA widget not found!');
+          return;
+        }
+
+        // Listen for ALTCHA verification events
+        altchaWidget.addEventListener('statechange', (event) => {
+          console.log('ALTCHA state changed:', event.detail);
+
+          // Enable button when ALTCHA is verified
+          if (event.detail.state === 'verified') {
+            console.log('ALTCHA verified - enabling button');
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            submitBtn.classList.add('cursor-pointer');
+          } else {
+            console.log('ALTCHA not verified - disabling button');
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            submitBtn.classList.remove('cursor-pointer');
+          }
+        });
+
+        console.log('ALTCHA listener attached successfully');
+      }
     </script>
   </div>
 </div>
