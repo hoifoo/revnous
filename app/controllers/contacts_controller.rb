@@ -44,9 +44,18 @@ class ContactsController < ApplicationController
     end
 
     begin
-      # Parse the JSON payload
+      # Decode Base64 payload first, then parse JSON
       payload_data = if altcha_payload.is_a?(String)
-        JSON.parse(altcha_payload)
+        begin
+          # Try to decode as Base64 first
+          decoded = Base64.decode64(altcha_payload)
+          Rails.logger.info("ALTCHA Decoded payload: #{decoded}")
+          JSON.parse(decoded)
+        rescue => e
+          # If Base64 decode fails, try direct JSON parse
+          Rails.logger.info("ALTCHA Direct JSON parse (not Base64): #{e.message}")
+          JSON.parse(altcha_payload)
+        end
       else
         altcha_payload
       end
