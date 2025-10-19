@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_18_160134) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_18_235004) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -79,6 +79,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_18_160134) do
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
+  end
+
+  create_table "beta_users", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "company"
+    t.string "website"
+    t.string "store_link"
+    t.integer "product_id", null: false
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_beta_users_on_email"
+    t.index ["product_id"], name: "index_beta_users_on_product_id"
   end
 
   create_table "blogs", force: :cascade do |t|

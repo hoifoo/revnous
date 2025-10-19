@@ -46,12 +46,13 @@ namespace :solid_queue do
     desc "Install Solid Queue systemd unit from template"
     task :install_unit do
       on roles(:app) do
-        within release_path do
-          unit_file = capture(:erb, "lib/capistrano/templates/solid_queue_systemd.service.erb")
-          execute :sudo, :tee, "/etc/systemd/system/solid-queue@revnous.service" do |io|
-            io.puts unit_file
-          end
-        end
+        # Render ERB locally using Capistrano context so `fetch` works
+        template_path = File.expand_path("../../templates/solid_queue_systemd.service.erb", __dir__)
+        content = ERB.new(File.read(template_path)).result(binding)
+
+        # Upload rendered unit file and reload systemd
+        upload! StringIO.new(content), "/tmp/solid-queue@revnous.service"
+        execute :sudo, :mv, "/tmp/solid-queue@revnous.service", "/etc/systemd/system/solid-queue@revnous.service"
         execute :sudo, :systemctl, :daemon_reload
       end
     end

@@ -16,5 +16,7 @@ class Admin::DashboardController < Admin::BaseController
     @newsletter_subscribers_count = NewsletterSubscriber.active.count
     @legal_documents_count = LegalDocument.count
     @active_legal_documents_count = LegalDocument.active.count
+    @beta_users_count = BetaUser.count
+    @beta_users_this_week = BetaUser.where("created_at >= ?", 1.week.ago).count
   end
 end
