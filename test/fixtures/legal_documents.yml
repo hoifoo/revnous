@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: Test Privacy Policy
+  slug: test-privacy-policy
+  content: This is a test privacy policy content.
+  document_type: privacy_policy
+  active: true
+  version: "1.0"
+  effective_date: <%= Date.today %>
+
+two:
+  title: Test Terms of Service
+  slug: test-terms-of-service
+  content: This is a test terms of service content.
+  document_type: terms_of_service
+  active: true
+  version: "1.0"
+  effective_date: <%= Date.today %>
