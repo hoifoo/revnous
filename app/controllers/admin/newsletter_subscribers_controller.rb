@@ -1,5 +1,5 @@
 class Admin::NewsletterSubscribersController < Admin::BaseController
-  before_action :set_newsletter_subscriber, only: [:edit, :update, :destroy]
+  before_action :set_newsletter_subscriber, only: [ :edit, :update, :destroy ]
 
   def index
     @newsletter_subscribers = NewsletterSubscriber.recent.page(params[:page]).per(20)

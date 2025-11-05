@@ -1,5 +1,5 @@
 class Admin::BlogsController < Admin::BaseController
-  before_action :set_blog, only: [:edit, :update, :destroy]
+  before_action :set_blog, only: [ :edit, :update, :destroy ]
 
   def index
     @blogs = Blog.order(created_at: :desc).page(params[:page]).per(20)

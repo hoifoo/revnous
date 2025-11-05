@@ -1,5 +1,5 @@
 class Admin::NoticesController < Admin::BaseController
-  before_action :set_notice, only: [:edit, :update, :destroy]
+  before_action :set_notice, only: [ :edit, :update, :destroy ]
 
   def index
     @notices = Notice.order(created_at: :desc).page(params[:page]).per(20)
