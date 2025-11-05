@@ -78,9 +78,7 @@
             <%= link_to edit_admin_blog_path(blog), class: "text-indigo-600 hover:text-indigo-900" do %>
               Edit
             <% end %>
-            <%= link_to admin_blog_path(blog), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-900" do %>
-              Delete
-            <% end %>
+            <%= button_to "Delete", admin_blog_path(blog), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-900" %>
           </td>
         </tr>
       <% end %>
