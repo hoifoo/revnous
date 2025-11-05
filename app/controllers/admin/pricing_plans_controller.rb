@@ -1,5 +1,5 @@
 class Admin::PricingPlansController < Admin::BaseController
-  before_action :set_pricing_plan, only: [:edit, :update, :destroy]
+  before_action :set_pricing_plan, only: [ :edit, :update, :destroy ]
 
   def index
     @pricing_plans = PricingPlan.ordered.page(params[:page]).per(20)

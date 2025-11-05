@@ -1,5 +1,5 @@
 class Admin::ProductsController < Admin::BaseController
-  before_action :set_product, only: [:edit, :update, :destroy]
+  before_action :set_product, only: [ :edit, :update, :destroy ]
 
   def index
     @products = Product.ordered.page(params[:page]).per(20)

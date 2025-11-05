@@ -33,7 +33,7 @@ class NewslettersController < ApplicationController
 
       <b>Email:</b> #{email}
       <b>Subscribed at:</b> #{Time.current.strftime('%Y-%m-%d %H:%M:%S %Z')}
-      
+
       Total subscribers: #{NewsletterSubscriber.active.count}
     MESSAGE
 

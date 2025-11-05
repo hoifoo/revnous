@@ -10,7 +10,7 @@ class PricingController < ApplicationController
 
     @pricing_plans = @product.pricing_plans.ordered
     @trusted_brands = TrustedBrand.ordered
-    @special_offer = SpecialOffer.for_page('pricing').first
+    @special_offer = SpecialOffer.for_page("pricing").first
 
     render :show
   end

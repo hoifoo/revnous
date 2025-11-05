@@ -1,5 +1,5 @@
 class LegalDocumentsController < ApplicationController
-  before_action :set_product, only: [:product_privacy_policy, :product_terms_of_service]
+  before_action :set_product, only: [ :product_privacy_policy, :product_terms_of_service ]
 
   # Global legal documents
   def privacy_policy
