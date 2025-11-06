@@ -1,9 +1,8 @@
 FactoryBot.define do
   factory :partner do
-    sequence(:name) { |n| "Test Partner #{n}" }
-    website_url { 'https://example.com' }
-    description { 'Test partner description' }
+    sequence(:name) { |n| "Partner #{n}" }
+    description { "Partner description" }
+    website_url { "https://partner.example.com" }
     active { true }
-    position { 0 }
   end
 end

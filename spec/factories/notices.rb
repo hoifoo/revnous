@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :notice do
-    message { 'Test notice message' }
-    link_url { 'https://example.com' }
-    link_text { 'Learn More' }
-    background_color { 'blue' }
+    message { "Important notice message" }
+    link_text { "Learn more" }
+    link_url { "https://example.com" }
+    background_color { "blue" }
     active { true }
   end
 end
