@@ -78,10 +78,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
+          cache: 'yarn'
 
       - name: Install npm dependencies
-        run: npm ci
+        run: yarn install --frozen-lockfile
 
       - name: Build assets
         run: |
