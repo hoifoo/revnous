@@ -13,7 +13,7 @@ class AdminResourceDeletionTest < ActionDispatch::IntegrationTest
     sign_in @admin_user
     notice = notices(:one)
 
-    assert_difference('Notice.count', -1) do
+    assert_difference("Notice.count", -1) do
       delete admin_notice_path(notice)
     end
 
@@ -25,7 +25,7 @@ class AdminResourceDeletionTest < ActionDispatch::IntegrationTest
     sign_in @regular_user
     notice = notices(:one)
 
-    assert_no_difference('Notice.count') do
+    assert_no_difference("Notice.count") do
       delete admin_notice_path(notice)
     end
 
@@ -36,7 +36,7 @@ class AdminResourceDeletionTest < ActionDispatch::IntegrationTest
   test "notice deletion requires authentication" do
     notice = notices(:one)
 
-    assert_no_difference('Notice.count') do
+    assert_no_difference("Notice.count") do
       delete admin_notice_path(notice)
     end
 
@@ -48,7 +48,7 @@ class AdminResourceDeletionTest < ActionDispatch::IntegrationTest
     sign_in @admin_user
     blog = blogs(:one)
 
-    assert_difference('Blog.count', -1) do
+    assert_difference("Blog.count", -1) do
       delete admin_blog_path(blog)
     end
 
@@ -60,7 +60,7 @@ class AdminResourceDeletionTest < ActionDispatch::IntegrationTest
     sign_in @regular_user
     blog = blogs(:one)
 
-    assert_no_difference('Blog.count') do
+    assert_no_difference("Blog.count") do
       delete admin_blog_path(blog)
     end
 
@@ -73,7 +73,7 @@ class AdminResourceDeletionTest < ActionDispatch::IntegrationTest
     sign_in @admin_user
     case_study = case_studies(:one)
 
-    assert_difference('CaseStudy.count', -1) do
+    assert_difference("CaseStudy.count", -1) do
       delete admin_case_study_path(case_study)
     end
 
@@ -85,7 +85,7 @@ class AdminResourceDeletionTest < ActionDispatch::IntegrationTest
     sign_in @regular_user
     case_study = case_studies(:one)
 
-    assert_no_difference('CaseStudy.count') do
+    assert_no_difference("CaseStudy.count") do
       delete admin_case_study_path(case_study)
     end
 
@@ -98,7 +98,7 @@ class AdminResourceDeletionTest < ActionDispatch::IntegrationTest
     sign_in @admin_user
     legal_document = legal_documents(:one)
 
-    assert_difference('LegalDocument.count', -1) do
+    assert_difference("LegalDocument.count", -1) do
       delete admin_legal_document_path(legal_document)
     end
 
@@ -110,7 +110,7 @@ class AdminResourceDeletionTest < ActionDispatch::IntegrationTest
     sign_in @regular_user
     legal_document = legal_documents(:one)
 
-    assert_no_difference('LegalDocument.count') do
+    assert_no_difference("LegalDocument.count") do
       delete admin_legal_document_path(legal_document)
     end
 
@@ -123,7 +123,7 @@ class AdminResourceDeletionTest < ActionDispatch::IntegrationTest
     sign_in @admin_user
     product = products(:one)
 
-    assert_difference('Product.count', -1) do
+    assert_difference("Product.count", -1) do
       delete admin_product_path(product)
     end
 
@@ -134,7 +134,7 @@ class AdminResourceDeletionTest < ActionDispatch::IntegrationTest
     sign_in @admin_user
     pricing_plan = pricing_plans(:one)
 
-    assert_difference('PricingPlan.count', -1) do
+    assert_difference("PricingPlan.count", -1) do
       delete admin_pricing_plan_path(pricing_plan)
     end
 
@@ -145,7 +145,7 @@ class AdminResourceDeletionTest < ActionDispatch::IntegrationTest
     sign_in @admin_user
     partner = partners(:one)
 
-    assert_difference('Partner.count', -1) do
+    assert_difference("Partner.count", -1) do
       delete admin_partner_path(partner)
     end
 
@@ -156,7 +156,7 @@ class AdminResourceDeletionTest < ActionDispatch::IntegrationTest
     sign_in @admin_user
     special_offer = special_offers(:one)
 
-    assert_difference('SpecialOffer.count', -1) do
+    assert_difference("SpecialOffer.count", -1) do
       delete admin_special_offer_path(special_offer)
     end
 
@@ -167,7 +167,7 @@ class AdminResourceDeletionTest < ActionDispatch::IntegrationTest
     sign_in @admin_user
     trusted_brand = trusted_brands(:one)
 
-    assert_difference('TrustedBrand.count', -1) do
+    assert_difference("TrustedBrand.count", -1) do
       delete admin_trusted_brand_path(trusted_brand)
     end
 

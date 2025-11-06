@@ -12,6 +12,6 @@ FactoryBot.define do
     is_popular { false }
     shopify_plus_only { false }
     position { 0 }
-    features { ['Feature 1', 'Feature 2', 'Feature 3'] }
+    features { [ 'Feature 1', 'Feature 2', 'Feature 3' ] }
   end
 end
