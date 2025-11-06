@@ -3,7 +3,7 @@ FactoryBot.define do
     message { "Important notice message" }
     link_text { "Learn more" }
     link_url { "https://example.com" }
-    background_color { "#3b82f6" }
+    background_color { "blue" }
     active { true }
   end
 end

@@ -63,9 +63,7 @@
             <%= link_to edit_admin_case_study_path(case_study), class: "text-indigo-600 hover:text-indigo-900" do %>
               Edit
             <% end %>
-            <%= link_to admin_case_study_path(case_study), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-900" do %>
-              Delete
-            <% end %>
+            <%= button_to "Delete", admin_case_study_path(case_study), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-900" %>
           </td>
         </tr>
       <% end %>

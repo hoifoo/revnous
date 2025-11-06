@@ -3,9 +3,10 @@ FactoryBot.define do
     association :product
     sequence(:name) { |n| "Plan #{n}" }
     price { 9.99 }
-    billing_period { "monthly" }
+    billing_period { "mo" }
     features { [ "Feature 1", "Feature 2", "Feature 3" ] }
-    active { true }
-    featured { false }
+    is_popular { false }
+    shopify_plus_only { false }
+    position { 0 }
   end
 end
