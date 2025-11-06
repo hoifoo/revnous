@@ -8,6 +8,6 @@ FactoryBot.define do
     cta_url { "https://example.com/offer" }
     logo_text { "SPECIAL" }
     active { true }
-    placement_tags { ["home", "pricing"] }
+    placement_tags { [ "home", "pricing" ] }
   end
 end
