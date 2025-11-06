@@ -1,5 +1,5 @@
 class Admin::SpecialOffersController < Admin::BaseController
-  before_action :set_special_offer, only: [:edit, :update, :destroy]
+  before_action :set_special_offer, only: [ :edit, :update, :destroy ]
 
   def index
     @special_offers = SpecialOffer.order(created_at: :desc).page(params[:page]).per(20)

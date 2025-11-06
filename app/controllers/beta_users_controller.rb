@@ -5,7 +5,7 @@ class BetaUsersController < ApplicationController
 
     # Check if this is a product-scoped route
     if params[:product_slug].present?
-      @product = Product.find_by(id: params[:product_slug]) || Product.find_by("LOWER(name) = ?", params[:product_slug].downcase.gsub('-', ' '))
+      @product = Product.find_by(id: params[:product_slug]) || Product.find_by("LOWER(name) = ?", params[:product_slug].downcase.gsub("-", " "))
     elsif params[:product_id].present?
       @product = Product.find_by(id: params[:product_id])
     end
@@ -80,9 +80,9 @@ class BetaUsersController < ApplicationController
 
       Rails.logger.info("ALTCHA Parsed payload: #{payload_data.inspect}")
 
-      hmac_key = ENV.fetch('ALTCHA_HMAC_KEY', 'default-secret-key-change-in-production')
+      hmac_key = ENV.fetch("ALTCHA_HMAC_KEY", "default-secret-key-change-in-production")
 
-      if hmac_key == 'default-secret-key-change-in-production'
+      if hmac_key == "default-secret-key-change-in-production"
         Rails.logger.error("ALTCHA FAILED: Using default HMAC key - environment variable not set!")
         return false
       end

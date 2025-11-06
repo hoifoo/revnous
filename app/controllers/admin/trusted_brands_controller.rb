@@ -1,5 +1,5 @@
 class Admin::TrustedBrandsController < Admin::BaseController
-  before_action :set_trusted_brand, only: [:edit, :update, :destroy]
+  before_action :set_trusted_brand, only: [ :edit, :update, :destroy ]
 
   def index
     @trusted_brands = TrustedBrand.ordered.page(params[:page]).per(20)

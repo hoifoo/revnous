@@ -62,9 +62,9 @@ class ContactsController < ApplicationController
 
       Rails.logger.info("ALTCHA Parsed payload: #{payload_data.inspect}")
 
-      hmac_key = ENV.fetch('ALTCHA_HMAC_KEY', 'default-secret-key-change-in-production')
+      hmac_key = ENV.fetch("ALTCHA_HMAC_KEY", "default-secret-key-change-in-production")
 
-      if hmac_key == 'default-secret-key-change-in-production'
+      if hmac_key == "default-secret-key-change-in-production"
         Rails.logger.error("ALTCHA FAILED: Using default HMAC key - environment variable not set!")
         return false
       end

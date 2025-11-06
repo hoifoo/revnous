@@ -1,5 +1,5 @@
 class Admin::PartnersController < Admin::BaseController
-  before_action :set_partner, only: [:edit, :update, :destroy]
+  before_action :set_partner, only: [ :edit, :update, :destroy ]
 
   def index
     @partners = Partner.ordered.page(params[:page]).per(20)

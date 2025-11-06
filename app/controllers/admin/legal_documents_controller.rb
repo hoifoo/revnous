@@ -1,5 +1,5 @@
 class Admin::LegalDocumentsController < Admin::BaseController
-  before_action :set_legal_document, only: [:edit, :update, :destroy]
+  before_action :set_legal_document, only: [ :edit, :update, :destroy ]
 
   def index
     @legal_documents = LegalDocument.ordered.page(params[:page]).per(20)

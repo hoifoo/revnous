@@ -1,5 +1,5 @@
 class Admin::CaseStudiesController < Admin::BaseController
-  before_action :set_case_study, only: [:edit, :update, :destroy]
+  before_action :set_case_study, only: [ :edit, :update, :destroy ]
 
   def index
     @case_studies = CaseStudy.order(created_at: :desc).page(params[:page]).per(20)

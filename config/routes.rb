@@ -1,26 +1,26 @@
 Rails.application.routes.draw do
-  devise_for :users, skip: [:registrations]
+  devise_for :users, skip: [ :registrations ]
   # Admin routes
   namespace :admin do
     root "dashboard#index"
-    resources :case_studies, except: [:show]
-    resources :blogs, except: [:show]
-    resources :notices, except: [:show]
-    resources :products, except: [:show]
-    resources :pricing_plans, except: [:show]
-    resources :trusted_brands, except: [:show]
-    resources :special_offers, except: [:show]
-    resources :partners, except: [:show]
-    resources :newsletter_subscribers, except: [:show]
-    resources :legal_documents, except: [:show]
-    resources :beta_users, only: [:index, :destroy]
+    resources :case_studies, except: [ :show ]
+    resources :blogs, except: [ :show ]
+    resources :notices, except: [ :show ]
+    resources :products, except: [ :show ]
+    resources :pricing_plans, except: [ :show ]
+    resources :trusted_brands, except: [ :show ]
+    resources :special_offers, except: [ :show ]
+    resources :partners, except: [ :show ]
+    resources :newsletter_subscribers, except: [ :show ]
+    resources :legal_documents, except: [ :show ]
+    resources :beta_users, only: [ :index, :destroy ]
   end
 
   # Public routes
   get "services", to: "services#index"
-  resources :products, only: [:index, :show]
-  resources :case_studies, only: [:index, :show]
-  resources :blogs, only: [:index, :show], path: "blog"
+  resources :products, only: [ :index, :show ]
+  resources :case_studies, only: [ :index, :show ]
+  resources :blogs, only: [ :index, :show ], path: "blog"
   get "contact-us", to: "contacts#index", as: :contact_us
   post "contact", to: "contacts#create"
   post "newsletter", to: "newsletters#create", as: :newsletter_subscription
