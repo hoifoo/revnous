@@ -2,7 +2,7 @@ require "test_helper"
 
 class Admin::PartnersControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user = create(:user)
+    @user = create(:user, admin: true)
     sign_in @user
   end
 
