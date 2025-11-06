@@ -1,6 +1,11 @@
 require "test_helper"
 
 class Admin::PartnersControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @user = create(:user)
+    sign_in @user
+  end
+
   test "should get index" do
     get admin_partners_url
     assert_response :success

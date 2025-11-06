@@ -1,6 +1,11 @@
 require "test_helper"
 
 class Admin::ProductsControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @user = create(:user)
+    sign_in @user
+  end
+
   test "should get index" do
     get admin_products_url
     assert_response :success
