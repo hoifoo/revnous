@@ -16,6 +16,7 @@ class Product < ApplicationRecord
   scope :featured_on_home, -> { where(featured_on_home: true) }
   scope :with_cover_photo, -> { joins(:cover_photo_attachment) }
   scope :ordered, -> { order(position: :asc, created_at: :desc) }
+  scope :published, -> { where(published: true) }
 
   # Helper methods for legal documents
   def privacy_policy

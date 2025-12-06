@@ -35,6 +35,7 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <%= auto_discovery_link_tag :xml, sitemap_url(format: :xml), title: "Sitemap" %>
   </head>
 
   <body class="flex flex-col min-h-screen">
