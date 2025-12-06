@@ -55,4 +55,13 @@ xml.urlset xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9" do
       xml.priority 0.9
     end
   end
+
+  # Solution pages (polymorphic landing pages)
+  SolutionsController::SOLUTIONS.each_key do |slug|
+    xml.url do
+      xml.loc solution_url(slug)
+      xml.changefreq "weekly"
+      xml.priority 0.9
+    end
+  end
 end
