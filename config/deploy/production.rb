@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-server "104.250.128.180", user: "deploy", roles: %w[app db web], primary: true
+server "revnous.com", user: "deploy", roles: %w[app db web], primary: true
 
 set :branch, "main"
 set :rails_env, "production"
