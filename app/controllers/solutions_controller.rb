@@ -8,6 +8,7 @@ class SolutionsController < ApplicationController
       subheadline: "Schedule flash sales that start and end automatically—no midnight panic, no manual work.",
       pain_point: "Stop waking up at midnight to manually update prices",
       pain_description: "Running flash sales shouldn't mean setting alarms or staying up late. Your competitors automate this. You should too.",
+      logo_image: "solutions/logo.png",
       value_props: [
         {
           title: "Schedule Start & End Times",
@@ -32,7 +33,7 @@ class SolutionsController < ApplicationController
         "Sale ends on schedule—original prices restore automatically"
       ],
       demo_image: nil, # Set to filename when image is added, e.g., "schedule-demo.png"
-      demo_video_url: nil,
+      demo_video_url: "https://youtu.be/QaVZkQRHnDM",
       social_proof: "Trusted by Shopify stores running automated sales campaigns",
       cta_primary: "Schedule My First Sale",
       cta_secondary: "See How It Works",
@@ -51,7 +52,8 @@ class SolutionsController < ApplicationController
       subheadline: "Bulk price updates with math operations. No CSV exports. No Excel crashes.",
       pain_point: "Stop crashing Excel with massive CSV imports",
       pain_description: "Shopify's native bulk editor is slow and limited. CSV imports are error-prone and crash with large catalogs. There's a better way.",
-      logo_image: "bulk-price-editor-logo.png",
+      logo_image: "solutions/logo.png",
+      demo_video_url: "https://youtu.be/QaVZkQRHnDM",
       value_props: [
         {
           title: "Filter & Select Smart",
@@ -75,8 +77,6 @@ class SolutionsController < ApplicationController
         "Apply math operations: +10%, -$5, round to .99, etc.",
         "Preview changes, then apply instantly to your store"
       ],
-      demo_image: nil, # Set to filename when image is added, e.g., "bulk-editor-demo.png"
-      demo_video_url: nil,
       social_proof: "Processing 50M+ price updates monthly for Shopify merchants",
       cta_primary: "Edit Prices Now",
       cta_secondary: "Watch Demo",
