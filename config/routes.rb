@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, skip: [ :registrations ]
   # Admin routes
   namespace :admin do
+    resources :seo_metadata, except: [ :show ]
     root "dashboard#index"
     resources :case_studies, except: [ :show ]
     resources :blogs, except: [ :show ]

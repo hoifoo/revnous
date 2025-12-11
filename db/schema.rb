@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_18_235004) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_11_144657) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -107,6 +107,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_18_235004) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "featured_on_home", default: false, null: false
+    t.string "meta_title"
+    t.text "meta_description"
     t.index ["featured_on_home"], name: "index_blogs_on_featured_on_home"
   end
 
@@ -375,6 +377,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_18_235004) do
     t.bigint "product_id", null: false
     t.index ["product_id", "special_offer_id"], name: "idx_on_product_id_special_offer_id_4278b602be"
     t.index ["special_offer_id", "product_id"], name: "idx_on_special_offer_id_product_id_302ad04826"
+  end
+
+  create_table "seo_metadata", force: :cascade do |t|
+    t.string "page_identifier"
+    t.string "page_title"
+    t.text "meta_description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["page_identifier"], name: "index_seo_metadata_on_page_identifier", unique: true
   end
 
   create_table "special_offers", force: :cascade do |t|

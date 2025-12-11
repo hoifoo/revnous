@@ -35,6 +35,7 @@
 <div class="bg-white py-16">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+      <h2 class="sr-only">Our Impact</h2>
       <div>
         <h3 class="text-5xl font-bold text-pink-600 mb-2">$1B+</h3>
         <p class="text-gray-600 text-lg">Revenue Generated</p>
@@ -69,7 +70,8 @@
             <% if case_study.image.attached? %>
               <%= image_tag case_study.image,
                   alt: case_study.name,
-                  class: "w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                  class: "w-full h-full object-cover group-hover:scale-105 transition duration-300",
+                  loading: :lazy
               %>
             <% else %>
               <div class="w-full h-full flex items-center justify-center bg-gray-200">
@@ -196,7 +198,7 @@
           <div class="<%= 'lg:order-2' if index.odd? %>">
             <% if product.logo.attached? %>
               <div class="mb-6">
-                <%= image_tag product.logo, class: "h-16 w-auto object-contain" %>
+                <%= image_tag product.logo, class: "h-16 w-auto object-contain", loading: :lazy %>
               </div>
             <% end %>
 
@@ -248,7 +250,7 @@
           <div class="<%= 'lg:order-1' if index.odd? %>">
             <% if product.cover_photo.attached? %>
               <div class="rounded-lg overflow-hidden shadow-xl">
-                <%= image_tag product.cover_photo, alt: product.name, class: "w-full h-full object-cover" %>
+                <%= image_tag product.cover_photo, alt: product.name, class: "w-full h-full object-cover", loading: :lazy %>
               </div>
             <% end %>
           </div>
@@ -278,7 +280,8 @@
             <% if blog.image.attached? %>
               <%= image_tag blog.image,
                   alt: blog.title,
-                  class: "w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                  class: "w-full h-full object-cover group-hover:scale-105 transition duration-300",
+                  loading: :lazy
               %>
             <% else %>
               <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-pink-100 to-purple-100">
@@ -381,7 +384,7 @@
         <% if partner.website_url.present? %>
           <a href="<%= partner.website_url %>" target="_blank" class="flex justify-center items-center p-6 bg-white rounded-lg hover:shadow-lg transition group" title="<%= partner.name %>">
             <% if partner.logo.attached? %>
-              <%= image_tag partner.logo, alt: partner.name, class: "h-16 w-auto max-w-full object-contain grayscale group-hover:grayscale-0 transition" %>
+              <%= image_tag partner.logo, alt: partner.name, class: "h-16 w-auto max-w-full object-contain grayscale group-hover:grayscale-0 transition", loading: :lazy %>
             <% else %>
               <span class="text-xl font-bold text-gray-700 group-hover:text-gray-900"><%= partner.name %></span>
             <% end %>
@@ -389,7 +392,7 @@
         <% else %>
           <div class="flex justify-center items-center p-6 bg-white rounded-lg" title="<%= partner.name %>">
             <% if partner.logo.attached? %>
-              <%= image_tag partner.logo, alt: partner.name, class: "h-16 w-auto max-w-full object-contain grayscale" %>
+              <%= image_tag partner.logo, alt: partner.name, class: "h-16 w-auto max-w-full object-contain grayscale", loading: :lazy %>
             <% else %>
               <span class="text-xl font-bold text-gray-700"><%= partner.name %></span>
             <% end %>
