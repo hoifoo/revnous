@@ -1,3 +1,12 @@
+<% content_for :structured_data do %>
+  <%= render_product_schema(@product) %>
+  <%= render_breadcrumbs_schema([
+    { name: "Home", url: root_url },
+    { name: "Products", url: products_url },
+    { name: @product.name, url: product_url(@product) }
+  ]) %>
+<% end %>
+
 <%= render "shared/notice_banner" %>
 
 <!-- Hero Section -->

@@ -1,13 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title><%= @page_title || "Revnous - Revenue Optimization for Shopify" %></title>
+    <title><%= page_title %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <% if @page_description %>
-      <meta name="description" content="<%= @page_description %>">
-    <% end %>
+    <meta name="description" content="<%= page_description %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="<%= canonical_url %>">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="icon" type="image/svg+xml" href="/icon.svg">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="<%= page_og_type %>">
+    <meta property="og:url" content="<%= canonical_url %>">
+    <meta property="og:title" content="<%= page_title %>">
+    <meta property="og:description" content="<%= page_description %>">
+    <meta property="og:image" content="<%= page_og_image %>">
+    <meta property="og:site_name" content="Revnous">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="<%= canonical_url %>">
+    <meta name="twitter:title" content="<%= page_title %>">
+    <meta name="twitter:description" content="<%= page_description %>">
+    <meta name="twitter:image" content="<%= page_og_image %>">
+
+    <!-- Robots -->
+    <meta name="robots" content="<%= page_robots %>">
+
+    <!-- Structured Data (JSON-LD) -->
+    <% if content_for?(:structured_data) %>
+      <%= yield :structured_data %>
+    <% else %>
+      <%= render_organization_schema %>
+    <% end %>
 
     <% if Rails.env.production? %>
       <!-- Preload critical assets -->

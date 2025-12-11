@@ -44,7 +44,8 @@ class Admin::ProductsController < Admin::BaseController
   def product_params
     params.require(:product).permit(
       :name, :product_type, :url, :short_description, :description,
-      :featured, :featured_on_home, :active, :position, :logo, :cover_photo
+      :featured, :featured_on_home, :active, :position, :logo, :cover_photo,
+      :meta_title, :meta_description
     )
   end
 end

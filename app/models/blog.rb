@@ -19,6 +19,19 @@ class Blog < ApplicationRecord
     meta_description.presence || ActionController::Base.helpers.strip_tags(content).truncate(160)
   end
 
+  def cover_photo_url
+    return nil unless image.attached?
+
+    if Rails.application.routes.default_url_options[:host]
+      Rails.application.routes.url_helpers.url_for(image)
+    else
+      # Fallback for console/tests
+      Rails.application.routes.url_helpers.rails_blob_path(image, only_path: false)
+    end
+  rescue StandardError
+    nil
+  end
+
   private
 
   def generate_slug

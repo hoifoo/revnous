@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
   def index
+    @page_title = "Revnous - Revenue Optimization for Shopify"
+    @page_description = "Revnous helps Shopify merchants optimize revenue with powerful pricing tools, analytics, and automation. Maximize your profits with data-driven insights."
     @featured_case_studies = CaseStudy.where(ad_active: true).limit(6)
     @special_offer = SpecialOffer.for_page("home").first
     @partners = Partner.active.ordered

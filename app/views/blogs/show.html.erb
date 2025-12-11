@@ -1,3 +1,12 @@
+<% content_for :structured_data do %>
+  <%= render_article_schema(@blog) %>
+  <%= render_breadcrumbs_schema([
+    { name: "Home", url: root_url },
+    { name: "Blog", url: blogs_url },
+    { name: @blog.title, url: blog_url(@blog.slug) }
+  ]) %>
+<% end %>
+
 <%= render "shared/notice_banner" %>
 
 <!-- Hero Section -->
