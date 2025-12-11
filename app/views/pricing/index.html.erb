@@ -51,7 +51,7 @@
         <div class="mb-16">
           <div class="flex items-center gap-4 mb-8">
             <% if product.logo.attached? %>
-              <%= image_tag product.logo, class: "h-12 w-auto" %>
+              <%= image_tag product.logo, class: "h-12 w-auto", alt: product.name %>
             <% end %>
             <div>
               <h2 class="text-3xl font-bold text-gray-900"><%= product.name %></h2>

@@ -5,9 +5,9 @@
       <!-- Logo -->
       <div class="mb-8 flex justify-center">
         <% if @data[:logo_image].present? %>
-          <%= image_tag @data[:logo_image], alt: @data[:headline], class: "h-20 w-auto" %>
+          <%= image_tag @data[:logo_image], alt: @data[:headline], class: "h-20 w-auto", loading: :lazy %>
         <% else %>
-          <%= image_tag "logo.png", alt: "Revnous", class: "h-16 w-auto brightness-0 invert" %>
+          <%= image_tag "logo.png", alt: "Revnous", class: "h-16 w-auto brightness-0 invert", loading: :lazy %>
         <% end %>
       </div>
       
@@ -78,6 +78,7 @@
           <div class="rounded-lg shadow-2xl overflow-hidden bg-white p-4">
             <%= image_tag @data[:demo_image], 
                 alt: "#{@data[:headline]} Demo", 
+                loading: :lazy,
                 class: "w-full h-auto rounded-lg" %>
           </div>
         <% else %>
