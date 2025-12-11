@@ -21,7 +21,10 @@
             <div class="<%= 'lg:order-2' if index.odd? %>">
               <% if product.logo.attached? %>
                 <div class="mb-6">
-                  <%= image_tag product.logo, class: "h-20 w-auto object-contain" %>
+                  <%= image_tag product.logo, 
+                  alt: product.name,
+                  loading: :lazy,
+                  class: "h-20 w-auto object-contain" %>
                 </div>
               <% end %>
 
@@ -73,7 +76,7 @@
             <div class="<%= 'lg:order-1' if index.odd? %>">
               <% if product.cover_photo.attached? %>
                 <div class="rounded-lg overflow-hidden shadow-2xl">
-                  <%= image_tag product.cover_photo, alt: product.name, class: "w-full h-full object-cover" %>
+                  <%= image_tag product.cover_photo, alt: product.name, class: "w-full h-full object-cover", loading: :lazy %>
                 </div>
               <% else %>
                 <div class="rounded-lg overflow-hidden shadow-2xl bg-gradient-to-br from-pink-100 to-purple-100 aspect-video flex items-center justify-center">

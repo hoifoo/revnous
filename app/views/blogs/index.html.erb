@@ -26,6 +26,7 @@
           <% if @featured_blog.image.attached? %>
             <%= image_tag @featured_blog.image,
                 alt: @featured_blog.title,
+                loading: :lazy,
                 class: "w-full h-full object-cover group-hover:scale-105 transition duration-500"
             %>
           <% else %>
@@ -85,6 +86,7 @@
             <% if blog.image.attached? %>
               <%= image_tag blog.image,
                   alt: blog.title,
+                  loading: :lazy,
                   class: "w-full h-full object-cover group-hover:scale-105 transition duration-300"
               %>
             <% else %>

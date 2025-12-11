@@ -77,11 +77,13 @@
             <% if case_study.image.attached? %>
               <%= image_tag case_study.image,
                   alt: case_study.name,
+                  loading: :lazy,
                   class: "w-full h-full object-cover group-hover:scale-105 transition duration-300"
               %>
             <% elsif case_study.image_url.present? %>
               <%= image_tag case_study.image_url,
                   alt: case_study.name,
+                  loading: :lazy,
                   class: "w-full h-full object-cover group-hover:scale-105 transition duration-300"
               %>
             <% else %>

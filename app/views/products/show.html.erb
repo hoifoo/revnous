@@ -8,7 +8,7 @@
       <div>
         <% if @product.logo.attached? %>
           <div class="mb-6">
-            <%= image_tag @product.logo, class: "h-20 w-auto" %>
+            <%= image_tag @product.logo, alt: @product.name, loading: :lazy, class: "h-20 w-auto" %>
           </div>
         <% end %>
 
@@ -54,7 +54,7 @@
       <div>
         <% if @product.cover_photo.attached? %>
           <div class="rounded-lg overflow-hidden shadow-2xl">
-            <%= image_tag @product.cover_photo, alt: @product.name, class: "w-full h-full object-cover" %>
+            <%= image_tag @product.cover_photo, alt: @product.name, class: "w-full h-full object-cover", loading: :lazy %>
           </div>
         <% end %>
       </div>

@@ -35,6 +35,7 @@
       <div class="aspect-[16/9] bg-gray-100 rounded-xl overflow-hidden mb-12">
         <%= image_tag @blog.image,
             alt: @blog.title,
+            loading: :lazy,
             class: "w-full h-full object-cover"
         %>
       </div>
@@ -83,6 +84,7 @@
             <% if related_blog.image.attached? %>
               <%= image_tag related_blog.image,
                   alt: related_blog.title,
+                  loading: :lazy,
                   class: "w-full h-full object-cover group-hover:scale-105 transition duration-300"
               %>
             <% else %>

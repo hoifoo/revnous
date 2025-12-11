@@ -173,6 +173,7 @@
             <% if related_case_study.image.attached? %>
               <%= image_tag related_case_study.image,
                   alt: related_case_study.name,
+                  loading: :lazy,
                   class: "w-full h-full object-cover group-hover:scale-105 transition duration-300"
               %>
             <% else %>

@@ -198,7 +198,7 @@
           <div class="<%= 'lg:order-2' if index.odd? %>">
             <% if product.logo.attached? %>
               <div class="mb-6">
-                <%= image_tag product.logo, class: "h-16 w-auto object-contain", loading: :lazy %>
+                <%= image_tag product.logo, class: "h-16 w-auto object-contain", loading: :lazy, alt: product.name %>
               </div>
             <% end %>
 
