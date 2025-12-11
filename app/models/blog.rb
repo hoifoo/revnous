@@ -11,6 +11,14 @@ class Blog < ApplicationRecord
   scope :featured, -> { where(featured: true) }
   scope :featured_on_home, -> { where(featured_on_home: true) }
 
+  def seo_title
+    meta_title.presence || "#{title} - Revnous"
+  end
+
+  def seo_description
+    meta_description.presence || ActionController::Base.helpers.strip_tags(content).truncate(160)
+  end
+
   private
 
   def generate_slug

@@ -8,6 +8,8 @@ class BlogsController < ApplicationController
 
   def show
     @blog = Blog.find_by!(slug: params[:id])
+    @page_title = @blog.seo_title
+    @page_description = @blog.seo_description
     @related_blogs = Blog.published
                          .where(category: @blog.category)
                          .where.not(id: @blog.id)
