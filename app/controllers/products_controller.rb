@@ -11,6 +11,7 @@ class ProductsController < ApplicationController
     @page_description = @product.seo_description
     @page_og_type = "product"
     @page_og_image = @product.cover_photo_url if @product.cover_photo.attached?
+    @canonical_url = product_url(@product)
     @pricing_plans = @product.pricing_plans.ordered
     @trusted_brands = TrustedBrand.ordered
   end
