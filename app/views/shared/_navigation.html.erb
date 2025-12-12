@@ -28,8 +28,8 @@
         <a href="<%= contact_us_path %>" class="text-gray-700 hover:text-gray-900 font-medium">Contact Us</a>
       </nav>
 
-      <!-- CTA Buttons -->
-      <div class="flex items-center space-x-4">
+      <!-- CTA Buttons (Desktop) -->
+      <div class="hidden md:flex items-center space-x-4">
         <a href="https://apps.shopify.com/pricing-schedule" target="_blank" class="px-4 py-2 text-gray-900 font-medium hover:text-gray-700 transition" onclick="gtag('event', 'start_trial_click', { 'button_location': 'header_navigation', 'app_name': 'revnous_bulk_pricing' });">
           Start a Free Trial
         </a>
@@ -37,6 +37,13 @@
           Book a demo
         </a>
       </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-button" class="md:hidden p-2 text-gray-700 hover:text-gray-900">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
     </div>
   </div>
 
@@ -147,10 +154,52 @@
       </div>
     </div>
   </div>
+
+  <!-- Mobile Navigation Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-200">
+    <div class="px-4 py-4 space-y-3">
+      <a href="<%= products_path %>" class="block py-2 text-gray-700 hover:text-gray-900 font-medium">Products</a>
+      <a href="<%= case_studies_path %>" class="block py-2 text-gray-700 hover:text-gray-900 font-medium">Case Studies</a>
+
+      <!-- Mobile Services Menu -->
+      <div>
+        <button id="mobile-services-toggle" class="flex items-center justify-between w-full py-2 text-gray-700 hover:text-gray-900 font-medium">
+          Services
+          <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div id="mobile-services-menu" class="hidden pl-4 mt-2 space-y-2">
+          <a href="<%= services_path %>#revenue-optimization" class="block py-2 text-sm text-gray-600 hover:text-pink-600">Revenue Optimization</a>
+          <a href="<%= services_path %>#shopify-setup" class="block py-2 text-sm text-gray-600 hover:text-pink-600">Shopify App Setup</a>
+          <a href="<%= services_path %>#consulting" class="block py-2 text-sm text-gray-600 hover:text-pink-600">Strategic Consulting</a>
+          <a href="<%= services_path %>#campaign-management" class="block py-2 text-sm text-gray-600 hover:text-pink-600">Campaign Management</a>
+          <a href="<%= services_path %>#analytics" class="block py-2 text-sm text-gray-600 hover:text-pink-600">Analytics & Reporting</a>
+          <a href="<%= services_path %>#support" class="block py-2 text-sm text-gray-600 hover:text-pink-600">Ongoing Support</a>
+          <a href="<%= services_path %>" class="block py-2 text-sm text-pink-600 font-semibold">View All Services →</a>
+        </div>
+      </div>
+
+      <a href="<%= blogs_path %>" class="block py-2 text-gray-700 hover:text-gray-900 font-medium">Blog</a>
+      <a href="<%= beta_signup_path %>" class="block py-2 text-gray-700 hover:text-gray-900 font-medium">Beta Program</a>
+      <a href="<%= contact_us_path %>" class="block py-2 text-gray-700 hover:text-gray-900 font-medium">Contact Us</a>
+
+      <!-- Mobile CTA Buttons -->
+      <div class="pt-4 space-y-3 border-t border-gray-200">
+        <a href="https://apps.shopify.com/pricing-schedule" target="_blank" class="block px-4 py-2 text-center text-gray-900 font-medium border border-gray-300 rounded-md hover:bg-gray-50 transition" onclick="gtag('event', 'start_trial_click', { 'button_location': 'mobile_menu', 'app_name': 'revnous_bulk_pricing' });">
+          Start a Free Trial
+        </a>
+        <a href="https://calendar.app.google/ExeXXoFRYB52hu5S8" target="_blank" class="block px-4 py-2 text-center bg-black text-white rounded-md hover:bg-gray-800 transition font-medium" onclick="gtag('event', 'book_demo_click', { 'button_location': 'mobile_menu', 'demo_type': 'calendar' });">
+          Book a Demo
+        </a>
+      </div>
+    </div>
+  </div>
 </header>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    // Desktop Services Mega Menu
     const dropdown = document.querySelector('.services-dropdown');
     const megaMenu = document.querySelector('.services-mega-menu');
     const chevron = dropdown.querySelector('svg');
@@ -177,6 +226,36 @@
     megaMenu.addEventListener('mouseleave', function() {
       megaMenu.classList.add('hidden');
       chevron.style.transform = 'rotate(0deg)';
+    });
+
+    // Mobile Menu Toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuButton.addEventListener('click', function() {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Mobile Services Submenu Toggle
+    const mobileServicesToggle = document.getElementById('mobile-services-toggle');
+    const mobileServicesMenu = document.getElementById('mobile-services-menu');
+    const mobileServicesChevron = mobileServicesToggle.querySelector('svg');
+
+    mobileServicesToggle.addEventListener('click', function() {
+      mobileServicesMenu.classList.toggle('hidden');
+      if (mobileServicesMenu.classList.contains('hidden')) {
+        mobileServicesChevron.style.transform = 'rotate(0deg)';
+      } else {
+        mobileServicesChevron.style.transform = 'rotate(180deg)';
+      }
+    });
+
+    // Close mobile menu when clicking on a link
+    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+    mobileMenuLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.add('hidden');
+      });
     });
 
     // Smooth scroll for anchor links
