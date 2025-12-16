@@ -5,6 +5,8 @@ class Blog < ApplicationRecord
   validates :title, :content, presence: true
   validates :slug, uniqueness: true, allow_nil: true
 
+  has_rich_text :content
+
   before_validation :generate_slug, on: :create
 
   scope :published, -> { where("published_at <= ?", Time.current).order(published_at: :desc) }

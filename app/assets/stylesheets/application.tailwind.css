@@ -1,1 +1,6 @@
 @import "tailwindcss";
+@import "./actiontext.css";
+
+.trix-content a {
+    @apply text-pink-600 hover:text-pink-700 underline decoration-pink-300 underline-offset-2;
+}

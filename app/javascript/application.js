@@ -2,3 +2,6 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import "./altcha"
+
+import "trix"
+import "@rails/actiontext"
