@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   # Global legal documents
   get "privacy-policy", to: "legal_documents#privacy_policy", as: :privacy_policy
   get "terms-of-service", to: "legal_documents#terms_of_service", as: :terms_of_service
+  get "impressum", to: "pages#impressum", as: :impressum
 
   # Product-scoped routes
   scope "/products/:product_slug" do
