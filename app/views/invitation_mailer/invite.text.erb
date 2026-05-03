@@ -1,0 +1,11 @@
+You've been invited to Revnous
+==============================
+
+<%= @inviter_name %> has invited you to join Revnous as an admin.
+
+View your invitation here:
+<%= @accept_url %>
+
+This link expires on <%= @expires_at.strftime("%B %d, %Y at %H:%M %Z") %>.
+
+If you weren't expecting this invitation, you can safely ignore this email.

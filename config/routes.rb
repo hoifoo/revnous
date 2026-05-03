@@ -15,6 +15,17 @@ Rails.application.routes.draw do
     resources :newsletter_subscribers, except: [ :show ]
     resources :legal_documents, except: [ :show ]
     resources :beta_users, only: [ :index, :destroy ]
+    resources :invitations, only: [ :index, :new, :create ]
+  end
+
+  # Invitation routes
+  resources :invitations, only: [ :show ], param: :token do
+    member do
+      post :accept
+      post :reject
+      get  :setup
+      post :complete
+    end
   end
 
   # Public routes

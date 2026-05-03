@@ -1,0 +1,50 @@
+<div class="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4">
+  <div class="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
+    <% if @invitation.acceptable? %>
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <h1 class="text-2xl font-bold text-gray-900">You've been invited</h1>
+        <p class="text-gray-600 mt-2">
+          <strong><%= @invitation.invited_by.first_name.presence || @invitation.invited_by.email %></strong>
+          has invited <strong><%= @invitation.email %></strong> to join Revnous as an admin.
+        </p>
+        <p class="text-sm text-gray-500 mt-2">
+          Expires <%= @invitation.expires_at.strftime("%B %d, %Y at %H:%M %Z") %>
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <%= button_to "Accept Invitation", accept_invitation_path(@invitation.token), method: :post,
+            class: "w-full py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition font-semibold text-center" %>
+        <%= button_to "Decline", reject_invitation_path(@invitation.token), method: :post,
+            class: "w-full py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition font-medium text-center",
+            data: { turbo_confirm: "Are you sure you want to decline this invitation?" } %>
+      </div>
+
+    <% elsif @invitation.status == "accepted" %>
+      <div class="text-center">
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+        <h1 class="text-2xl font-bold text-gray-900">Already accepted</h1>
+        <p class="text-gray-600 mt-2">This invitation has already been used.</p>
+        <%= link_to "Sign in", new_user_session_path, class: "mt-6 inline-block px-6 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition font-medium" %>
+      </div>
+
+    <% elsif @invitation.status == "rejected" %>
+      <div class="text-center">
+        <h1 class="text-2xl font-bold text-gray-900">Invitation declined</h1>
+        <p class="text-gray-600 mt-2">This invitation was declined.</p>
+      </div>
+
+    <% else %>
+      <%= render "expired" %>
+    <% end %>
+  </div>
+</div>
