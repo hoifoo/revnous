@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 1 UI-SPEC approved
-last_updated: "2026-05-13T12:10:24.506Z"
-last_activity: 2026-05-13 -- Phase 01 execution started
+stopped_at: "Checkpoint: 01-02 Tasks 1-3 complete, awaiting manual verification (Task 4)"
+last_updated: "2026-05-13T17:11:32.256Z"
+last_activity: 2026-05-13
 progress:
   total_phases: 3
   completed_phases: 0
   total_plans: 3
-  completed_plans: 0
-  percent: 0
+  completed_plans: 2
+  percent: 67
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-13)
 ## Current Position
 
 Phase: 01 (editor-foundation) — EXECUTING
-Plan: 1 of 3
-Status: Executing Phase 01
-Last activity: 2026-05-13 -- Phase 01 execution started
+Plan: 2 of 3
+Status: Ready to execute
+Last activity: 2026-05-13
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [███████░░░] 67%
 
 ## Performance Metrics
 
@@ -52,6 +52,7 @@ Progress: [░░░░░░░░░░] 0%
 - Trend: -
 
 *Updated after each plan completion*
+| Phase 01-editor-foundation P02 | 23 | 3 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -63,6 +64,9 @@ Recent decisions affecting current work:
 - Replace Trix with Tiptap; store output as sanitized HTML in plain `blogs.body` text column
 - Author profile stored on `users` table via FK; no separate Author model
 - FAQ stored as JSON in `faq_schema` text column; serialized in model
+- [Phase ?]: Expanded toolbar scope: all available Tiptap tools added per user approval
+- [Phase ?]: Prose scoping rule already present from post-01-01 fix — no CSS change needed in Plan 02
+- [Phase ?]: json_escape(schema.to_json) replaces .to_json.html_safe in all four JSON-LD helpers — closes SEC-02
 
 ### Pending Todos
 
@@ -82,6 +86,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-13T08:35:11.988Z
-Stopped at: Phase 1 UI-SPEC approved
-Resume file: .planning/phases/01-editor-foundation/01-UI-SPEC.md
+Last session: 2026-05-13T17:11:32.252Z
+Stopped at: Checkpoint: 01-02 Tasks 1-3 complete, awaiting manual verification (Task 4)
+Resume file: .planning/phases/01-editor-foundation/01-02-SUMMARY.md

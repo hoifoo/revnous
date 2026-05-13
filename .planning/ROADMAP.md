@@ -35,7 +35,7 @@ Plans:
 - [x] 01-01-PLAN.md — Walking skeleton: npm swap, body column, minimal Tiptap editor with sanitization, factory + show page cutover
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 01-02-PLAN.md — Full toolbar (H1–H6, inline marks, link, undo/redo, disabled table/image stubs) + sticky verification + JSON-LD `json_escape` fix (SEC-02)
+- [x] 01-02-PLAN.md — Full toolbar (H1–H6, inline marks, link, undo/redo, disabled table/image stubs) + sticky verification + JSON-LD `json_escape` fix (SEC-02)
 - [ ] 01-03-PLAN.md — `blogs:migrate_body` Rake task to backfill existing ActionText content into `blogs.body`, stripping `<action-text-attachment>` nodes
 **UI hint**: yes
 
@@ -73,6 +73,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Editor Foundation | 0/3 | Not started | - |
+| 1. Editor Foundation | 2/3 | In Progress|  |
 | 2. Rich Content & Author Profiles | 0/TBD | Not started | - |
 | 3. SEO Fields & FAQ Schema | 0/TBD | Not started | - |

@@ -5,8 +5,8 @@
 ### Editor Core (EDIT)
 
 - [ ] **EDIT-01**: Admin can compose blog content in Tiptap editor (replaces Trix/ActionText; content stored as sanitized HTML in `blogs.body` text column)
-- [ ] **EDIT-02**: Editor toolbar remains fixed/sticky while admin scrolls long posts
-- [ ] **EDIT-03**: Admin can apply H1, H2, H3, H4, H5, H6 headings from the toolbar
+- [x] **EDIT-02**: Editor toolbar remains fixed/sticky while admin scrolls long posts
+- [x] **EDIT-03**: Admin can apply H1, H2, H3, H4, H5, H6 headings from the toolbar
 - [ ] **EDIT-04**: Heading styles render visually inside the editor matching the live page appearance (WYSIWYG via Tailwind prose applied to editor div)
 - [ ] **EDIT-05**: Bullet lists and numbered lists render correctly on live published pages (via Tailwind Typography prose classes)
 - [ ] **EDIT-06**: Existing blog content migrated from ActionText to the new `body` column without data loss (ActionText attachment nodes stripped via Nokogiri)
@@ -34,7 +34,7 @@
 ### Security (SEC)
 
 - [ ] **SEC-01**: Blog body HTML sanitized server-side via `Rails::Html::SafeListSanitizer` before saving; view renders pre-sanitized value (never `raw`)
-- [ ] **SEC-02**: All JSON-LD `<script>` tags use `json_escape` to prevent `</script>` injection (fix pre-existing bug in `render_article_schema`, `render_breadcrumbs_schema`, `render_product_schema`)
+- [x] **SEC-02**: All JSON-LD `<script>` tags use `json_escape` to prevent `</script>` injection (fix pre-existing bug in `render_article_schema`, `render_breadcrumbs_schema`, `render_product_schema`)
 
 ---
 
@@ -62,13 +62,13 @@
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | EDIT-01 | Phase 1 | Pending |
-| EDIT-02 | Phase 1 | Pending |
-| EDIT-03 | Phase 1 | Pending |
+| EDIT-02 | Phase 1 | Complete |
+| EDIT-03 | Phase 1 | Complete |
 | EDIT-04 | Phase 1 | Pending |
 | EDIT-05 | Phase 1 | Pending |
 | EDIT-06 | Phase 1 | Pending |
 | SEC-01 | Phase 1 | Pending |
-| SEC-02 | Phase 1 | Pending |
+| SEC-02 | Phase 1 | Complete |
 | RICH-01 | Phase 2 | Pending |
 | RICH-02 | Phase 2 | Pending |
 | RICH-03 | Phase 2 | Pending |
