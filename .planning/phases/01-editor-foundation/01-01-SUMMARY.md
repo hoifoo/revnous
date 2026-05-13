@@ -35,7 +35,7 @@ decisions:
 metrics:
   duration: "~25 minutes"
   completed: "2026-05-13"
-  tasks_completed: 3
+  tasks_completed: 4
   tasks_total: 4
   files_created: 2
   files_modified: 12
@@ -91,9 +91,15 @@ metrics:
 - Admin blogs request spec: 1 example, 0 failures
 - Smoke test: `Blog.new(title: "Smoke", body: "<p>ok</p><script>x</script>").save!` → persisted body is `<p>ok</p>` (script stripped)
 
-### Task 4 — Checkpoint (awaiting manual verification)
+### Task 4 — Checkpoint: APPROVED (2026-05-13)
 
-The walking skeleton is code-complete. Task 4 requires manual end-to-end smoke verification in a live dev environment by the operator.
+Operator verified the walking skeleton end-to-end in the live dev environment. Two styling issues were discovered and fixed post-checkpoint:
+
+1. `ProseMirror` class + `prose prose-lg max-w-none min-h-[400px] px-4 py-3` were on the wrapper div (the Tiptap `element:` target) rather than on the inner ProseMirror contenteditable that Tiptap creates. Fixed by moving these to CSS: `.tiptap-editor .ProseMirror { @apply prose max-w-none min-h-[400px] px-4 py-3 outline-none; }`. Browser default blue `outline` on the contenteditable also removed via `outline-none`.
+
+2. `prose-lg` line-height (1.7778) was too tall for editor use. Dropped to `prose` + explicit `line-height: 1.6` override on both `.tiptap-editor .ProseMirror` and `.tiptap-editor .ProseMirror p`.
+
+Both fixes committed after approval (commits 9ced457 and f3c70db).
 
 ## Deviations from Plan
 
