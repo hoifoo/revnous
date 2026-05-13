@@ -683,7 +683,7 @@ content_tag :script, json_escape(schema.to_json), type: "application/ld+json"
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Sticky toolbar offset — UI-SPEC discrepancy**
    - What we know: Admin header is `position: static`; UI-SPEC says `top-16` (64px)

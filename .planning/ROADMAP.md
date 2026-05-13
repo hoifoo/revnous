@@ -31,7 +31,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   5. All pre-existing blog content is readable and intact after migration; no `<action-text-attachment>` nodes remain in the body column
 **Plans**: 3 plans
 Plans:
+**Wave 1**
 - [ ] 01-01-PLAN.md — Walking skeleton: npm swap, body column, minimal Tiptap editor with sanitization, factory + show page cutover
+
+**Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 01-02-PLAN.md — Full toolbar (H1–H6, inline marks, link, undo/redo, disabled table/image stubs) + sticky verification + JSON-LD `json_escape` fix (SEC-02)
 - [ ] 01-03-PLAN.md — `blogs:migrate_body` Rake task to backfill existing ActionText content into `blogs.body`, stripping `<action-text-attachment>` nodes
 **UI hint**: yes
