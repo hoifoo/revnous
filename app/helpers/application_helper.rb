@@ -58,7 +58,7 @@ module ApplicationHelper
       ]
     }
 
-    content_tag :script, schema.to_json.html_safe, type: "application/ld+json"
+    content_tag :script, json_escape(schema.to_json), type: "application/ld+json"
   end
 
   def render_article_schema(article)
@@ -84,7 +84,7 @@ module ApplicationHelper
       }
     }
 
-    content_tag :script, schema.to_json.html_safe, type: "application/ld+json"
+    content_tag :script, json_escape(schema.to_json), type: "application/ld+json"
   end
 
   def render_product_schema(product)
@@ -108,7 +108,7 @@ module ApplicationHelper
       end
     end
 
-    content_tag :script, schema.to_json.html_safe, type: "application/ld+json"
+    content_tag :script, json_escape(schema.to_json), type: "application/ld+json"
   end
 
   def render_breadcrumbs_schema(breadcrumbs)
@@ -127,7 +127,7 @@ module ApplicationHelper
       "itemListElement": items
     }
 
-    content_tag :script, schema.to_json.html_safe, type: "application/ld+json"
+    content_tag :script, json_escape(schema.to_json), type: "application/ld+json"
   end
 
   private
