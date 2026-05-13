@@ -1,2 +1,11 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+.tiptap-editor .ProseMirror {
+  @apply prose prose-lg max-w-none min-h-[400px] px-4 py-3 outline-none;
+}
+
+.tiptap-editor .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  @apply text-gray-400 float-left h-0 pointer-events-none;
+}
