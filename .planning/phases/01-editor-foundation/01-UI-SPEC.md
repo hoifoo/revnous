@@ -54,13 +54,15 @@ Exceptions:
 
 ## Typography
 
-Admin UI uses Tailwind's default type scale (no custom font). Four roles apply to Phase 1 output:
+Admin UI uses Tailwind's default type scale (no custom font). Two weights and four size roles apply to Phase 1 output:
+
+**Weights (exactly 2):** `font-normal` (400) for body text and `font-semibold` (600) for all labels, toolbar text, and headings.
 
 | Role | Size | Weight | Line Height | Usage |
 |------|------|--------|-------------|-------|
-| Label | 14px (`text-sm`) | 500 (`font-medium`) | 1.25 | Form field labels (`block text-sm font-medium text-gray-700`) |
+| Label | 14px (`text-sm`) | 600 (`font-semibold`) | 1.25 | Form field labels (`block text-sm font-semibold text-gray-700`) |
 | Body | 16px (`text-base`) | 400 (`font-normal`) | 1.5 | Helper text, editor body default, hint paragraphs |
-| Heading | 30px (`text-3xl`) | 700 (`font-bold`) | 1.2 | Page headings ("Edit Blog Post", "New Blog Post") |
+| Heading | 30px (`text-3xl`) | 600 (`font-semibold`) | 1.2 | Page headings ("Edit Blog Post", "New Blog Post") |
 | Toolbar label | 12px (`text-xs`) | 600 (`font-semibold`) | 1 | Heading-level dropdown label ("H1"–"H6") rendered as text buttons |
 
 **WYSIWYG heading sizes inside `.ProseMirror`:** Controlled entirely by `prose prose-lg` (Tailwind Typography). Do not declare custom heading sizes — they must match the public blog show page rendering automatically. The executor must not override `prose` heading sizes with custom CSS.
@@ -98,6 +100,8 @@ Accent is NOT used for:
 ---
 
 ## Component Specifications
+
+**Primary focal point:** The `bg-pink-600` submit button draws the eye as the only accent-colored element in the form. All other interactive elements use gray-scale so the CTA stands out without competition.
 
 ### Tiptap Editor Container
 
@@ -173,7 +177,7 @@ Use `title="Coming soon"` on the `<button>` element. Native browser tooltip appe
 
 The existing form label stays:
 ```erb
-<%= form.label :body, "Content", class: "block text-sm font-medium text-gray-700 mb-2" %>
+<%= form.label :body, "Content", class: "block text-sm font-semibold text-gray-700 mb-2" %>
 ```
 Label text: "Content" (was using `:content`; the new field is `:body`). Helper text below: "Supports rich text and heading formatting" (replaces old "Supports rich text, images, and formatting" — images are Phase 2).
 
@@ -182,7 +186,7 @@ Label text: "Content" (was using `:content`; the new field is `:body`). Helper t
 Existing error block pattern reused without modification:
 ```erb
 <div class="bg-red-50 border-l-4 border-red-500 p-4">
-  <h3 class="text-sm font-medium text-red-800 mb-2">N errors prohibited this blog from being saved:</h3>
+  <h3 class="text-sm font-semibold text-red-800 mb-2">N errors prohibited this blog from being saved:</h3>
   <ul class="list-disc list-inside text-sm text-red-700">...</ul>
 </div>
 ```
