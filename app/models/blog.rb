@@ -2,12 +2,14 @@ class Blog < ApplicationRecord
   has_one_attached :image
   has_and_belongs_to_many :products
 
-  validates :title, :content, presence: true
+  ALLOWED_TAGS = %w[p br h1 h2 h3 h4 h5 h6 ul ol li strong em a blockquote code pre].freeze
+  ALLOWED_ATTRIBUTES = %w[href target rel].freeze
+
+  validates :title, :body, presence: true
   validates :slug, uniqueness: true, allow_nil: true
 
-  has_rich_text :content
-
   before_validation :generate_slug, on: :create
+  before_save :sanitize_body
 
   scope :published, -> { where("published_at <= ?", Time.current).order(published_at: :desc) }
   scope :featured, -> { where(featured: true) }
@@ -18,7 +20,7 @@ class Blog < ApplicationRecord
   end
 
   def seo_description
-    meta_description.presence || ActionController::Base.helpers.strip_tags(content).truncate(160)
+    meta_description.presence || ActionController::Base.helpers.strip_tags(body).truncate(160)
   end
 
   def cover_photo_url
@@ -38,5 +40,12 @@ class Blog < ApplicationRecord
 
   def generate_slug
     self.slug ||= title.parameterize if title.present?
+  end
+
+  def sanitize_body
+    return if body.blank?
+
+    sanitizer = Rails::Html::SafeListSanitizer.new
+    self.body = sanitizer.sanitize(body, tags: ALLOWED_TAGS, attributes: ALLOWED_ATTRIBUTES)
   end
 end
