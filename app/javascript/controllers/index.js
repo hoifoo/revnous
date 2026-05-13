@@ -6,3 +6,6 @@ import { application } from "./application"
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import TiptapEditorController from "./tiptap_editor_controller"
+application.register("tiptap-editor", TiptapEditorController)
