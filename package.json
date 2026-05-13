@@ -12,10 +12,12 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.18",
-    "@rails/actiontext": "^8.1.100",
     "@tailwindcss/cli": "^4.1.14",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tiptap/core": "^3.23.2",
+    "@tiptap/extensions": "^3.23.2",
+    "@tiptap/starter-kit": "^3.23.2",
     "altcha": "^2.2.4",
-    "tailwindcss": "^4.1.14",
-    "trix": "^2.1.15"
+    "tailwindcss": "^4.1.14"
   }
 }

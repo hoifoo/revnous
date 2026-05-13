@@ -44,7 +44,7 @@ class Admin::BlogsController < Admin::BaseController
   def blog_params
     params.require(:blog).permit(
       :title, :author, :published_at, :category,
-      :excerpt, :content, :slug, :featured, :featured_on_home, :image,
+      :excerpt, :body, :slug, :featured, :featured_on_home, :image,
       :meta_title, :meta_description,
       product_ids: []
     )
