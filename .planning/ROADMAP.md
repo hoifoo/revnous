@@ -19,7 +19,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 ## Phase Details
 
 ### Phase 1: Editor Foundation
-**Goal**: Marketing team can compose and publish blog posts in the new Tiptap editor with all existing content migrated intact and the app free of XSS/injection vulnerabilities
+**Goal**: As an admin editor, I want to compose blog posts in the new Tiptap editor (replacing Trix) with all existing content migrated intact, so that the marketing team can publish without XSS/injection vulnerabilities or developer involvement.
 **Mode:** mvp
 **Depends on**: Nothing (first phase)
 **Requirements**: EDIT-01, EDIT-02, EDIT-03, EDIT-04, EDIT-05, EDIT-06, SEC-01, SEC-02
@@ -29,7 +29,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Admin can apply H1 through H6 headings and heading styles match the live page appearance inside the editor
   4. Bullet and numbered lists render correctly on published pages using Tailwind Typography prose classes
   5. All pre-existing blog content is readable and intact after migration; no `<action-text-attachment>` nodes remain in the body column
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 01-01-PLAN.md — Walking skeleton: npm swap, body column, minimal Tiptap editor with sanitization, factory + show page cutover
+- [ ] 01-02-PLAN.md — Full toolbar (H1–H6, inline marks, link, undo/redo, disabled table/image stubs) + sticky verification + JSON-LD `json_escape` fix (SEC-02)
+- [ ] 01-03-PLAN.md — `blogs:migrate_body` Rake task to backfill existing ActionText content into `blogs.body`, stripping `<action-text-attachment>` nodes
 **UI hint**: yes
 
 ### Phase 2: Rich Content & Author Profiles
@@ -66,6 +70,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Editor Foundation | 0/TBD | Not started | - |
+| 1. Editor Foundation | 0/3 | Not started | - |
 | 2. Rich Content & Author Profiles | 0/TBD | Not started | - |
 | 3. SEO Fields & FAQ Schema | 0/TBD | Not started | - |
