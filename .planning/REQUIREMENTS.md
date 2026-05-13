@@ -59,10 +59,24 @@
 
 ## Traceability
 
-| Requirement | Phase |
-|-------------|-------|
-| EDIT-01, EDIT-02, EDIT-03, EDIT-04, EDIT-05, EDIT-06 | Phase 1 |
-| RICH-01, RICH-02, RICH-03 | Phase 2 |
-| AUTH-01, AUTH-02, AUTH-03, AUTH-04 | Phase 2 |
-| SEO-01, SEO-02, SEO-03, SEO-04 | Phase 3 |
-| SEC-01, SEC-02 | Phase 1 (SEC-02 started; fully audited in Phase 3) |
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| EDIT-01 | Phase 1 | Pending |
+| EDIT-02 | Phase 1 | Pending |
+| EDIT-03 | Phase 1 | Pending |
+| EDIT-04 | Phase 1 | Pending |
+| EDIT-05 | Phase 1 | Pending |
+| EDIT-06 | Phase 1 | Pending |
+| SEC-01 | Phase 1 | Pending |
+| SEC-02 | Phase 1 | Pending |
+| RICH-01 | Phase 2 | Pending |
+| RICH-02 | Phase 2 | Pending |
+| RICH-03 | Phase 2 | Pending |
+| AUTH-01 | Phase 2 | Pending |
+| AUTH-02 | Phase 2 | Pending |
+| AUTH-03 | Phase 2 | Pending |
+| AUTH-04 | Phase 2 | Pending |
+| SEO-01 | Phase 3 | Pending |
+| SEO-02 | Phase 3 | Pending |
+| SEO-03 | Phase 3 | Pending |
+| SEO-04 | Phase 3 | Pending |
