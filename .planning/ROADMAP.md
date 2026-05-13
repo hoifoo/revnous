@@ -12,7 +12,7 @@ Three phases take the blog from a Trix/ActionText editor to a capable, SEO-first
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Editor Foundation** - Replace Trix with Tiptap, migrate existing content, enforce sanitization and JSON-LD security
+- [x] **Phase 1: Editor Foundation** - Replace Trix with Tiptap, migrate existing content, enforce sanitization and JSON-LD security (completed 2026-05-13)
 - [ ] **Phase 2: Rich Content & Author Profiles** - Tables, inline images, paragraph spacing, author profile UI, author card on show page, Person schema
 - [ ] **Phase 3: SEO Fields & FAQ Schema** - Keywords meta, FAQ schema builder, canonical URL override, OG image per post
 
@@ -36,7 +36,7 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 - [x] 01-02-PLAN.md — Full toolbar (H1–H6, inline marks, link, undo/redo, disabled table/image stubs) + sticky verification + JSON-LD `json_escape` fix (SEC-02)
-- [ ] 01-03-PLAN.md — `blogs:migrate_body` Rake task to backfill existing ActionText content into `blogs.body`, stripping `<action-text-attachment>` nodes
+- [x] 01-03-PLAN.md — `blogs:migrate_body` Rake task to backfill existing ActionText content into `blogs.body`, stripping `<action-text-attachment>` nodes
 **UI hint**: yes
 
 ### Phase 2: Rich Content & Author Profiles
@@ -73,6 +73,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Editor Foundation | 2/3 | In Progress|  |
+| 1. Editor Foundation | 3/3 | Complete   | 2026-05-13 |
 | 2. Rich Content & Author Profiles | 0/TBD | Not started | - |
 | 3. SEO Fields & FAQ Schema | 0/TBD | Not started | - |

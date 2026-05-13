@@ -9,7 +9,7 @@
 - [x] **EDIT-03**: Admin can apply H1, H2, H3, H4, H5, H6 headings from the toolbar
 - [ ] **EDIT-04**: Heading styles render visually inside the editor matching the live page appearance (WYSIWYG via Tailwind prose applied to editor div)
 - [ ] **EDIT-05**: Bullet lists and numbered lists render correctly on live published pages (via Tailwind Typography prose classes)
-- [ ] **EDIT-06**: Existing blog content migrated from ActionText to the new `body` column without data loss (ActionText attachment nodes stripped via Nokogiri)
+- [x] **EDIT-06**: Existing blog content migrated from ActionText to the new `body` column without data loss (ActionText attachment nodes stripped via Nokogiri)
 
 ### Rich Content (RICH)
 
@@ -66,7 +66,7 @@
 | EDIT-03 | Phase 1 | Complete |
 | EDIT-04 | Phase 1 | Pending |
 | EDIT-05 | Phase 1 | Pending |
-| EDIT-06 | Phase 1 | Pending |
+| EDIT-06 | Phase 1 | Complete |
 | SEC-01 | Phase 1 | Pending |
 | SEC-02 | Phase 1 | Complete |
 | RICH-01 | Phase 2 | Pending |
