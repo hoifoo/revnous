@@ -106,6 +106,11 @@ export default class extends Controller {
     if (url === '') {
       this.editor.chain().focus().extendMarkRange('link').unsetLink().run()
     } else {
+      const normalized = url.trim().toLowerCase()
+      if (normalized.startsWith('javascript:') || normalized.startsWith('data:')) {
+        console.warn('Tiptap: blocked unsafe link protocol')
+        return
+      }
       this.editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run()
     }
   }
