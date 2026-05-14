@@ -59,7 +59,7 @@
 
     <!-- Content -->
     <div class="prose prose-lg max-w-none mb-16">
-      <%= raw @blog.body %>
+      <%= sanitize @blog.body, tags: Blog::ALLOWED_TAGS, attributes: Blog::ALLOWED_ATTRIBUTES %>
     </div>
 
     <!-- Share Section -->
