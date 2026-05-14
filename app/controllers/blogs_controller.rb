@@ -20,9 +20,10 @@ class BlogsController < ApplicationController
                          .where(category: @blog.category)
                          .where.not(id: @blog.id)
                          .limit(3)
+                         .to_a
 
-    if @related_blogs.count < 3
-      @related_blogs = Blog.published.where.not(id: @blog.id).limit(3)
+    if @related_blogs.length < 3
+      @related_blogs = Blog.published.where.not(id: @blog.id).limit(3).to_a
     end
   end
 end
