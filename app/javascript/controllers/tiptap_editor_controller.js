@@ -47,10 +47,7 @@ export default class extends Controller {
   }
 
   teardown() {
-    if (this.editor) {
-      this.editor.destroy()
-      this.editor = null
-    }
+    this.disconnect()
   }
 
   toggleBold() {
