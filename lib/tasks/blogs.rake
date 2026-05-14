@@ -32,7 +32,10 @@ namespace :blogs do
       doc.css("action-text-attachment").each(&:remove)
       clean_html = doc.to_html
 
-      blog.update_column(:body, clean_html)
+      sanitizer = Rails::Html::SafeListSanitizer.new
+      sanitized_html = sanitizer.sanitize(clean_html, tags: Blog::ALLOWED_TAGS, attributes: Blog::ALLOWED_ATTRIBUTES)
+
+      blog.update_column(:body, sanitized_html)
       migrated += 1
       puts "Migrated #{migrated}/#{total} posts"
     end
