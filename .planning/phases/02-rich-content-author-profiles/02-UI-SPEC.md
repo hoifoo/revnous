@@ -1,7 +1,8 @@
 ---
 phase: 2
 slug: rich-content-author-profiles
-status: draft
+status: approved
+reviewed_at: 2026-05-17
 shadcn_initialized: false
 preset: none
 created: 2026-05-17
@@ -374,7 +375,7 @@ Password Confirmation (password_field)
 
 <!-- Profile section divider -->
 <div class="border-t border-gray-200 pt-6">
-  <h2 class="text-lg font-semibold text-gray-900 mb-4">Author Profile</h2>
+  <h2 class="text-base font-semibold text-gray-900 mb-4">Author Profile</h2>
 </div>
 
 <!-- Job Title -->
@@ -432,7 +433,7 @@ Visible only when `@blog.author_id` is set. When `author_id` is null, nothing re
         <!-- Initials placeholder -->
         <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center"
              aria-label="<%= @blog.author.full_name %>">
-          <span class="text-xl font-semibold text-gray-500" aria-hidden="true">
+          <span class="text-base font-semibold text-gray-500" aria-hidden="true">
             <%= @blog.author.initials %>
           </span>
         </div>
@@ -495,7 +496,7 @@ def initials
 end
 ```
 
-Visual spec for initials circle: `w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center`. Initials text: `text-xl font-semibold text-gray-500`. This applies to both the author card (public show page) and the admin users index table row (where the circle is `w-10 h-10` with `text-sm font-semibold`).
+Visual spec for initials circle: `w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center`. Initials text: `text-base font-semibold text-gray-500`. This applies to both the author card (public show page) and the admin users index table row (where the circle is `w-10 h-10` with `text-sm font-semibold`).
 
 ---
 
