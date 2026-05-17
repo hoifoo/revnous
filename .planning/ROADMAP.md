@@ -50,7 +50,20 @@ Plans:
   3. Admin can choose Normal or Relaxed paragraph spacing per post via a dropdown and the change is visible on the published page
   4. Admin users can fill in bio, job title, LinkedIn URL, Twitter handle, and upload an avatar on their profile; admin can select a user as the author on any blog post
   5. Published posts with an author assigned show an author card (avatar, name, role, bio, social links) and the page JSON-LD article schema includes a Person author node
-**Plans**: TBD
+**Plans**: 5 plans
+Plans:
+**Wave 1**
+- [ ] 02-P1-PLAN.md — Paragraph spacing slice: blogs.spacing column, dropdown in admin form, prose-paragraph-relaxed class + CSS rule on show page (RICH-03)
+- [ ] 02-P4-PLAN.md — Admin user CRUD with author profile: bio/job_title/linkedin_url/twitter_handle + avatar attachment, full_name/initials, admin/users routes + views + specs (AUTH-02)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 02-P2-PLAN.md — Table editing slice: Tiptap table + BubbleMenu extensions, activated toolbar button, sanitizer accepts table tags, model spec proves round-trip (RICH-01)
+
+**Wave 3** *(blocked on Wave 2 completion — shares blog.rb sanitizer + tiptap controller + form)*
+- [ ] 02-P3-PLAN.md — Inline image upload slice: Tiptap image extension + ActiveStorage DirectUpload, click + drag-and-drop triggers, alt text prompt, resize handles, sanitizer width attribute (RICH-02)
+
+**Wave 4** *(blocked on Wave 3 + Wave 1 P4)*
+- [ ] 02-P5-PLAN.md — Author wiring slice: blogs.author_id FK, belongs_to :author, admin form dropdown, author card partial on show page, Person/Organization JSON-LD branch (AUTH-01, AUTH-03, AUTH-04)
 **UI hint**: yes
 
 ### Phase 3: SEO Fields & FAQ Schema
@@ -74,5 +87,5 @@ Phases execute in numeric order: 1 → 2 → 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Editor Foundation | 3/3 | Complete   | 2026-05-13 |
-| 2. Rich Content & Author Profiles | 0/TBD | Not started | - |
+| 2. Rich Content & Author Profiles | 0/5 | Not started | - |
 | 3. SEO Fields & FAQ Schema | 0/TBD | Not started | - |
