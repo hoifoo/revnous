@@ -70,7 +70,7 @@ All from Phase 1 — no new type roles introduced in Phase 2.
 | Small/meta | 12px (`text-xs`) | 400 (`font-normal`) | 1.4 | Author job title in the author card; table header labels in admin index |
 
 **Author card public page typography (inherits show page styles):**
-- Author name: `text-lg font-semibold text-gray-900` (18px / 600)
+- Author name: `text-base font-semibold text-gray-900` (16px / 600)
 - Author job title: `text-sm text-gray-500` (14px / 400)
 - Author bio: `text-base text-gray-600 leading-relaxed` (16px / 400 / 1.625)
 - Social link text: `text-sm text-pink-600 hover:text-pink-700` (14px / 400) — matches existing site link color
@@ -442,7 +442,7 @@ Visible only when `@blog.author_id` is set. When `author_id` is null, nothing re
     <!-- Text content -->
     <div class="flex-1 min-w-0">
       <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Written by</p>
-      <p class="text-lg font-semibold text-gray-900"><%= @blog.author.full_name %></p>
+      <p class="text-base font-semibold text-gray-900"><%= @blog.author.full_name %></p>
       <% if @blog.author.job_title.present? %>
         <p class="text-sm text-gray-500 mb-2"><%= @blog.author.job_title %></p>
       <% end %>
