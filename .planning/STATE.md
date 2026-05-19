@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Completed 02-P4: Admin user CRUD + author profile columns"
-last_updated: "2026-05-19T20:50:35.773Z"
+stopped_at: "Completed 02-P3: Inline image upload, drag-and-drop, resize handles"
+last_updated: "2026-05-19T20:58:47.200Z"
 last_activity: 2026-05-19
 progress:
   total_phases: 3
   completed_phases: 1
   total_plans: 8
-  completed_plans: 6
-  percent: 75
+  completed_plans: 7
+  percent: 88
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-13)
 ## Current Position
 
 Phase: 02 (rich-content-author-profiles) — EXECUTING
-Plan: 4 of 5
+Plan: 5 of 5
 Status: Ready to execute
 Last activity: 2026-05-19
 
-Progress: [████████░░] 75%
+Progress: [█████████░] 88%
 
 ## Performance Metrics
 
@@ -55,6 +55,7 @@ Progress: [████████░░] 75%
 | Phase 01-editor-foundation P02 | 23 | 3 tasks | 3 files |
 | Phase 02-rich-content-author-profiles PP4 | 15 | 2 tasks | 11 files |
 | Phase 02-rich-content-author-profiles PP2 | 20 | 2 tasks | 7 files |
+| Phase 02-rich-content-author-profiles PP3 | 5 | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -71,6 +72,9 @@ Recent decisions affecting current work:
 - [Phase ?]: json_escape(schema.to_json) replaces .to_json.html_safe in all four JSON-LD helpers — closes SEC-02
 - [Phase ?]: Admin user CRUD with blank-password-preserve pattern prevents accidental password reset
 - [Phase ?]: linkedin_url validation via URI::DEFAULT_PARSER.make_regexp rejects javascript: schemes at model layer
+- [Phase ?]: @tiptap/extension-image uses default export (not named) at 3.23.5
+- [Phase ?]: DirectUpload resolved to @rails/activestorage@8.1.300 matching Rails 8 backend
+- [Phase ?]: Blog::ALLOWED_ATTRIBUTES already included src/alt/width from Phase 1 no model change required in P3
 
 ### Pending Todos
 
@@ -90,6 +94,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-19T20:50:35.765Z
-Stopped at: Completed 02-P4: Admin user CRUD + author profile columns
+Last session: 2026-05-19T20:58:47.196Z
+Stopped at: Completed 02-P3: Inline image upload, drag-and-drop, resize handles
 Resume file: None

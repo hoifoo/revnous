@@ -60,7 +60,7 @@ Plans:
 - [x] 02-P2-PLAN.md — Table editing slice: Tiptap table + BubbleMenu extensions, activated toolbar button, sanitizer accepts table tags, model spec proves round-trip (RICH-01)
 
 **Wave 3** *(blocked on Wave 2 completion — shares blog.rb sanitizer + tiptap controller + form)*
-- [ ] 02-P3-PLAN.md — Inline image upload slice: Tiptap image extension + ActiveStorage DirectUpload, click + drag-and-drop triggers, alt text prompt, resize handles, sanitizer width attribute (RICH-02)
+- [x] 02-P3-PLAN.md — Inline image upload slice: Tiptap image extension + ActiveStorage DirectUpload, click + drag-and-drop triggers, alt text prompt, resize handles, sanitizer width attribute (RICH-02)
 
 **Wave 4** *(blocked on Wave 3 + Wave 1 P4)*
 - [ ] 02-P5-PLAN.md — Author wiring slice: blogs.author_id FK, belongs_to :author, admin form dropdown, author card partial on show page, Person/Organization JSON-LD branch (AUTH-01, AUTH-03, AUTH-04)
@@ -87,5 +87,5 @@ Phases execute in numeric order: 1 → 2 → 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Editor Foundation | 3/3 | Complete   | 2026-05-13 |
-| 2. Rich Content & Author Profiles | 3/5 | In Progress|  |
+| 2. Rich Content & Author Profiles | 4/5 | In Progress|  |
 | 3. SEO Fields & FAQ Schema | 0/TBD | Not started | - |
