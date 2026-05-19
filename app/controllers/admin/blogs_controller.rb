@@ -11,6 +11,7 @@ class Admin::BlogsController < Admin::BaseController
 
   def create
     @blog = Blog.new(blog_params)
+    @blog[:author] = params.dig(:blog, :author).presence
 
     if @blog.save
       redirect_to admin_blogs_path, notice: "Blog post created successfully."
@@ -23,6 +24,7 @@ class Admin::BlogsController < Admin::BaseController
   end
 
   def update
+    @blog[:author] = params.dig(:blog, :author).presence
     if @blog.update(blog_params)
       redirect_to admin_blogs_path, notice: "Blog post updated successfully."
     else
@@ -42,7 +44,7 @@ class Admin::BlogsController < Admin::BaseController
   end
 
   def blog_params
-    permitted = %i[title author author_id published_at category
+    permitted = %i[title author_id published_at category
                    excerpt body featured featured_on_home image
                    meta_title meta_description spacing]
     permitted << :slug if action_name == 'create'

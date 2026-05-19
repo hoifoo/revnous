@@ -34,5 +34,17 @@ RSpec.describe "Admin::Blogs", type: :request do
       blog.reload
       expect(blog.spacing).to eq("relaxed")
     end
+
+    it "updates the author_id and preserves the legacy author text byline" do
+      user = create(:user, :admin)
+      patch admin_blog_path(blog), params: {
+        blog: { author_id: user.id, author: "Legacy Byline" }
+      }
+
+      expect(response).to redirect_to(admin_blogs_path)
+      blog.reload
+      expect(blog.author).to eq(user)
+      expect(blog[:author]).to eq("Legacy Byline")
+    end
   end
 end
