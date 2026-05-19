@@ -54,7 +54,7 @@ Plans:
 Plans:
 **Wave 1**
 - [x] 02-P1-PLAN.md — Paragraph spacing slice: blogs.spacing column, dropdown in admin form, prose-paragraph-relaxed class + CSS rule on show page (RICH-03)
-- [ ] 02-P4-PLAN.md — Admin user CRUD with author profile: bio/job_title/linkedin_url/twitter_handle + avatar attachment, full_name/initials, admin/users routes + views + specs (AUTH-02)
+- [x] 02-P4-PLAN.md — Admin user CRUD with author profile: bio/job_title/linkedin_url/twitter_handle + avatar attachment, full_name/initials, admin/users routes + views + specs (AUTH-02)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 02-P2-PLAN.md — Table editing slice: Tiptap table + BubbleMenu extensions, activated toolbar button, sanitizer accepts table tags, model spec proves round-trip (RICH-01)

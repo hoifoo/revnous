@@ -20,7 +20,7 @@
 ### Author Profile (AUTH)
 
 - [ ] **AUTH-01**: Admin can select an author for a blog post from existing admin users via a dropdown
-- [ ] **AUTH-02**: Admin users can set their author profile: bio, job title/role, LinkedIn URL, Twitter handle, and avatar image
+- [x] **AUTH-02**: Admin users can set their author profile: bio, job title/role, LinkedIn URL, Twitter handle, and avatar image
 - [ ] **AUTH-03**: Published blog posts display an author card below the content showing avatar, name, role, bio, and social links (only when author is set)
 - [ ] **AUTH-04**: Blog post JSON-LD article schema includes a Person author node when an author is assigned (falls back to Organization when no author)
 
@@ -73,7 +73,7 @@
 | RICH-02 | Phase 2 | Pending |
 | RICH-03 | Phase 2 | Complete |
 | AUTH-01 | Phase 2 | Pending |
-| AUTH-02 | Phase 2 | Pending |
+| AUTH-02 | Phase 2 | Complete |
 | AUTH-03 | Phase 2 | Pending |
 | AUTH-04 | Phase 2 | Pending |
 | SEO-01 | Phase 3 | Pending |
