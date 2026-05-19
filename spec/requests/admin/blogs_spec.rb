@@ -22,5 +22,17 @@ RSpec.describe "Admin::Blogs", type: :request do
       expect(blog.meta_title).to eq("New SEO Title")
       expect(blog.meta_description).to eq("New SEO Description")
     end
+
+    it "updates the blog spacing to relaxed" do
+      patch admin_blog_path(blog), params: {
+        blog: {
+          spacing: "relaxed"
+        }
+      }
+
+      expect(response).to redirect_to(admin_blogs_path)
+      blog.reload
+      expect(blog.spacing).to eq("relaxed")
+    end
   end
 end
