@@ -9,9 +9,12 @@ import TableRow from "@tiptap/extension-table-row"
 import TableCell from "@tiptap/extension-table-cell"
 import TableHeader from "@tiptap/extension-table-header"
 import { BubbleMenu } from "@tiptap/extension-bubble-menu"
+import Image from "@tiptap/extension-image"
+import { DirectUpload } from "@rails/activestorage"
 
 export default class extends Controller {
-  static targets = ["editor", "input", "tableMenu"]
+  static targets = ["editor", "input", "tableMenu", "imageFileInput"]
+  static values = { directUploadUrl: { type: String, default: "/rails/active_storage/direct_uploads" } }
 
   connect() {
     const existingContent = this.inputTarget.value
@@ -31,7 +34,8 @@ export default class extends Controller {
         TableRow,
         TableCell,
         TableHeader,
-        BubbleMenu.configure({ element: this.tableMenuTarget, shouldShow: ({ editor }) => editor.isActive('table'), tippyOptions: { placement: 'top' } })
+        BubbleMenu.configure({ element: this.tableMenuTarget, shouldShow: ({ editor }) => editor.isActive('table'), tippyOptions: { placement: 'top' } }),
+        Image.configure({ inline: false, allowBase64: false, HTMLAttributes: { class: "tiptap-inline-image" } })
       ],
       content: existingContent,
       onUpdate: ({ editor }) => {
@@ -39,6 +43,7 @@ export default class extends Controller {
       },
       onSelectionUpdate: ({ editor }) => {
         this.updateToolbarState(editor)
+        this.updateImageSelectionHandles(editor)
       },
       onTransaction: ({ editor }) => {
         this.updateToolbarState(editor)
@@ -47,9 +52,38 @@ export default class extends Controller {
 
     // Sync initial value so an empty form submission doesn't miss the field
     this.inputTarget.value = this.editor.getHTML()
+
+    // Drag-and-drop listeners on the editor target
+    this._onDragOver = (event) => {
+      event.preventDefault()
+      this.editorTarget.classList.add('border-pink-400', 'bg-pink-50')
+    }
+
+    this._onDragLeave = (event) => {
+      this.editorTarget.classList.remove('border-pink-400', 'bg-pink-50')
+    }
+
+    this._onDrop = (event) => {
+      event.preventDefault()
+      this.editorTarget.classList.remove('border-pink-400', 'bg-pink-50')
+      if (event.dataTransfer.files.length > 0) {
+        this.uploadImage(event.dataTransfer.files[0])
+      }
+    }
+
+    this.editorTarget.addEventListener('dragover', this._onDragOver)
+    this.editorTarget.addEventListener('dragleave', this._onDragLeave)
+    this.editorTarget.addEventListener('drop', this._onDrop)
   }
 
   disconnect() {
+    // Remove drag-and-drop listeners
+    if (this._onDragOver) {
+      this.editorTarget.removeEventListener('dragover', this._onDragOver)
+      this.editorTarget.removeEventListener('dragleave', this._onDragLeave)
+      this.editorTarget.removeEventListener('drop', this._onDrop)
+    }
+
     if (this.editor) {
       this.editor.destroy()
       this.editor = null
@@ -160,6 +194,124 @@ export default class extends Controller {
 
   deleteTable() {
     this.editor.chain().focus().deleteTable().run()
+  }
+
+  triggerImageUpload() {
+    this.imageFileInputTarget.click()
+  }
+
+  handleImageFileSelected(event) {
+    const file = event.target.files[0]
+    if (!file) return
+    this.uploadImage(file)
+    // Reset so selecting the same file again fires the change event
+    event.target.value = ""
+  }
+
+  uploadImage(file) {
+    if (!file.type.startsWith('image/')) {
+      this.showInlineError('Only image files can be dropped here.')
+      return
+    }
+
+    const uploadId = Math.random().toString(36).slice(2)
+    const placeholderHtml = `<p class="tiptap-image-placeholder" data-upload-id="${uploadId}">Uploading image…</p>`
+    this.editor.commands.insertContent(placeholderHtml)
+
+    const upload = new DirectUpload(file, this.directUploadUrlValue)
+    upload.create((error, blob) => {
+      const placeholderEl = this.editorTarget.querySelector(`[data-upload-id="${uploadId}"]`)
+
+      if (error) {
+        if (placeholderEl) {
+          placeholderEl.innerHTML = '<span class="text-sm text-red-600">Image upload failed. Please try again.</span>'
+          setTimeout(() => {
+            placeholderEl.remove()
+          }, 4000)
+        }
+        return
+      }
+
+      // Prompt for alt text
+      const altText = window.prompt('Enter alt text for this image (required):')
+      if (altText === null) {
+        // User cancelled — remove placeholder
+        if (placeholderEl) placeholderEl.remove()
+        return
+      }
+
+      // Remove placeholder
+      if (placeholderEl) placeholderEl.remove()
+
+      const blobUrl = `/rails/active_storage/blobs/redirect/${blob.signed_id}/${encodeURIComponent(blob.filename)}`
+      this.editor.chain().focus().setImage({ src: blobUrl, alt: altText, width: 720 }).run()
+    })
+  }
+
+  showInlineError(message) {
+    const errorHtml = `<p class="text-sm text-red-600">${message}</p>`
+    this.editor.commands.insertContent(errorHtml)
+    const errorEls = this.editorTarget.querySelectorAll('p.text-sm.text-red-600')
+    const lastError = errorEls[errorEls.length - 1]
+    if (lastError) {
+      setTimeout(() => {
+        lastError.remove()
+      }, 4000)
+    }
+  }
+
+  updateImageSelectionHandles(editor) {
+    // Remove existing handles
+    this.editorTarget.querySelectorAll('.tiptap-resize-handle').forEach(el => el.remove())
+
+    if (!editor.isActive('image')) return
+
+    const selectedImg = this.editorTarget.querySelector('img.ProseMirror-selectednode, img.tiptap-inline-image.ProseMirror-selectednode')
+    if (!selectedImg) return
+
+    // Add selection ring
+    selectedImg.classList.add('ring-2', 'ring-pink-500')
+
+    const editorRect = this.editorTarget.getBoundingClientRect()
+    const imgRect = selectedImg.getBoundingClientRect()
+
+    const corners = [
+      { corner: 'nw', left: imgRect.left - editorRect.left - 4, top: imgRect.top - editorRect.top - 4 },
+      { corner: 'ne', left: imgRect.right - editorRect.left - 4, top: imgRect.top - editorRect.top - 4 },
+      { corner: 'sw', left: imgRect.left - editorRect.left - 4, top: imgRect.bottom - editorRect.top - 4 },
+      { corner: 'se', left: imgRect.right - editorRect.left - 4, top: imgRect.bottom - editorRect.top - 4 }
+    ]
+
+    corners.forEach(({ corner, left, top }) => {
+      const handle = document.createElement('div')
+      handle.className = 'tiptap-resize-handle'
+      handle.dataset.corner = corner
+      handle.style.left = `${left}px`
+      handle.style.top = `${top}px`
+
+      handle.addEventListener('mousedown', (startEvent) => {
+        startEvent.preventDefault()
+        const startX = startEvent.clientX
+        const startWidth = parseInt(selectedImg.getAttribute('width'), 10) || selectedImg.naturalWidth || 720
+        const editorContentWidth = this.editorTarget.clientWidth
+
+        const onMouseMove = (moveEvent) => {
+          const delta = moveEvent.clientX - startX
+          const newWidth = Math.min(Math.max(64, startWidth + delta), editorContentWidth)
+          editor.commands.updateAttributes('image', { width: newWidth })
+        }
+
+        const onMouseUp = () => {
+          window.removeEventListener('mousemove', onMouseMove)
+          window.removeEventListener('mouseup', onMouseUp)
+        }
+
+        window.addEventListener('mousemove', onMouseMove)
+        window.addEventListener('mouseup', onMouseUp)
+      })
+
+      this.editorTarget.appendChild(handle)
+    })
   }
 
   updateToolbarState(editor) {
