@@ -16,3 +16,7 @@
   content: attr(data-placeholder);
   @apply text-gray-400 float-left h-0 pointer-events-none;
 }
+
+.prose-paragraph-relaxed p {
+  margin-bottom: 2em;
+}
