@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one_attached :avatar
+  has_many :authored_blogs, class_name: "Blog", foreign_key: "author_id", dependent: :nullify
 
   before_validation :normalize_twitter_handle
 

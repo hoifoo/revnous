@@ -1,5 +1,6 @@
 class Blog < ApplicationRecord
   has_one_attached :image
+  belongs_to :author, class_name: "User", foreign_key: "author_id", optional: true
   has_and_belongs_to_many :products
 
   ALLOWED_TAGS = %w[p br h1 h2 h3 h4 h5 h6 ul ol li strong em a blockquote code pre img figure figcaption table thead tbody tfoot tr th td colgroup col].freeze

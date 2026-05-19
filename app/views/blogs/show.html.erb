@@ -29,9 +29,9 @@
       <span class="text-sm text-gray-500">
         <%= @blog.published_at&.strftime("%B %d, %Y") %>
       </span>
-      <% if @blog.author.present? %>
+      <% if @blog.author.nil? && @blog[:author].present? %>
         <span class="text-sm text-gray-500">
-          by <%= @blog.author %>
+          by <%= @blog[:author] %>
         </span>
       <% end %>
     </div>

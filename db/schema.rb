@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_05_19_203520) do
+ActiveRecord::Schema[8.0].define(version: 2026_05_19_210037) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -133,6 +133,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_05_19_203520) do
     t.text "meta_description"
     t.text "body"
     t.string "spacing", default: "normal", null: false
+    t.bigint "author_id"
+    t.index ["author_id"], name: "index_blogs_on_author_id"
     t.index ["featured_on_home"], name: "index_blogs_on_featured_on_home"
   end
 
@@ -487,6 +489,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_05_19_203520) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "admin_invitations", "users", column: "invited_by_id"
   add_foreign_key "audit_logs", "users"
+  add_foreign_key "blogs", "users", column: "author_id", on_delete: :nullify
   add_foreign_key "contribution_receipts", "donations"
   add_foreign_key "contribution_receipts", "users"
   add_foreign_key "donation_reminders", "users"
