@@ -15,7 +15,7 @@
 
 - [ ] **RICH-01**: Admin can insert and edit tables (insert table, add/remove rows and columns) via toolbar
 - [ ] **RICH-02**: Admin can upload images inline within blog body; images stored in ActiveStorage and embedded as standard `<img>` tags
-- [ ] **RICH-03**: Admin can set paragraph spacing style (Normal or Relaxed) per blog post via a dropdown selector
+- [x] **RICH-03**: Admin can set paragraph spacing style (Normal or Relaxed) per blog post via a dropdown selector
 
 ### Author Profile (AUTH)
 
@@ -71,7 +71,7 @@
 | SEC-02 | Phase 1 | Complete |
 | RICH-01 | Phase 2 | Pending |
 | RICH-02 | Phase 2 | Pending |
-| RICH-03 | Phase 2 | Pending |
+| RICH-03 | Phase 2 | Complete |
 | AUTH-01 | Phase 2 | Pending |
 | AUTH-02 | Phase 2 | Pending |
 | AUTH-03 | Phase 2 | Pending |

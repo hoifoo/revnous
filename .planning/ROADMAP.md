@@ -53,7 +53,7 @@ Plans:
 **Plans**: 5 plans
 Plans:
 **Wave 1**
-- [ ] 02-P1-PLAN.md — Paragraph spacing slice: blogs.spacing column, dropdown in admin form, prose-paragraph-relaxed class + CSS rule on show page (RICH-03)
+- [x] 02-P1-PLAN.md — Paragraph spacing slice: blogs.spacing column, dropdown in admin form, prose-paragraph-relaxed class + CSS rule on show page (RICH-03)
 - [ ] 02-P4-PLAN.md — Admin user CRUD with author profile: bio/job_title/linkedin_url/twitter_handle + avatar attachment, full_name/initials, admin/users routes + views + specs (AUTH-02)
 
 **Wave 2** *(blocked on Wave 1 completion)*
@@ -87,5 +87,5 @@ Phases execute in numeric order: 1 → 2 → 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Editor Foundation | 3/3 | Complete   | 2026-05-13 |
-| 2. Rich Content & Author Profiles | 0/5 | Not started | - |
+| 2. Rich Content & Author Profiles | 1/5 | In Progress|  |
 | 3. SEO Fields & FAQ Schema | 0/TBD | Not started | - |
