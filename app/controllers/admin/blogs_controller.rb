@@ -44,7 +44,7 @@ class Admin::BlogsController < Admin::BaseController
   def blog_params
     permitted = %i[title author published_at category
                    excerpt body featured featured_on_home image
-                   meta_title meta_description]
+                   meta_title meta_description spacing]
     permitted << :slug if action_name == 'create'
     params.require(:blog).permit(*permitted, product_ids: [])
   end

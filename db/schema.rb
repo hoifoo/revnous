@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_05_13_121220) do
+ActiveRecord::Schema[8.0].define(version: 2026_05_19_201530) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -132,6 +132,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_05_13_121220) do
     t.string "meta_title"
     t.text "meta_description"
     t.text "body"
+    t.string "spacing", default: "normal", null: false
     t.index ["featured_on_home"], name: "index_blogs_on_featured_on_home"
   end
 
