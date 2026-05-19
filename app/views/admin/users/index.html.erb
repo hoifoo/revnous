@@ -1,0 +1,76 @@
+<div class="flex justify-between items-center mb-8">
+  <div>
+    <h1 class="text-3xl font-bold text-gray-900">Users</h1>
+    <p class="text-gray-600 mt-2">Manage admin users and author profiles</p>
+  </div>
+  <%= link_to new_admin_user_path, class: "px-6 py-3 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition font-medium inline-flex items-center" do %>
+    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+    </svg>
+    New User
+  <% end %>
+</div>
+
+<div class="bg-white rounded-lg shadow overflow-hidden">
+  <table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
+      <tr>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Avatar / Name</th>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Job Title</th>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+      <% if @users.none? %>
+        <tr>
+          <td colspan="5" class="px-6 py-12 text-center text-gray-500">
+            No admin users yet. <%= link_to "Add the first user", new_admin_user_path, class: "text-pink-600 hover:underline" %>.
+          </td>
+        </tr>
+      <% else %>
+        <% @users.each do |user| %>
+          <tr class="hover:bg-gray-50">
+            <td class="px-6 py-4">
+              <div class="flex items-center">
+                <% if user.avatar.attached? %>
+                  <%= image_tag user.avatar, class: "h-10 w-10 rounded-full object-cover mr-3", alt: user.full_name %>
+                <% else %>
+                  <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center mr-3"
+                       aria-label="<%= user.full_name %>">
+                    <span class="text-sm font-semibold text-gray-500" aria-hidden="true"><%= user.initials %></span>
+                  </div>
+                <% end %>
+                <span class="font-medium text-gray-900"><%= user.full_name %></span>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+              <%= user.email %>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+              <%= user.job_title.presence || "—" %>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <% if user.admin? %>
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">Admin</span>
+              <% else %>
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-700">Member</span>
+              <% end %>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+              <%= link_to "Edit", edit_admin_user_path(user), class: "text-indigo-600 hover:text-indigo-900" %>
+              <%= link_to "Delete", admin_user_path(user),
+                    data: { turbo_method: :delete, turbo_confirm: "Delete this user? Their blog posts will be unassigned but not deleted." },
+                    class: "text-red-600 hover:text-red-900 ml-3" %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="mt-6">
+  <%= paginate @users %>
+</div>

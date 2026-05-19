@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :legal_documents, except: [ :show ]
     resources :beta_users, only: [ :index, :destroy ]
     resources :invitations, only: [ :index, :new, :create ]
+    resources :users, except: [ :show ]
   end
 
   # Invitation routes
