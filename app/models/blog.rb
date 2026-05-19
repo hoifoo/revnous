@@ -2,8 +2,8 @@ class Blog < ApplicationRecord
   has_one_attached :image
   has_and_belongs_to_many :products
 
-  ALLOWED_TAGS = %w[p br h1 h2 h3 h4 h5 h6 ul ol li strong em a blockquote code pre img figure figcaption].freeze
-  ALLOWED_ATTRIBUTES = %w[href target rel src alt width height].freeze
+  ALLOWED_TAGS = %w[p br h1 h2 h3 h4 h5 h6 ul ol li strong em a blockquote code pre img figure figcaption table thead tbody tfoot tr th td colgroup col].freeze
+  ALLOWED_ATTRIBUTES = %w[href target rel src alt width height colspan rowspan scope].freeze
 
   validates :title, :body, presence: true
   validates :slug, uniqueness: true, allow_nil: true

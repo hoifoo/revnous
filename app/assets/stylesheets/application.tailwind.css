@@ -20,3 +20,22 @@
 .prose-paragraph-relaxed p {
   margin-bottom: 2em;
 }
+
+.tiptap-editor .ProseMirror table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+.tiptap-editor .ProseMirror th,
+.tiptap-editor .ProseMirror td {
+  border: 1px solid #d1d5db;
+  padding: 0.5em 0.75em;
+  vertical-align: top;
+}
+
+.tiptap-editor .ProseMirror th {
+  background-color: #f9fafb;
+  font-weight: 600;
+  text-align: left;
+}
