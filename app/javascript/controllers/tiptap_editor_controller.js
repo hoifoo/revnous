@@ -4,9 +4,14 @@ import StarterKit from "@tiptap/starter-kit"
 import { Placeholder } from "@tiptap/extensions"
 import Underline from "@tiptap/extension-underline"
 import Link from "@tiptap/extension-link"
+import { Table } from "@tiptap/extension-table"
+import TableRow from "@tiptap/extension-table-row"
+import TableCell from "@tiptap/extension-table-cell"
+import TableHeader from "@tiptap/extension-table-header"
+import { BubbleMenu } from "@tiptap/extension-bubble-menu"
 
 export default class extends Controller {
-  static targets = ["editor", "input"]
+  static targets = ["editor", "input", "tableMenu"]
 
   connect() {
     const existingContent = this.inputTarget.value
@@ -21,7 +26,12 @@ export default class extends Controller {
           placeholder: "Start writing your post..."
         }),
         Underline,
-        Link.configure({ openOnClick: false })
+        Link.configure({ openOnClick: false }),
+        Table.configure({ resizable: false }),
+        TableRow,
+        TableCell,
+        TableHeader,
+        BubbleMenu.configure({ element: this.tableMenuTarget, shouldShow: ({ editor }) => editor.isActive('table'), tippyOptions: { placement: 'top' } })
       ],
       content: existingContent,
       onUpdate: ({ editor }) => {
@@ -118,6 +128,38 @@ export default class extends Controller {
 
   redo() {
     this.editor.chain().focus().redo().run()
+  }
+
+  insertTable() {
+    this.editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()
+  }
+
+  addRowBefore() {
+    this.editor.chain().focus().addRowBefore().run()
+  }
+
+  addRowAfter() {
+    this.editor.chain().focus().addRowAfter().run()
+  }
+
+  deleteRow() {
+    this.editor.chain().focus().deleteRow().run()
+  }
+
+  addColumnBefore() {
+    this.editor.chain().focus().addColumnBefore().run()
+  }
+
+  addColumnAfter() {
+    this.editor.chain().focus().addColumnAfter().run()
+  }
+
+  deleteColumn() {
+    this.editor.chain().focus().deleteColumn().run()
+  }
+
+  deleteTable() {
+    this.editor.chain().focus().deleteTable().run()
   }
 
   updateToolbarState(editor) {
