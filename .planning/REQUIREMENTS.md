@@ -13,7 +13,7 @@
 
 ### Rich Content (RICH)
 
-- [ ] **RICH-01**: Admin can insert and edit tables (insert table, add/remove rows and columns) via toolbar
+- [x] **RICH-01**: Admin can insert and edit tables (insert table, add/remove rows and columns) via toolbar
 - [ ] **RICH-02**: Admin can upload images inline within blog body; images stored in ActiveStorage and embedded as standard `<img>` tags
 - [x] **RICH-03**: Admin can set paragraph spacing style (Normal or Relaxed) per blog post via a dropdown selector
 
@@ -69,7 +69,7 @@
 | EDIT-06 | Phase 1 | Complete |
 | SEC-01 | Phase 1 | Pending |
 | SEC-02 | Phase 1 | Complete |
-| RICH-01 | Phase 2 | Pending |
+| RICH-01 | Phase 2 | Complete |
 | RICH-02 | Phase 2 | Pending |
 | RICH-03 | Phase 2 | Complete |
 | AUTH-01 | Phase 2 | Pending |
