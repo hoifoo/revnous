@@ -39,3 +39,48 @@
   font-weight: 600;
   text-align: left;
 }
+
+.tiptap-editor {
+  position: relative;
+}
+
+.tiptap-editor .ProseMirror img.tiptap-inline-image {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+}
+
+.tiptap-editor .ProseMirror img.ProseMirror-selectednode {
+  outline: 2px solid #ec4899;
+  outline-offset: 2px;
+}
+
+.tiptap-editor .tiptap-resize-handle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #db2777;
+  border: 1px solid #ffffff;
+  border-radius: 2px;
+  z-index: 20;
+}
+
+.tiptap-editor .tiptap-resize-handle[data-corner="nw"],
+.tiptap-editor .tiptap-resize-handle[data-corner="se"] {
+  cursor: nwse-resize;
+}
+
+.tiptap-editor .tiptap-resize-handle[data-corner="ne"],
+.tiptap-editor .tiptap-resize-handle[data-corner="sw"] {
+  cursor: nesw-resize;
+}
+
+.tiptap-editor .ProseMirror .tiptap-image-placeholder {
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  background-color: #f3f4f6;
+  color: #6b7280;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  margin: 0.5rem 0;
+}
