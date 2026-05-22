@@ -18,6 +18,34 @@ RSpec.describe Blog, type: :model do
     end
   end
 
+  describe "#keywords" do
+    it "returns [] by default after save (jsonb default)" do
+      blog = create(:blog)
+      expect(blog.reload.keywords).to eq([])
+    end
+
+    it "persists keywords as an Array and round-trips correctly" do
+      blog = create(:blog, keywords: ["seo", "marketing"])
+      expect(blog.reload.keywords).to eq(["seo", "marketing"])
+    end
+
+    it "returns '' when keywords is nil" do
+      blog = build(:blog)
+      blog.keywords = nil
+      expect(blog.keywords_list).to eq("")
+    end
+
+    it "returns '' when keywords is []" do
+      blog = build(:blog, keywords: [])
+      expect(blog.keywords_list).to eq("")
+    end
+
+    it "returns comma-joined string when keywords is present" do
+      blog = build(:blog, keywords: ["seo", "marketing", "b2b"])
+      expect(blog.keywords_list).to eq("seo, marketing, b2b")
+    end
+  end
+
   describe "#sanitize_body" do
     it "preserves table markup and table-specific attributes" do
       body = '<table><thead><tr><th>H</th></tr></thead><tbody><tr><td colspan="2" scope="col">x</td></tr></tbody></table>'
