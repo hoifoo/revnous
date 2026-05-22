@@ -41,6 +41,18 @@ RSpec.describe "Admin::Blogs", type: :request do
     end
   end
 
+  describe "PATCH /update canonical_url_override" do
+    it "persists canonical_url_override when a valid https URL is submitted" do
+      patch admin_blog_path(blog), params: {
+        blog: { canonical_url_override: "https://canonical.test/x" }
+      }
+
+      expect(response).to redirect_to(admin_blogs_path)
+      blog.reload
+      expect(blog.canonical_url_override).to eq("https://canonical.test/x")
+    end
+  end
+
   describe "PATCH /update" do
     it "updates the blog meta fields" do
       patch admin_blog_path(blog), params: {

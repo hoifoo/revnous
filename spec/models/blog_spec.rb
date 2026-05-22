@@ -46,6 +46,44 @@ RSpec.describe Blog, type: :model do
     end
   end
 
+  describe "#canonical_url_override validation" do
+    it "is valid when canonical_url_override is nil" do
+      blog = build(:blog, canonical_url_override: nil)
+      expect(blog).to be_valid
+    end
+
+    it "is valid when canonical_url_override is blank string" do
+      blog = build(:blog, canonical_url_override: "")
+      expect(blog).to be_valid
+    end
+
+    it "is valid with an https URL" do
+      blog = build(:blog, canonical_url_override: "https://example.com/post")
+      expect(blog).to be_valid
+    end
+
+    it "is valid with an http URL" do
+      blog = build(:blog, canonical_url_override: "http://example.com")
+      expect(blog).to be_valid
+    end
+
+    it "is invalid with a javascript: scheme" do
+      blog = build(:blog, canonical_url_override: "javascript:alert(1)")
+      expect(blog).not_to be_valid
+      expect(blog.errors[:canonical_url_override]).to include("must be a valid http or https URL")
+    end
+
+    it "is invalid with a non-URL string" do
+      blog = build(:blog, canonical_url_override: "not a url")
+      expect(blog).not_to be_valid
+    end
+
+    it "persists canonical_url_override when present" do
+      blog = create(:blog, canonical_url_override: "https://canonical.test/post")
+      expect(blog.reload.canonical_url_override).to eq("https://canonical.test/post")
+    end
+  end
+
   describe "#sanitize_body" do
     it "preserves table markup and table-specific attributes" do
       body = '<table><thead><tr><th>H</th></tr></thead><tbody><tr><td colspan="2" scope="col">x</td></tr></tbody></table>'
