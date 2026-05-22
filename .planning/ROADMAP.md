@@ -79,7 +79,7 @@ Plans:
 **Plans**: 4 plans
 Plans:
 **Wave 1**
-- [ ] 03-01-PLAN.md — Keywords slice: shared migration (keywords jsonb / faq_schema text / canonical_url_override string) + Blog#og_image attachment + keywords-input Stimulus controller + chip UI + page_keywords helper + layout meta tag (SEO-01)
+- [x] 03-01-PLAN.md — Keywords slice: shared migration (keywords jsonb / faq_schema text / canonical_url_override string) + Blog#og_image attachment + keywords-input Stimulus controller + chip UI + page_keywords helper + layout meta tag (SEO-01)
 
 **Wave 2** *(blocked on 03-01 — shares blog.rb / admin form / admin controller)*
 - [ ] 03-02-PLAN.md — Canonical URL Override slice: URI::DEFAULT_PARSER validation + admin form field + blogs_controller @canonical_url override (SEO-03)
@@ -100,4 +100,4 @@ Phases execute in numeric order: 1 → 2 → 3
 |-------|----------------|--------|-----------|
 | 1. Editor Foundation | 3/3 | Complete   | 2026-05-13 |
 | 2. Rich Content & Author Profiles | 5/5 | Complete   | 2026-05-22 |
-| 3. SEO Fields & FAQ Schema | 0/4 | Planned | - |
+| 3. SEO Fields & FAQ Schema | 1/4 | In Progress|  |

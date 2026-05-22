@@ -26,7 +26,7 @@
 
 ### SEO Fields (SEO)
 
-- [ ] **SEO-01**: Admin can enter keywords for a blog post; rendered as `<meta name="keywords">` in the page head
+- [x] **SEO-01**: Admin can enter keywords for a blog post; rendered as `<meta name="keywords">` in the page head
 - [ ] **SEO-02**: Admin can add FAQ question–answer pairs to a blog post via a dynamic form; rendered as FAQPage JSON-LD schema in the page head
 - [ ] **SEO-03**: Admin can override the canonical URL for a blog post; overrides `request.original_url` in the page head
 - [ ] **SEO-04**: Admin can upload a separate OG image per blog post for social sharing; falls back to cover photo, then site logo
@@ -76,7 +76,7 @@
 | AUTH-02 | Phase 2 | Complete |
 | AUTH-03 | Phase 2 | Complete |
 | AUTH-04 | Phase 2 | Complete |
-| SEO-01 | Phase 3 | Pending |
+| SEO-01 | Phase 3 | Complete |
 | SEO-02 | Phase 3 | Pending |
 | SEO-03 | Phase 3 | Pending |
 | SEO-04 | Phase 3 | Pending |
