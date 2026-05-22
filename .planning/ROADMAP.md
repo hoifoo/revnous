@@ -82,7 +82,7 @@ Plans:
 - [x] 03-01-PLAN.md — Keywords slice: shared migration (keywords jsonb / faq_schema text / canonical_url_override string) + Blog#og_image attachment + keywords-input Stimulus controller + chip UI + page_keywords helper + layout meta tag (SEO-01)
 
 **Wave 2** *(blocked on 03-01 — shares blog.rb / admin form / admin controller)*
-- [ ] 03-02-PLAN.md — Canonical URL Override slice: URI::DEFAULT_PARSER validation + admin form field + blogs_controller @canonical_url override (SEO-03)
+- [x] 03-02-PLAN.md — Canonical URL Override slice: URI::DEFAULT_PARSER validation + admin form field + blogs_controller @canonical_url override (SEO-03)
 
 **Wave 3** *(blocked on 03-02 — shares blog.rb / admin form / admin controller / blogs_controller)*
 - [ ] 03-03-PLAN.md — OG Image slice: og_image_url model helper + image content-type whitelist + admin form file_field/preview + blogs_controller 3-step fallback chain (SEO-04)
