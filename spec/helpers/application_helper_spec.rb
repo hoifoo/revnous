@@ -1,6 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe ApplicationHelper, type: :helper do
+  describe "#page_keywords" do
+    it "returns nil when @page_keywords is nil" do
+      helper.instance_variable_set(:@page_keywords, nil)
+      expect(helper.page_keywords).to be_nil
+    end
+
+    it "returns nil when @page_keywords is an empty array" do
+      helper.instance_variable_set(:@page_keywords, [])
+      expect(helper.page_keywords).to be_nil
+    end
+
+    it "returns comma-joined string when @page_keywords has values" do
+      helper.instance_variable_set(:@page_keywords, ["seo", "marketing", "b2b"])
+      expect(helper.page_keywords).to eq("seo, marketing, b2b")
+    end
+  end
+
   describe "#render_article_schema" do
     it "emits Person author node when blog.author is a User with linkedin and twitter" do
       user = create(:user, first_name: "Ada", last_name: "Lovelace",
