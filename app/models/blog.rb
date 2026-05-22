@@ -1,5 +1,6 @@
 class Blog < ApplicationRecord
   has_one_attached :image
+  has_one_attached :og_image
   belongs_to :author, class_name: "User", foreign_key: "author_id", optional: true
   has_and_belongs_to_many :products
 
@@ -22,6 +23,10 @@ class Blog < ApplicationRecord
 
   def seo_description
     meta_description.presence || ActionController::Base.helpers.strip_tags(body).truncate(160)
+  end
+
+  def keywords_list
+    Array(keywords).join(", ")
   end
 
   def cover_photo_url
