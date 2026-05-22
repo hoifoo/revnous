@@ -9,6 +9,11 @@ class Blog < ApplicationRecord
 
   validates :title, :body, presence: true
   validates :slug, uniqueness: true, allow_nil: true
+  validates :canonical_url_override, format: {
+    with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
+    allow_blank: true,
+    message: "must be a valid http or https URL"
+  }
 
   before_validation :generate_slug, on: :create
   before_save :sanitize_body

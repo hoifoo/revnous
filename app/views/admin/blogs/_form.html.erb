@@ -72,6 +72,12 @@
       <p class="text-sm text-gray-500 mt-1">URL-friendly version of title</p>
     </div>
 
+    <div>
+      <%= form.label :canonical_url_override, "Canonical URL Override", class: "block text-sm font-medium text-gray-700 mb-2" %>
+      <%= form.text_field :canonical_url_override, placeholder: "https://example.com/blog/your-post", class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-transparent" %>
+      <p class="text-sm text-gray-500 mt-1">Overrides the auto-generated canonical URL. Leave blank to use the default post URL.</p>
+    </div>
+
     <div class="md:col-span-2">
       <label class="block text-sm font-medium text-gray-700 mb-2">Keywords</label>
       <div data-controller="keywords-input" role="group" aria-label="Keywords">
