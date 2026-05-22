@@ -76,7 +76,19 @@ Plans:
   2. Admin can add, edit, and remove FAQ question–answer pairs on the blog form; published page head contains valid FAQPage JSON-LD schema reflecting those pairs
   3. Admin can enter a canonical URL override; published page head uses that URL in the canonical `<link>` tag instead of `request.original_url`
   4. Admin can upload a separate OG image per post; published page uses it as the `og:image` meta tag, falling back to cover photo, then site logo when absent
-**Plans**: TBD
+**Plans**: 4 plans
+Plans:
+**Wave 1**
+- [ ] 03-01-PLAN.md — Keywords slice: shared migration (keywords jsonb / faq_schema text / canonical_url_override string) + Blog#og_image attachment + keywords-input Stimulus controller + chip UI + page_keywords helper + layout meta tag (SEO-01)
+
+**Wave 2** *(blocked on 03-01 — shares blog.rb / admin form / admin controller)*
+- [ ] 03-02-PLAN.md — Canonical URL Override slice: URI::DEFAULT_PARSER validation + admin form field + blogs_controller @canonical_url override (SEO-03)
+
+**Wave 3** *(blocked on 03-02 — shares blog.rb / admin form / admin controller / blogs_controller)*
+- [ ] 03-03-PLAN.md — OG Image slice: og_image_url model helper + image content-type whitelist + admin form file_field/preview + blogs_controller 3-step fallback chain (SEO-04)
+
+**Wave 4** *(blocked on 03-03 — shares blog.rb / admin form / admin controller / helper / show.html.erb)*
+- [ ] 03-04-PLAN.md — FAQ Schema slice: parse_faq_schema callback + faq_pairs reader + faq-builder Stimulus controller + collapsible form section + render_faq_schema helper + visible FAQ section on show + render_article_schema .html_safe cleanup (SEO-02)
 **UI hint**: yes
 
 ## Progress
@@ -88,4 +100,4 @@ Phases execute in numeric order: 1 → 2 → 3
 |-------|----------------|--------|-----------|
 | 1. Editor Foundation | 3/3 | Complete   | 2026-05-13 |
 | 2. Rich Content & Author Profiles | 5/5 | Complete   | 2026-05-22 |
-| 3. SEO Fields & FAQ Schema | 0/TBD | Not started | - |
+| 3. SEO Fields & FAQ Schema | 0/4 | Planned | - |

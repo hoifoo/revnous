@@ -753,17 +753,17 @@ Rails collects `blog[keywords][]` into `params[:blog][:keywords]` as `Array<Stri
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Visible FAQ HTML on show page**
    - What we know: Google FAQPage guidelines say content must be visible on the page
    - What's unclear: Whether the plan should include a visible FAQ section partial in `blogs/show.html.erb` as part of this phase or defer it
-   - Recommendation: Include it — it is a small addition (`@blog.faq_pairs.any?` guard + simple `<dl>` or `<details>` rendering below the body) and is required for rich results to work correctly. The planner should add this as a task alongside the JSON-LD emission task.
+   - RESOLVED: Include it — it is a small addition (`@blog.faq_pairs.any?` guard + simple `<dl>` or `<details>` rendering below the body) and is required for rich results to work correctly. The planner should add this as a task alongside the JSON-LD emission task.
 
 2. **`@blog[:author]` vs `@blog.author` collision in form**
    - What we know: The admin form has both `blog[:author]` (legacy string) and `blog.author` (User association via `author_id`). The controller handles this separately (`@blog[:author] = params.dig(:blog, :author).presence`).
    - What's unclear: No conflict with Phase 3 fields — this is noted as context only, not a blocker.
-   - Recommendation: No action needed; preserve the existing pattern.
+   - RESOLVED: No action needed; preserve the existing pattern.
 
 ---
 
