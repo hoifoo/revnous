@@ -13,7 +13,7 @@ Three phases take the blog from a Trix/ActionText editor to a capable, SEO-first
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Editor Foundation** - Replace Trix with Tiptap, migrate existing content, enforce sanitization and JSON-LD security (completed 2026-05-13)
-- [ ] **Phase 2: Rich Content & Author Profiles** - Tables, inline images, paragraph spacing, author profile UI, author card on show page, Person schema
+- [x] **Phase 2: Rich Content & Author Profiles** - Tables, inline images, paragraph spacing, author profile UI, author card on show page, Person schema (completed 2026-05-22)
 - [ ] **Phase 3: SEO Fields & FAQ Schema** - Keywords meta, FAQ schema builder, canonical URL override, OG image per post
 
 ## Phase Details
@@ -63,7 +63,7 @@ Plans:
 - [x] 02-P3-PLAN.md — Inline image upload slice: Tiptap image extension + ActiveStorage DirectUpload, click + drag-and-drop triggers, alt text prompt, resize handles, sanitizer width attribute (RICH-02)
 
 **Wave 4** *(blocked on Wave 3 + Wave 1 P4)*
-- [ ] 02-P5-PLAN.md — Author wiring slice: blogs.author_id FK, belongs_to :author, admin form dropdown, author card partial on show page, Person/Organization JSON-LD branch (AUTH-01, AUTH-03, AUTH-04)
+- [x] 02-P5-PLAN.md — Author wiring slice: blogs.author_id FK, belongs_to :author, admin form dropdown, author card partial on show page, Person/Organization JSON-LD branch (AUTH-01, AUTH-03, AUTH-04)
 **UI hint**: yes
 
 ### Phase 3: SEO Fields & FAQ Schema
@@ -87,5 +87,5 @@ Phases execute in numeric order: 1 → 2 → 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Editor Foundation | 3/3 | Complete   | 2026-05-13 |
-| 2. Rich Content & Author Profiles | 4/5 | In Progress|  |
+| 2. Rich Content & Author Profiles | 5/5 | Complete   | 2026-05-22 |
 | 3. SEO Fields & FAQ Schema | 0/TBD | Not started | - |
