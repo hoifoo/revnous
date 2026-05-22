@@ -85,6 +85,12 @@ None yet.
 
 None yet.
 
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 260522-9sh | Fix image upload placeholder to overlay on editor wrapper instead of editable ProseMirror content | 2026-05-22 | 7851ac3 | [260522-9sh-fix-image-upload-placeholder-to-overlay-](.planning/quick/260522-9sh-fix-image-upload-placeholder-to-overlay-/) |
+
 ## Deferred Items
 
 Items acknowledged and carried forward from previous milestone close:
