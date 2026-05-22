@@ -21,11 +21,12 @@ RSpec.describe ApplicationHelper, type: :helper do
       blog = create(:blog, author_user: user)
 
       output = helper.render_article_schema(blog)
+      schema = JSON.parse(output.gsub(/<[^>]+>/, ""))
 
-      expect(output).to include('"@type":"Person"')
-      expect(output).to include('"name":"Ada Lovelace"')
-      expect(output).not_to include('"url":')
-      expect(output).not_to include('"sameAs":')
+      expect(schema.dig("author", "@type")).to eq("Person")
+      expect(schema.dig("author", "name")).to eq("Ada Lovelace")
+      expect(schema.dig("author")).not_to have_key("url")
+      expect(schema.dig("author")).not_to have_key("sameAs")
     end
 
     it "falls back to Organization author when blog has no author user" do

@@ -1,0 +1,54 @@
+<% if @blog.author.present? %>
+  <div class="author-card border border-gray-200 rounded-xl p-6 mb-16 flex items-start gap-5">
+
+    <!-- Avatar -->
+    <div class="flex-shrink-0">
+      <% if @blog.author.avatar.attached? %>
+        <%= image_tag @blog.author.avatar,
+              class: "w-16 h-16 rounded-full object-cover",
+              alt: @blog.author.full_name %>
+      <% else %>
+        <!-- Initials placeholder -->
+        <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center"
+             aria-label="<%= @blog.author.full_name %>">
+          <span class="text-base font-semibold text-gray-500" aria-hidden="true">
+            <%= @blog.author.initials %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Text content -->
+    <div class="flex-1 min-w-0">
+      <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Written by</p>
+      <p class="text-base font-semibold text-gray-900"><%= @blog.author.full_name %></p>
+      <% if @blog.author.job_title.present? %>
+        <p class="text-sm text-gray-500 mb-2"><%= @blog.author.job_title %></p>
+      <% end %>
+      <% if @blog.author.bio.present? %>
+        <p class="text-base text-gray-600 leading-relaxed mb-3"><%= @blog.author.bio %></p>
+      <% end %>
+
+      <!-- Social links (conditional on presence) -->
+      <div class="flex items-center gap-4">
+        <% if @blog.author.linkedin_url.present? %>
+          <%= link_to @blog.author.linkedin_url,
+                target: "_blank",
+                rel: "noopener noreferrer",
+                class: "text-sm text-pink-600 hover:text-pink-700 font-medium inline-flex items-center gap-1" do %>
+            LinkedIn
+          <% end %>
+        <% end %>
+        <% if @blog.author.twitter_handle.present? %>
+          <%= link_to "https://twitter.com/#{@blog.author.twitter_handle.delete_prefix('@')}",
+                target: "_blank",
+                rel: "noopener noreferrer",
+                class: "text-sm text-pink-600 hover:text-pink-700 font-medium inline-flex items-center gap-1" do %>
+            Twitter
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+<% end %>
