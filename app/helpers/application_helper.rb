@@ -40,6 +40,17 @@ module ApplicationHelper
     end
   end
 
+  def page_keywords
+    keywords = @page_keywords
+    return nil if keywords.blank?
+
+    if keywords.is_a?(Array)
+      keywords.compact_blank.join(", ").presence
+    else
+      keywords.to_s.presence
+    end
+  end
+
   def page_robots
     @page_robots || "index, follow"
   end
