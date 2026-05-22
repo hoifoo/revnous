@@ -73,6 +73,31 @@
     </div>
 
     <div class="md:col-span-2">
+      <label class="block text-sm font-medium text-gray-700 mb-2">Keywords</label>
+      <div data-controller="keywords-input" role="group" aria-label="Keywords">
+        <div data-keywords-input-target="chipContainer" class="flex flex-wrap items-center gap-2 w-full px-3 py-2 border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-pink-500 focus-within:border-transparent min-h-[42px]">
+          <% Array(@blog.keywords).each_with_index do |kw, i| %>
+            <input type="hidden" name="blog[keywords][]" value="<%= kw %>">
+            <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold bg-pink-50 text-pink-700 border border-pink-200">
+              <span><%= kw %></span>
+              <button type="button"
+                      data-action="click->keywords-input#removeChip"
+                      data-index="<%= i %>"
+                      aria-label="Remove <%= kw %>"
+                      class="h-4 w-4 inline-flex items-center justify-center rounded-full hover:bg-pink-200">×</button>
+            </span>
+          <% end %>
+          <input type="text"
+                 data-keywords-input-target="input"
+                 data-action="keydown->keywords-input#addChip"
+                 class="flex-1 min-w-[120px] px-2 py-1 text-sm outline-none bg-transparent"
+                 placeholder="Type a keyword and press Enter...">
+        </div>
+      </div>
+      <p class="text-sm text-gray-500 mt-1">Press Enter or comma to add. Click &times; to remove. Used in &lt;meta name=&quot;keywords&quot;&gt; when published.</p>
+    </div>
+
+    <div class="md:col-span-2">
       <%= form.label :featured, class: "block text-sm font-medium text-gray-700 mb-2" %>
       <%= form.check_box :featured, class: "h-5 w-5 text-pink-600 focus:ring-pink-500 border-gray-300 rounded" %>
       <span class="ml-2 text-sm text-gray-600">Feature this post on blog homepage</span>

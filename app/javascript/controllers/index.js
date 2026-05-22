@@ -9,3 +9,6 @@ application.register("hello", HelloController)
 
 import TiptapEditorController from "./tiptap_editor_controller"
 application.register("tiptap-editor", TiptapEditorController)
+
+import KeywordsInputController from "./keywords_input_controller"
+application.register("keywords-input", KeywordsInputController)

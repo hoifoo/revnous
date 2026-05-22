@@ -12,6 +12,7 @@ class Blog < ApplicationRecord
 
   before_validation :generate_slug, on: :create
   before_save :sanitize_body
+  before_save :normalize_keywords
 
   scope :published, -> { where("published_at <= ?", Time.current).order(published_at: :desc) }
   scope :featured, -> { where(featured: true) }
@@ -46,6 +47,10 @@ class Blog < ApplicationRecord
 
   def generate_slug
     self.slug = title.parameterize if slug.blank? && title.present?
+  end
+
+  def normalize_keywords
+    self.keywords = Array(keywords).reject(&:blank?)
   end
 
   def sanitize_body

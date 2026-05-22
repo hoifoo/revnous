@@ -48,6 +48,6 @@ class Admin::BlogsController < Admin::BaseController
                    excerpt body featured featured_on_home image
                    meta_title meta_description spacing]
     permitted << :slug if action_name == 'create'
-    params.require(:blog).permit(*permitted, product_ids: [])
+    params.require(:blog).permit(*permitted, product_ids: [], keywords: [])
   end
 end
