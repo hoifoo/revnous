@@ -90,6 +90,7 @@ None yet.
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 260522-9sh | Fix image upload placeholder to overlay on editor wrapper instead of editable ProseMirror content | 2026-05-22 | 7851ac3 | [260522-9sh-fix-image-upload-placeholder-to-overlay-](.planning/quick/260522-9sh-fix-image-upload-placeholder-to-overlay-/) |
+| 260522-ao2 | Fix admin blog View link condition and slug blank? auto-generation guard | 2026-05-22 | 81a8f9f | [260522-ao2-fix-admin-blog-view-link-and-slug-auto-g](.planning/quick/260522-ao2-fix-admin-blog-view-link-and-slug-auto-g/) |
 
 ## Deferred Items
 
