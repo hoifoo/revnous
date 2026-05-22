@@ -84,6 +84,13 @@ export default class extends Controller {
       this.editorTarget.removeEventListener('drop', this._onDrop)
     }
 
+    // Clean up any lingering overlays / timers
+    this._removeUploadOverlay()
+    if (this._errorBannerTimeout) {
+      clearTimeout(this._errorBannerTimeout)
+      this._errorBannerTimeout = null
+    }
+
     if (this.editor) {
       this.editor.destroy()
       this.editor = null
@@ -214,34 +221,25 @@ export default class extends Controller {
       return
     }
 
-    const uploadId = Math.random().toString(36).slice(2)
-    const placeholderHtml = `<p class="tiptap-image-placeholder" data-upload-id="${uploadId}">Uploading image…</p>`
-    this.editor.commands.insertContent(placeholderHtml)
+    this._showUploadOverlay()
 
     const upload = new DirectUpload(file, this.directUploadUrlValue)
     upload.create((error, blob) => {
-      const placeholderEl = this.editorTarget.querySelector(`[data-upload-id="${uploadId}"]`)
-
       if (error) {
-        if (placeholderEl) {
-          placeholderEl.innerHTML = '<span class="text-sm text-red-600">Image upload failed. Please try again.</span>'
-          setTimeout(() => {
-            placeholderEl.remove()
-          }, 4000)
-        }
+        this._removeUploadOverlay()
+        this.showInlineError('Image upload failed. Please try again.')
         return
       }
 
       // Prompt for alt text
       const altText = window.prompt('Enter alt text for this image (required):')
       if (altText === null) {
-        // User cancelled — remove placeholder
-        if (placeholderEl) placeholderEl.remove()
+        // User cancelled — remove overlay
+        this._removeUploadOverlay()
         return
       }
 
-      // Remove placeholder
-      if (placeholderEl) placeholderEl.remove()
+      this._removeUploadOverlay()
 
       const blobUrl = `/rails/active_storage/blobs/redirect/${blob.signed_id}/${encodeURIComponent(blob.filename)}`
       this.editor.chain().focus().setImage({ src: blobUrl, alt: altText, width: 720 }).run()
@@ -249,14 +247,60 @@ export default class extends Controller {
   }
 
   showInlineError(message) {
-    const errorHtml = `<p class="text-sm text-red-600">${message}</p>`
-    this.editor.commands.insertContent(errorHtml)
-    const errorEls = this.editorTarget.querySelectorAll('p.text-sm.text-red-600')
-    const lastError = errorEls[errorEls.length - 1]
-    if (lastError) {
-      setTimeout(() => {
-        lastError.remove()
-      }, 4000)
+    const banner = document.createElement('div')
+    banner.className = 'tiptap-error-banner'
+    banner.setAttribute('contenteditable', 'false')
+    banner.textContent = message
+    this.element.appendChild(banner)
+    this._errorBannerTimeout = setTimeout(() => banner.remove(), 4000)
+  }
+
+  _showUploadOverlay() {
+    if (this._uploadOverlay) return
+
+    const overlay = document.createElement('div')
+    overlay.className = 'tiptap-upload-overlay'
+    overlay.setAttribute('contenteditable', 'false')
+
+    const spinner = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+    spinner.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+    spinner.setAttribute('width', '20')
+    spinner.setAttribute('height', '20')
+    spinner.setAttribute('viewBox', '0 0 24 24')
+    spinner.setAttribute('fill', 'none')
+    spinner.setAttribute('stroke', 'currentColor')
+    spinner.setAttribute('stroke-width', '2')
+    spinner.setAttribute('stroke-linecap', 'round')
+    spinner.setAttribute('stroke-linejoin', 'round')
+    spinner.classList.add('animate-spin')
+
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
+    circle.setAttribute('cx', '12')
+    circle.setAttribute('cy', '12')
+    circle.setAttribute('r', '10')
+    circle.setAttribute('stroke', '#d1d5db')
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+    path.setAttribute('d', 'M12 2a10 10 0 0 1 10 10')
+    path.setAttribute('stroke', '#6b7280')
+
+    spinner.appendChild(circle)
+    spinner.appendChild(path)
+
+    const label = document.createElement('span')
+    label.textContent = 'Uploading image…'
+
+    overlay.appendChild(spinner)
+    overlay.appendChild(label)
+
+    this.element.appendChild(overlay)
+    this._uploadOverlay = overlay
+  }
+
+  _removeUploadOverlay() {
+    if (this._uploadOverlay) {
+      this._uploadOverlay.remove()
+      this._uploadOverlay = null
     }
   }
 
