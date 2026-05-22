@@ -1,6 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe Blog, type: :model do
+  describe "#generate_slug" do
+    it "auto-generates slug from title on create" do
+      blog = create(:blog, title: "Hello World", slug: nil)
+      expect(blog.slug).to eq("hello-world")
+    end
+
+    it "auto-generates slug when form submits blank string" do
+      blog = create(:blog, title: "Hello World", slug: "")
+      expect(blog.slug).to eq("hello-world")
+    end
+
+    it "does not overwrite an explicitly provided slug" do
+      blog = create(:blog, title: "Hello World", slug: "custom-slug")
+      expect(blog.slug).to eq("custom-slug")
+    end
+  end
+
   describe "#sanitize_body" do
     it "preserves table markup and table-specific attributes" do
       body = '<table><thead><tr><th>H</th></tr></thead><tbody><tr><td colspan="2" scope="col">x</td></tr></tbody></table>'

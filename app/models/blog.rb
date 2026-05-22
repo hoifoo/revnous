@@ -40,7 +40,7 @@ class Blog < ApplicationRecord
   private
 
   def generate_slug
-    self.slug ||= title.parameterize if title.present?
+    self.slug = title.parameterize if slug.blank? && title.present?
   end
 
   def sanitize_body

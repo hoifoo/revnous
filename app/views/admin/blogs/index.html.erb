@@ -72,7 +72,7 @@
             </div>
           </td>
           <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-            <% if blog.slug.present? && blog.published_at && blog.published_at <= Time.current %>
+            <% if blog.slug.present? %>
               <%= link_to blog_path(blog.slug), target: "_blank", class: "text-blue-600 hover:text-blue-900" do %>
                 View
               <% end %>
