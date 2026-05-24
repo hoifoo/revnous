@@ -146,6 +146,49 @@ RSpec.describe Blog, type: :model do
     end
   end
 
+  describe "#faq_schema" do
+    it "persists faq_schema as JSON string when saved with an array of pairs" do
+      blog = create(:blog, faq_schema: [ { "question" => "Q1", "answer" => "A1" }, { "question" => "Q2", "answer" => "A2" } ])
+      parsed = JSON.parse(blog.reload.faq_schema)
+      expect(parsed).to eq([ { "question" => "Q1", "answer" => "A1" }, { "question" => "Q2", "answer" => "A2" } ])
+    end
+
+    it "strips blank pairs on save and persists only the populated pair" do
+      blog = create(:blog, faq_schema: [ { "question" => "", "answer" => "" }, { "question" => "Q", "answer" => "A" } ])
+      parsed = JSON.parse(blog.reload.faq_schema)
+      expect(parsed).to eq([ { "question" => "Q", "answer" => "A" } ])
+    end
+
+    it "sets faq_schema to nil when all pairs are blank" do
+      blog = create(:blog, faq_schema: [ { "question" => "", "answer" => "" } ])
+      expect(blog.reload.faq_schema).to be_nil
+    end
+
+    it "faq_pairs returns parsed array when faq_schema is JSON-encoded" do
+      blog = create(:blog, faq_schema: [ { "question" => "Q1", "answer" => "A1" } ])
+      expect(blog.faq_pairs).to eq([ { "question" => "Q1", "answer" => "A1" } ])
+    end
+
+    it "faq_pairs returns [] when faq_schema is nil" do
+      blog = create(:blog, faq_schema: nil)
+      expect(blog.faq_pairs).to eq([])
+    end
+
+    it "faq_pairs returns [] when faq_schema is malformed JSON" do
+      blog = create(:blog)
+      blog.update_column(:faq_schema, "not-valid-json{")
+      expect(blog.faq_pairs).to eq([])
+    end
+
+    it "handles faq_schema passed as JSON string (defensive)" do
+      pre_encoded = [ { "question" => "Q", "answer" => "A" } ].to_json
+      blog = Blog.new(title: "T", body: "<p>x</p>", faq_schema: pre_encoded)
+      blog.save!
+      parsed = JSON.parse(blog.reload.faq_schema)
+      expect(parsed).to eq([ { "question" => "Q", "answer" => "A" } ])
+    end
+  end
+
   describe "#sanitize_body" do
     it "preserves table markup and table-specific attributes" do
       body = '<table><thead><tr><th>H</th></tr></thead><tbody><tr><td colspan="2" scope="col">x</td></tr></tbody></table>'
