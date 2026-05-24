@@ -73,6 +73,39 @@ RSpec.describe "Admin::Blogs", type: :request do
     end
   end
 
+  describe "FAQ schema params" do
+    it "persists FAQ pairs when submitted as nested params" do
+      patch admin_blog_path(blog), params: {
+        blog: { faq_schema: [ { question: "What?", answer: "This." }, { question: "Why?", answer: "Because." } ] }
+      }
+
+      expect(response).to redirect_to(admin_blogs_path)
+      blog.reload
+      expect(blog.faq_pairs.length).to eq(2)
+    end
+
+    it "results in nil faq_schema when all pairs are blank" do
+      patch admin_blog_path(blog), params: {
+        blog: { faq_schema: [ { question: "", answer: "" } ] }
+      }
+
+      expect(response).to redirect_to(admin_blogs_path)
+      blog.reload
+      expect(blog.faq_schema).to be_nil
+    end
+
+    it "clears existing pairs when blank pair is submitted" do
+      blog.update_column(:faq_schema, '[{"question":"Q","answer":"A"}]')
+      patch admin_blog_path(blog), params: {
+        blog: { faq_schema: [ { question: "", answer: "" } ] }
+      }
+
+      expect(response).to redirect_to(admin_blogs_path)
+      blog.reload
+      expect(blog.faq_schema).to be_nil
+    end
+  end
+
   describe "PATCH /update" do
     it "updates the blog meta fields" do
       patch admin_blog_path(blog), params: {
