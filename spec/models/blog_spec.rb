@@ -84,6 +84,68 @@ RSpec.describe Blog, type: :model do
     end
   end
 
+  describe "#og_image" do
+    it "og_image_url returns nil when og_image is not attached" do
+      blog = create(:blog)
+      expect(blog.og_image_url).to be_nil
+    end
+
+    it "og_image_url returns a URL string when og_image is attached" do
+      blog = create(:blog)
+      blog.og_image.attach(
+        io: StringIO.new("fake-png"),
+        filename: "test.png",
+        content_type: "image/png"
+      )
+      blog.save!
+      expect(blog.og_image_url).to be_a(String)
+      expect(blog.og_image_url).to be_present
+    end
+
+    it "is invalid when og_image has content_type application/pdf (non-image rejected)" do
+      blog = build(:blog)
+      blog.og_image.attach(
+        io: StringIO.new("fake-pdf"),
+        filename: "test.pdf",
+        content_type: "application/pdf"
+      )
+      expect(blog).not_to be_valid
+      expect(blog.errors[:og_image]).to be_present
+    end
+
+    it "is valid when og_image has content_type image/png" do
+      blog = build(:blog)
+      blog.og_image.attach(
+        io: StringIO.new("fake-png"),
+        filename: "test.png",
+        content_type: "image/png"
+      )
+      expect(blog).to be_valid
+    end
+
+    it "is invalid when og_image has content_type image/svg+xml (SVG rejected to prevent stored-XSS)" do
+      blog = build(:blog)
+      blog.og_image.attach(
+        io: StringIO.new("<svg><script>alert(1)</script></svg>"),
+        filename: "evil.svg",
+        content_type: "image/svg+xml"
+      )
+      expect(blog).not_to be_valid
+      expect(blog.errors[:og_image]).to be_present
+    end
+
+    it "purges og_image attachment when content_type is invalid" do
+      blog = build(:blog)
+      blog.og_image.attach(
+        io: StringIO.new("fake-pdf"),
+        filename: "test.pdf",
+        content_type: "application/pdf"
+      )
+      blog.valid?
+      expect(blog.og_image.attached?).to be false
+    end
+  end
+
   describe "#sanitize_body" do
     it "preserves table markup and table-specific attributes" do
       body = '<table><thead><tr><th>H</th></tr></thead><tbody><tr><td colspan="2" scope="col">x</td></tr></tbody></table>'
