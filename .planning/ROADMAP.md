@@ -88,7 +88,7 @@ Plans:
 - [x] 03-03-PLAN.md — OG Image slice: og_image_url model helper + image content-type whitelist + admin form file_field/preview + blogs_controller 3-step fallback chain (SEO-04)
 
 **Wave 4** *(blocked on 03-03 — shares blog.rb / admin form / admin controller / helper / show.html.erb)*
-- [ ] 03-04-PLAN.md — FAQ Schema slice: parse_faq_schema callback + faq_pairs reader + faq-builder Stimulus controller + collapsible form section + render_faq_schema helper + visible FAQ section on show + render_article_schema .html_safe cleanup (SEO-02)
+- [x] 03-04-PLAN.md — FAQ Schema slice: parse_faq_schema callback + faq_pairs reader + faq-builder Stimulus controller + collapsible form section + render_faq_schema helper + visible FAQ section on show + render_article_schema .html_safe cleanup (SEO-02)
 **UI hint**: yes
 
 ## Progress
