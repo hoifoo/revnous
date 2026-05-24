@@ -69,7 +69,7 @@ module ApplicationHelper
       ]
     }
 
-    content_tag :script, json_escape(schema.to_json), type: "application/ld+json"
+    content_tag :script, json_escape(schema.to_json).html_safe, type: "application/ld+json"
   end
 
   def render_article_schema(article)
@@ -90,6 +90,27 @@ module ApplicationHelper
           "url": asset_url("logo.png")
         }
       }
+    }
+
+    content_tag :script, json_escape(schema.to_json).html_safe, type: "application/ld+json"
+  end
+
+  def render_faq_schema(blog)
+    return nil unless blog.respond_to?(:faq_pairs) && blog.faq_pairs.any?
+
+    schema = {
+      "@context" => "https://schema.org",
+      "@type" => "FAQPage",
+      "mainEntity" => blog.faq_pairs.map do |pair|
+        {
+          "@type" => "Question",
+          "name" => pair["question"],
+          "acceptedAnswer" => {
+            "@type" => "Answer",
+            "text" => pair["answer"]
+          }
+        }
+      end
     }
 
     content_tag :script, json_escape(schema.to_json).html_safe, type: "application/ld+json"
@@ -116,7 +137,7 @@ module ApplicationHelper
       end
     end
 
-    content_tag :script, json_escape(schema.to_json), type: "application/ld+json"
+    content_tag :script, json_escape(schema.to_json).html_safe, type: "application/ld+json"
   end
 
   def render_breadcrumbs_schema(breadcrumbs)
@@ -135,7 +156,7 @@ module ApplicationHelper
       "itemListElement": items
     }
 
-    content_tag :script, json_escape(schema.to_json), type: "application/ld+json"
+    content_tag :script, json_escape(schema.to_json).html_safe, type: "application/ld+json"
   end
 
   private

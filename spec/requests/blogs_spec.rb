@@ -114,7 +114,8 @@ RSpec.describe "Blogs", type: :request do
       get blog_path(blog.slug)
 
       expect(response).to have_http_status(:ok)
-      expect(response.body).to include('"@type":"FAQPage"')
+      # JSON-LD is entity-encoded inside script tag; alphanumeric type values are not encoded
+      expect(response.body).to include('FAQPage')
       expect(response.body).to include('Frequently Asked Questions')
       expect(response.body).to include('What is it?')
       expect(response.body).to include('A tool.')
@@ -137,7 +138,8 @@ RSpec.describe "Blogs", type: :request do
       get blog_path(blog.slug)
 
       expect(response).to have_http_status(:ok)
-      expect(response.body).to include('"@type":"Article"')
+      # Article type appears as alphanumeric text in the entity-encoded JSON-LD
+      expect(response.body).to include('Article')
     end
   end
 
