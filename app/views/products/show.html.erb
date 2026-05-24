@@ -1,5 +1,7 @@
 <% content_for :structured_data do %>
-  <%= render_product_schema(@product) %>
+  <%= render_organization_schema %>
+  <%= render_website_schema %>
+  <%= render_software_application_schema(@product) %>
   <%= render_breadcrumbs_schema([
     { name: "Home", url: root_url },
     { name: "Products", url: products_url },

@@ -1,3 +1,17 @@
+<% content_for :structured_data do %>
+  <%= render_organization_schema %>
+  <%= render_website_schema %>
+  <script type="application/ld+json"><%= json_escape({
+    "@context" => "https://schema.org",
+    "@type" => "Blog",
+    "@id" => "#{blogs_url}#blog",
+    "url" => blogs_url,
+    "name" => "Revnous Blog",
+    "description" => "Expert tips, industry trends, and proven tactics to increase your Shopify revenue",
+    "publisher" => { "@id" => "#{root_url}#organization" }
+  }.to_json).html_safe %></script>
+<% end %>
+
 <%= render "shared/notice_banner" %>
 
 <!-- Hero Section -->

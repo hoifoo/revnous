@@ -1,4 +1,6 @@
 <% content_for :structured_data do %>
+  <%= render_organization_schema %>
+  <%= render_website_schema %>
   <%= render_article_schema(@blog) %>
   <%= render_breadcrumbs_schema([
     { name: "Home", url: root_url },
@@ -6,6 +8,17 @@
     { name: @blog.title, url: blog_url(@blog.slug) }
   ]) %>
   <%= render_faq_schema(@blog) %>
+  <% if @related_blogs.any? %>
+    <% related_list_schema = {
+      "@context" => "https://schema.org",
+      "@type" => "ItemList",
+      "name" => "Related Articles",
+      "itemListElement" => @related_blogs.map.with_index do |b, i|
+        { "@type" => "ListItem", "position" => i + 1, "url" => blog_url(b.slug), "name" => b.title }
+      end
+    } %>
+    <script type="application/ld+json"><%= json_escape(related_list_schema.to_json).html_safe %></script>
+  <% end %>
 <% end %>
 
 <%= render "shared/notice_banner" %>

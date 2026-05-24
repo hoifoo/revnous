@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_05_22_000001) do
+ActiveRecord::Schema[8.0].define(version: 2026_05_24_202004) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -137,6 +137,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_05_22_000001) do
     t.jsonb "keywords", default: [], null: false
     t.text "faq_schema"
     t.string "canonical_url_override"
+    t.string "type"
     t.index ["author_id"], name: "index_blogs_on_author_id"
     t.index ["featured_on_home"], name: "index_blogs_on_featured_on_home"
   end
