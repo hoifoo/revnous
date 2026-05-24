@@ -18,6 +18,45 @@ RSpec.describe ApplicationHelper, type: :helper do
     end
   end
 
+  describe "#render_faq_schema" do
+    it "returns nil when blog.faq_schema is nil" do
+      blog = build(:blog, faq_schema: nil)
+      expect(helper.render_faq_schema(blog)).to be_nil
+    end
+
+    it "returns nil when faq_pairs is empty" do
+      blog = build(:blog, faq_schema: nil)
+      expect(helper.render_faq_schema(blog)).to be_nil
+    end
+
+    it "returns a script tag with FAQPage JSON-LD when blog has 2 pairs" do
+      blog = build(:blog)
+      blog.update_column(:faq_schema, '[{"question":"Q1","answer":"A1"},{"question":"Q2","answer":"A2"}]') rescue nil
+      allow(blog).to receive(:faq_pairs).and_return(
+        [ { "question" => "Q1", "answer" => "A1" }, { "question" => "Q2", "answer" => "A2" } ]
+      )
+
+      output = helper.render_faq_schema(blog)
+
+      expect(output).to include('application/ld+json')
+      json = JSON.parse(output.gsub(/<[^>]+>/, "").strip)
+      expect(json["@type"]).to eq("FAQPage")
+      expect(json["mainEntity"].length).to eq(2)
+    end
+
+    it "escapes </script> injection attempts in FAQ answer (Test 4)" do
+      blog = build(:blog)
+      allow(blog).to receive(:faq_pairs).and_return(
+        [ { "question" => "Safe?", "answer" => "</script><script>alert(1)</script>" } ]
+      )
+
+      output = helper.render_faq_schema(blog)
+
+      expect(output).not_to match(/<\/script><script>alert/i)
+      expect(output).to match(/Hack|Safe|\\/i)
+    end
+  end
+
   describe "#render_article_schema" do
     it "emits Person author node when blog.author is a User with linkedin and twitter" do
       user = create(:user, first_name: "Ada", last_name: "Lovelace",
