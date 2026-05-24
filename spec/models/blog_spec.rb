@@ -85,6 +85,15 @@ RSpec.describe Blog, type: :model do
   end
 
   describe "#og_image" do
+    around do |example|
+      # Use :test adapter to avoid SolidQueue DB tables being needed during attach
+      original_adapter = ActiveJob::Base.queue_adapter
+      ActiveJob::Base.queue_adapter = :test
+      example.run
+    ensure
+      ActiveJob::Base.queue_adapter = original_adapter
+    end
+
     it "og_image_url returns nil when og_image is not attached" do
       blog = create(:blog)
       expect(blog.og_image_url).to be_nil
@@ -98,8 +107,12 @@ RSpec.describe Blog, type: :model do
         content_type: "image/png"
       )
       blog.save!
+      # Set host so rails_blob_path(only_path: false) can build a full URL
+      Rails.application.routes.default_url_options[:host] = "www.example.com"
       expect(blog.og_image_url).to be_a(String)
       expect(blog.og_image_url).to be_present
+    ensure
+      Rails.application.routes.default_url_options.delete(:host)
     end
 
     it "is invalid when og_image has content_type application/pdf (non-image rejected)" do

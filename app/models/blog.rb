@@ -14,6 +14,7 @@ class Blog < ApplicationRecord
     allow_blank: true,
     message: "must be a valid http or https URL"
   }
+  validate :validate_og_image_content_type
 
   before_validation :generate_slug, on: :create
   before_save :sanitize_body
@@ -48,10 +49,33 @@ class Blog < ApplicationRecord
     nil
   end
 
+  def og_image_url
+    return nil unless og_image.attached?
+
+    if Rails.application.routes.default_url_options[:host]
+      Rails.application.routes.url_helpers.url_for(og_image)
+    else
+      # Fallback for console/tests
+      Rails.application.routes.url_helpers.rails_blob_path(og_image, only_path: false)
+    end
+  rescue StandardError
+    nil
+  end
+
   private
 
   def generate_slug
     self.slug = title.parameterize if slug.blank? && title.present?
+  end
+
+  def validate_og_image_content_type
+    return unless og_image.attached?
+
+    allowed_types = %w[image/png image/jpeg image/jpg image/gif image/webp]
+    unless allowed_types.include?(og_image.blob.content_type.to_s.downcase)
+      errors.add(:og_image, "must be a PNG, JPEG, GIF, or WebP image")
+      og_image.purge
+    end
   end
 
   def normalize_keywords
