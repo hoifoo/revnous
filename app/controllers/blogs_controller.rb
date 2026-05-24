@@ -13,7 +13,7 @@ class BlogsController < ApplicationController
     @page_title = @blog.seo_title
     @page_description = @blog.seo_description
     @page_og_type = "article"
-    @page_og_image = @blog.cover_photo_url if @blog.image.attached?
+    @page_og_image = og_image_for(@blog)
     @canonical_url = @blog.canonical_url_override.presence || blog_url(@blog.slug)
     @page_keywords = @blog.keywords
 
@@ -25,6 +25,18 @@ class BlogsController < ApplicationController
 
     if @related_blogs.length < 3
       @related_blogs = Blog.published.where.not(id: @blog.id).limit(3).to_a
+    end
+  end
+
+  private
+
+  def og_image_for(blog)
+    if blog.og_image.attached?
+      blog.og_image_url
+    elsif blog.image.attached?
+      blog.cover_photo_url
+    else
+      helpers.asset_url("logo.png")
     end
   end
 end
