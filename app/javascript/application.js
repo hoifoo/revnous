@@ -3,5 +3,10 @@ import "@hotwired/turbo-rails"
 import "./controllers"
 import "./altcha"
 
-import "trix"
-import "@rails/actiontext"
+import { application } from "./controllers/application"
+
+document.addEventListener('turbo:before-cache', () => {
+  application.controllers.forEach(c => {
+    if (typeof c.teardown === 'function') c.teardown()
+  })
+})

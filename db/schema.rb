@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_05_03_184915) do
+ActiveRecord::Schema[8.0].define(version: 2026_05_22_000001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -131,6 +131,13 @@ ActiveRecord::Schema[8.0].define(version: 2026_05_03_184915) do
     t.boolean "featured_on_home", default: false, null: false
     t.string "meta_title"
     t.text "meta_description"
+    t.text "body"
+    t.string "spacing", default: "normal", null: false
+    t.bigint "author_id"
+    t.jsonb "keywords", default: [], null: false
+    t.text "faq_schema"
+    t.string "canonical_url_override"
+    t.index ["author_id"], name: "index_blogs_on_author_id"
     t.index ["featured_on_home"], name: "index_blogs_on_featured_on_home"
   end
 
@@ -473,6 +480,10 @@ ActiveRecord::Schema[8.0].define(version: 2026_05_03_184915) do
     t.text "permanent_address"
     t.boolean "permanent_same_as_present"
     t.boolean "admin", default: false, null: false
+    t.text "bio"
+    t.string "job_title"
+    t.string "linkedin_url"
+    t.string "twitter_handle"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -481,6 +492,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_05_03_184915) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "admin_invitations", "users", column: "invited_by_id"
   add_foreign_key "audit_logs", "users"
+  add_foreign_key "blogs", "users", column: "author_id", on_delete: :nullify
   add_foreign_key "contribution_receipts", "donations"
   add_foreign_key "contribution_receipts", "users"
   add_foreign_key "donation_reminders", "users"

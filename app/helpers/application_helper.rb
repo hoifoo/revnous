@@ -40,6 +40,17 @@ module ApplicationHelper
     end
   end
 
+  def page_keywords
+    keywords = @page_keywords
+    return nil if keywords.blank?
+
+    if keywords.is_a?(Array)
+      keywords.compact_blank.join(", ").presence
+    else
+      keywords.to_s.presence
+    end
+  end
+
   def page_robots
     @page_robots || "index, follow"
   end
@@ -58,7 +69,7 @@ module ApplicationHelper
       ]
     }
 
-    content_tag :script, schema.to_json.html_safe, type: "application/ld+json"
+    content_tag :script, json_escape(schema.to_json).html_safe, type: "application/ld+json"
   end
 
   def render_article_schema(article)
@@ -70,10 +81,7 @@ module ApplicationHelper
       "image": article.cover_photo_url,
       "datePublished": article.created_at.iso8601,
       "dateModified": article.updated_at.iso8601,
-      "author": {
-        "@type": "Organization",
-        "name": "Revnous"
-      },
+      "author": author_schema_node(article),
       "publisher": {
         "@type": "Organization",
         "name": "Revnous",
@@ -84,7 +92,28 @@ module ApplicationHelper
       }
     }
 
-    content_tag :script, schema.to_json.html_safe, type: "application/ld+json"
+    content_tag :script, json_escape(schema.to_json).html_safe, type: "application/ld+json"
+  end
+
+  def render_faq_schema(blog)
+    return nil unless blog.respond_to?(:faq_pairs) && blog.faq_pairs.any?
+
+    schema = {
+      "@context" => "https://schema.org",
+      "@type" => "FAQPage",
+      "mainEntity" => blog.faq_pairs.map do |pair|
+        {
+          "@type" => "Question",
+          "name" => pair["question"],
+          "acceptedAnswer" => {
+            "@type" => "Answer",
+            "text" => pair["answer"]
+          }
+        }
+      end
+    }
+
+    content_tag :script, json_escape(schema.to_json).html_safe, type: "application/ld+json"
   end
 
   def render_product_schema(product)
@@ -108,7 +137,7 @@ module ApplicationHelper
       end
     end
 
-    content_tag :script, schema.to_json.html_safe, type: "application/ld+json"
+    content_tag :script, json_escape(schema.to_json).html_safe, type: "application/ld+json"
   end
 
   def render_breadcrumbs_schema(breadcrumbs)
@@ -127,10 +156,21 @@ module ApplicationHelper
       "itemListElement": items
     }
 
-    content_tag :script, schema.to_json.html_safe, type: "application/ld+json"
+    content_tag :script, json_escape(schema.to_json).html_safe, type: "application/ld+json"
   end
 
   private
+
+  def author_schema_node(article)
+    if article.respond_to?(:author) && article.author.is_a?(User)
+      person = { "@type": "Person", "name": article.author.full_name }
+      person["url"] = article.author.linkedin_url if article.author.linkedin_url.present?
+      person["sameAs"] = [ "https://twitter.com/#{article.author.twitter_handle}" ] if article.author.twitter_handle.present?
+      person
+    else
+      { "@type": "Organization", "name": "Revnous" }
+    end
+  end
 
   def seo_metadata
     @seo_metadata ||= SeoMetadatum.find_by(page_identifier: controller_path_identifier)

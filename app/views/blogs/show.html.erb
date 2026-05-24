@@ -5,6 +5,7 @@
     { name: "Blog", url: blogs_url },
     { name: @blog.title, url: blog_url(@blog.slug) }
   ]) %>
+  <%= render_faq_schema(@blog) %>
 <% end %>
 
 <%= render "shared/notice_banner" %>
@@ -27,11 +28,11 @@
         </span>
       <% end %>
       <span class="text-sm text-gray-500">
-        <%= @blog.published_at.strftime("%B %d, %Y") %>
+        <%= @blog.published_at&.strftime("%B %d, %Y") %>
       </span>
-      <% if @blog.author.present? %>
+      <% if @blog.author.nil? && @blog[:author].present? %>
         <span class="text-sm text-gray-500">
-          by <%= @blog.author %>
+          by <%= @blog[:author] %>
         </span>
       <% end %>
     </div>
@@ -58,9 +59,13 @@
     <% end %>
 
     <!-- Content -->
-    <div class="prose prose-lg max-w-none mb-16">
-      <%= @blog.content %>
+    <div class="prose prose-lg max-w-none mb-16 <%= 'prose-paragraph-relaxed' if @blog.spacing == 'relaxed' %>">
+      <%= sanitize @blog.body, tags: Blog::ALLOWED_TAGS, attributes: Blog::ALLOWED_ATTRIBUTES %>
     </div>
+
+    <%= render "faq_section" %>
+
+    <%= render "author_card" %>
 
     <!-- Share Section -->
     <div class="border-t border-b border-gray-200 py-8 mb-16">
@@ -110,7 +115,7 @@
                 </span>
               <% end %>
               <span class="text-xs text-gray-500">
-                <%= related_blog.published_at.strftime("%b %d, %Y") %>
+                <%= related_blog.published_at&.strftime("%b %d, %Y") %>
               </span>
             </div>
             <h3 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-pink-600 transition">

@@ -112,7 +112,7 @@ class ZeptoMailDeliveryMethod
   end
 
   def payload_summary(payload)
-    summary = payload.reject { |k, _| [:htmlbody, :textbody, :inline_images].include?(k) }
+    summary = payload.reject { |k, _| [ :htmlbody, :textbody, :inline_images ].include?(k) }
     summary[:htmlbody_size] = payload[:htmlbody]&.bytesize
     summary[:textbody_size] = payload[:textbody]&.bytesize
     summary[:inline_images_count] = payload[:inline_images]&.length || 0
