@@ -41,6 +41,26 @@ RSpec.describe "Admin::Blogs", type: :request do
     end
   end
 
+  describe "PATCH /update og_image" do
+    around do |example|
+      original_adapter = ActiveJob::Base.queue_adapter
+      ActiveJob::Base.queue_adapter = :test
+      example.run
+    ensure
+      ActiveJob::Base.queue_adapter = original_adapter
+    end
+
+    it "attaches og_image when a valid PNG is uploaded" do
+      patch admin_blog_path(blog), params: {
+        blog: { og_image: fixture_file_upload("sample.png", "image/png") }
+      }
+
+      expect(response).to redirect_to(admin_blogs_path)
+      blog.reload
+      expect(blog.og_image.attached?).to be true
+    end
+  end
+
   describe "PATCH /update canonical_url_override" do
     it "persists canonical_url_override when a valid https URL is submitted" do
       patch admin_blog_path(blog), params: {
