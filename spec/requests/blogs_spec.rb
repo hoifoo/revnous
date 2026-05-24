@@ -145,7 +145,7 @@ RSpec.describe "Blogs", type: :request do
 
   describe "GET /blog/:id (show)" do
     it "renders keywords meta tag when blog has keywords" do
-      blog = create(:blog, slug: "keywords-test", keywords: ["seo", "marketing"],
+      blog = create(:blog, slug: "keywords-test", keywords: [ "seo", "marketing" ],
                     published_at: 1.day.ago)
 
       get blog_path(blog.slug)

@@ -2,7 +2,7 @@
 
 class InvitationsController < ApplicationController
   before_action :load_invitation
-  before_action :ensure_acceptable, only: [:accept, :setup, :complete]
+  before_action :ensure_acceptable, only: [ :accept, :setup, :complete ]
 
   def show
   end

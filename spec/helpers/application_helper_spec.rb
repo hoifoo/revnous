@@ -13,7 +13,7 @@ RSpec.describe ApplicationHelper, type: :helper do
     end
 
     it "returns comma-joined string when @page_keywords has values" do
-      helper.instance_variable_set(:@page_keywords, ["seo", "marketing", "b2b"])
+      helper.instance_variable_set(:@page_keywords, [ "seo", "marketing", "b2b" ])
       expect(helper.page_keywords).to eq("seo, marketing, b2b")
     end
   end

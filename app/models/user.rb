@@ -16,16 +16,16 @@ class User < ApplicationRecord
   }
 
   def full_name
-    [first_name, last_name].compact_blank.join(' ').presence || email
+    [ first_name, last_name ].compact_blank.join(" ").presence || email
   end
 
   def initials
-    [first_name&.first, last_name&.first].compact.join.upcase.presence || '?'
+    [ first_name&.first, last_name&.first ].compact.join.upcase.presence || "?"
   end
 
   private
 
   def normalize_twitter_handle
-    self.twitter_handle = twitter_handle.to_s.strip.delete_prefix('@').presence
+    self.twitter_handle = twitter_handle.to_s.strip.delete_prefix("@").presence
   end
 end

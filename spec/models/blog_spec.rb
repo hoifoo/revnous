@@ -25,8 +25,8 @@ RSpec.describe Blog, type: :model do
     end
 
     it "persists keywords as an Array and round-trips correctly" do
-      blog = create(:blog, keywords: ["seo", "marketing"])
-      expect(blog.reload.keywords).to eq(["seo", "marketing"])
+      blog = create(:blog, keywords: [ "seo", "marketing" ])
+      expect(blog.reload.keywords).to eq([ "seo", "marketing" ])
     end
 
     it "returns '' when keywords is nil" do
@@ -41,7 +41,7 @@ RSpec.describe Blog, type: :model do
     end
 
     it "returns comma-joined string when keywords is present" do
-      blog = build(:blog, keywords: ["seo", "marketing", "b2b"])
+      blog = build(:blog, keywords: [ "seo", "marketing", "b2b" ])
       expect(blog.keywords_list).to eq("seo, marketing, b2b")
     end
   end

@@ -1,0 +1,26 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 105,
+      "fingerprint": "65572beab7e2934e069d38dddd02d57ed295a65ff20bb1bc6320b67bac540647",
+      "check_name": "PermitAttributes",
+      "message": "Potentially dangerous key allowed for mass assignment",
+      "file": "app/controllers/admin/users_controller.rb",
+      "line": 53,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :bio, :job_title, :linkedin_url, :twitter_handle, :avatar, :admin)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Admin::UsersController",
+        "method": "user_params"
+      },
+      "user_input": ":admin",
+      "confidence": "High",
+      "note": "Intentional: Admin::UsersController is protected by ensure_admin! — only existing admins can set admin flag on other users."
+    }
+  ],
+  "updated": "2026-05-24 00:00:00 +0000",
+  "notes": ""
+}
