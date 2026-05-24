@@ -19,6 +19,7 @@ class Blog < ApplicationRecord
   before_validation :generate_slug, on: :create
   before_save :sanitize_body
   before_save :normalize_keywords
+  before_save :parse_faq_schema
 
   scope :published, -> { where("published_at <= ?", Time.current).order(published_at: :desc) }
   scope :featured, -> { where(featured: true) }
@@ -47,6 +48,25 @@ class Blog < ApplicationRecord
     end
   rescue StandardError
     nil
+  end
+
+  def faq_schema=(value)
+    # When assigned an Array (e.g. from tests or ActionController::Parameters),
+    # JSON-encode it immediately so the text column stores valid JSON, not Ruby inspect.
+    if value.is_a?(Array) || value.is_a?(ActionController::Parameters)
+      super(Array(value).to_json)
+    else
+      super(value)
+    end
+  end
+
+  def faq_pairs
+    return [] if faq_schema.blank?
+
+    parsed = JSON.parse(faq_schema)
+    parsed.is_a?(Array) ? parsed : []
+  rescue JSON::ParserError
+    []
   end
 
   def og_image_url
@@ -80,6 +100,27 @@ class Blog < ApplicationRecord
 
   def normalize_keywords
     self.keywords = Array(keywords).reject(&:blank?)
+  end
+
+  def parse_faq_schema
+    return if faq_schema.blank?
+
+    pairs = if faq_schema.is_a?(String)
+      begin
+        JSON.parse(faq_schema)
+      rescue JSON::ParserError
+        self.faq_schema = nil
+        return
+      end
+    else
+      Array(faq_schema)
+    end
+
+    cleaned = pairs.map do |entry|
+      { "question" => entry["question"].to_s.strip, "answer" => entry["answer"].to_s.strip }
+    end.reject { |p| p["question"].blank? && p["answer"].blank? }
+
+    self.faq_schema = cleaned.empty? ? nil : cleaned.to_json
   end
 
   def sanitize_body

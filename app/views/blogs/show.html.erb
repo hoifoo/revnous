@@ -5,6 +5,7 @@
     { name: "Blog", url: blogs_url },
     { name: @blog.title, url: blog_url(@blog.slug) }
   ]) %>
+  <%= render_faq_schema(@blog) %>
 <% end %>
 
 <%= render "shared/notice_banner" %>
@@ -61,6 +62,8 @@
     <div class="prose prose-lg max-w-none mb-16 <%= 'prose-paragraph-relaxed' if @blog.spacing == 'relaxed' %>">
       <%= sanitize @blog.body, tags: Blog::ALLOWED_TAGS, attributes: Blog::ALLOWED_ATTRIBUTES %>
     </div>
+
+    <%= render "faq_section" %>
 
     <%= render "author_card" %>
 

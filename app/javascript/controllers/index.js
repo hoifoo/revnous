@@ -12,3 +12,6 @@ application.register("tiptap-editor", TiptapEditorController)
 
 import KeywordsInputController from "./keywords_input_controller"
 application.register("keywords-input", KeywordsInputController)
+
+import FaqBuilderController from "./faq_builder_controller"
+application.register("faq-builder", FaqBuilderController)

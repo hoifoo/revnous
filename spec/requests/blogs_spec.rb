@@ -106,6 +106,43 @@ RSpec.describe "Blogs", type: :request do
     end
   end
 
+  describe "FAQ rendering on show" do
+    it "includes FAQPage JSON-LD and visible FAQ section when blog has pairs" do
+      blog = create(:blog, slug: "faq-test-with-pairs", published_at: 1.day.ago)
+      blog.update_column(:faq_schema, '[{"question":"What is it?","answer":"A tool."}]')
+
+      get blog_path(blog.slug)
+
+      expect(response).to have_http_status(:ok)
+      # JSON-LD is entity-encoded inside script tag; alphanumeric type values are not encoded
+      expect(response.body).to include('FAQPage')
+      expect(response.body).to include('Frequently Asked Questions')
+      expect(response.body).to include('What is it?')
+      expect(response.body).to include('A tool.')
+    end
+
+    it "omits FAQPage JSON-LD and FAQ section when blog has no pairs" do
+      blog = create(:blog, slug: "faq-test-no-pairs", published_at: 1.day.ago,
+                    faq_schema: nil)
+
+      get blog_path(blog.slug)
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body.scan('FAQPage').length).to eq(0)
+      expect(response.body.scan('Frequently Asked Questions').length).to eq(0)
+    end
+
+    it "still renders article schema correctly after render_article_schema cleanup" do
+      blog = create(:blog, slug: "article-schema-check", published_at: 1.day.ago)
+
+      get blog_path(blog.slug)
+
+      expect(response).to have_http_status(:ok)
+      # Article type appears as alphanumeric text in the entity-encoded JSON-LD
+      expect(response.body).to include('Article')
+    end
+  end
+
   describe "GET /blog/:id (show)" do
     it "renders keywords meta tag when blog has keywords" do
       blog = create(:blog, slug: "keywords-test", keywords: ["seo", "marketing"],
