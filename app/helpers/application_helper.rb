@@ -58,39 +58,60 @@ module ApplicationHelper
   # Structured Data (JSON-LD)
   def render_organization_schema
     schema = {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Revnous",
-      "url": root_url,
-      "logo": asset_url("logo.png"),
-      "description": "Revenue optimization tools for Shopify merchants",
-      "sameAs": [
-        # Add your social media URLs here when available
+      "@context" => "https://schema.org",
+      "@type" => "Organization",
+      "@id" => "#{root_url}#organization",
+      "name" => "Revnous",
+      "url" => root_url,
+      "logo" => image_object_schema(asset_url("logo.png")),
+      "description" => "Revenue optimization tools for Shopify merchants",
+      "sameAs" => [
+        "https://www.linkedin.com/company/revnous",
+        "https://x.com/revnous",
+        "https://www.facebook.com/revnous"
       ]
     }
 
     content_tag :script, json_escape(schema.to_json).html_safe, type: "application/ld+json"
   end
 
-  def render_article_schema(article)
+  def render_website_schema
     schema = {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": article.title,
-      "description": article.meta_description || article.excerpt,
-      "image": article.cover_photo_url,
-      "datePublished": article.created_at.iso8601,
-      "dateModified": article.updated_at.iso8601,
-      "author": author_schema_node(article),
-      "publisher": {
-        "@type": "Organization",
-        "name": "Revnous",
-        "logo": {
-          "@type": "ImageObject",
-          "url": asset_url("logo.png")
-        }
-      }
+      "@context" => "https://schema.org",
+      "@type" => "WebSite",
+      "@id" => "#{root_url}#website",
+      "url" => root_url,
+      "name" => "Revnous",
+      "description" => "Revenue optimization tools for Shopify merchants",
+      "publisher" => { "@id" => "#{root_url}#organization" }
     }
+
+    content_tag :script, json_escape(schema.to_json).html_safe, type: "application/ld+json"
+  end
+
+  def render_article_schema(article)
+    article_url = blog_url(article.slug)
+
+    schema = {
+      "@context" => "https://schema.org",
+      "@type" => "BlogPosting",
+      "@id" => "#{article_url}#article",
+      "headline" => article.title,
+      "description" => article.seo_description,
+      "url" => article_url,
+      "mainEntityOfPage" => { "@type" => "WebPage", "@id" => article_url },
+      "image" => image_object_schema(article.cover_photo_url, caption: article.title),
+      "datePublished" => article.published_at&.iso8601,
+      "dateModified" => article.updated_at.iso8601,
+      "wordCount" => ActionController::Base.helpers.strip_tags(article.body.to_s).split.size,
+      "author" => author_schema_node(article),
+      "publisher" => {
+        "@type" => "Organization",
+        "@id" => "#{root_url}#organization",
+        "name" => "Revnous",
+        "logo" => image_object_schema(asset_url("logo.png"))
+      }
+    }.compact
 
     content_tag :script, json_escape(schema.to_json).html_safe, type: "application/ld+json"
   end
@@ -118,21 +139,47 @@ module ApplicationHelper
 
   def render_product_schema(product)
     schema = {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "name": product.name,
-      "description": product.description,
-      "image": product.cover_photo_url
-    }
+      "@context" => "https://schema.org",
+      "@type" => "Product",
+      "name" => product.name,
+      "description" => product.description,
+      "image" => image_object_schema(product.cover_photo_url)
+    }.compact
 
-    # Add offers if pricing plans exist
     if product.pricing_plans.any?
-      schema[:offers] = product.pricing_plans.map do |plan|
+      schema["offers"] = product.pricing_plans.map do |plan|
         {
-          "@type": "Offer",
-          "name": plan.name,
-          "price": plan.price,
-          "priceCurrency": "USD"
+          "@type" => "Offer",
+          "name" => plan.name,
+          "price" => plan.price,
+          "priceCurrency" => "USD"
+        }
+      end
+    end
+
+    content_tag :script, json_escape(schema.to_json).html_safe, type: "application/ld+json"
+  end
+
+  def render_software_application_schema(product)
+    schema = {
+      "@context" => "https://schema.org",
+      "@type" => "SoftwareApplication",
+      "@id" => "#{product_url(product)}#software",
+      "name" => product.name,
+      "description" => product.description.presence || product.short_description,
+      "applicationCategory" => "BusinessApplication",
+      "operatingSystem" => "Web",
+      "url" => product.url.presence || product_url(product),
+      "image" => image_object_schema(product.cover_photo_url)
+    }.compact
+
+    if product.pricing_plans.any?
+      schema["offers"] = product.pricing_plans.map do |plan|
+        {
+          "@type" => "Offer",
+          "name" => plan.name,
+          "price" => plan.price,
+          "priceCurrency" => "USD"
         }
       end
     end
@@ -143,17 +190,17 @@ module ApplicationHelper
   def render_breadcrumbs_schema(breadcrumbs)
     items = breadcrumbs.map.with_index do |crumb, index|
       {
-        "@type": "ListItem",
-        "position": index + 1,
-        "name": crumb[:name],
-        "item": crumb[:url]
+        "@type" => "ListItem",
+        "position" => index + 1,
+        "name" => crumb[:name],
+        "item" => crumb[:url]
       }
     end
 
     schema = {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": items
+      "@context" => "https://schema.org",
+      "@type" => "BreadcrumbList",
+      "itemListElement" => items
     }
 
     content_tag :script, json_escape(schema.to_json).html_safe, type: "application/ld+json"
@@ -161,14 +208,25 @@ module ApplicationHelper
 
   private
 
+  def image_object_schema(url, caption: nil)
+    return nil if url.blank?
+    node = { "@type" => "ImageObject", "url" => url, "contentUrl" => url }
+    node["caption"] = caption if caption.present?
+    node
+  end
+
   def author_schema_node(article)
     if article.respond_to?(:author) && article.author.is_a?(User)
-      person = { "@type": "Person", "name": article.author.full_name }
+      person = {
+        "@type" => "Person",
+        "@id" => "#{root_url}#author-#{article.author.id}",
+        "name" => article.author.full_name
+      }
       person["url"] = article.author.linkedin_url if article.author.linkedin_url.present?
       person["sameAs"] = [ "https://twitter.com/#{article.author.twitter_handle}" ] if article.author.twitter_handle.present?
       person
     else
-      { "@type": "Organization", "name": "Revnous" }
+      { "@type" => "Organization", "@id" => "#{root_url}#organization", "name" => "Revnous" }
     end
   end
 
@@ -177,7 +235,6 @@ module ApplicationHelper
   end
 
   def controller_path_identifier
-    # Generate identifier like "home#index" or "blogs#show"
     "#{controller_name}##{action_name}"
   end
 end

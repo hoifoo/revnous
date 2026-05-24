@@ -44,6 +44,7 @@
       <%= yield :structured_data %>
     <% else %>
       <%= render_organization_schema %>
+      <%= render_website_schema %>
     <% end %>
 
     <% if Rails.env.production? %>
