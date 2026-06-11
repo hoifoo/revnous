@@ -1,7 +1,31 @@
-# See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+# Revnous robots.txt
 
+# Default rules for all bots
 User-agent: *
+Allow: /
 Disallow: /admin
 Disallow: /admin/*
+Disallow: /rails/
+Disallow: /*.json$
 
+# AI agent permissions
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Sitemap
 Sitemap: https://www.revnous.com/sitemap.xml
