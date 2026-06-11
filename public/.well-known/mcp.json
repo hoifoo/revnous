@@ -1,0 +1,23 @@
+{
+  "schema_version": "2025-06-18",
+  "name": "revnous",
+  "display_name": "Revnous",
+  "description": "Read-only access to Revnous public content: published blog posts (by slug) and active products (by id). Public content only; no authentication and no write operations.",
+  "documentation_url": "https://www.revnous.com/llms.txt",
+  "capabilities": {
+    "resources": true,
+    "tools": false,
+    "prompts": false
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://www.revnous.com/api/v1/openapi.json"
+  },
+  "transport": {
+    "type": "streamable-http",
+    "endpoint": "https://www.revnous.com/mcp",
+    "status": "planned"
+  },
+  "auth": { "type": "none" },
+  "contact_email": "hello@revnous.com"
+}

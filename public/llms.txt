@@ -35,6 +35,7 @@ Polyglot, "right tool for the job" philosophy prioritizing stability, low server
 
 - [OpenAPI spec](https://www.revnous.com/api/v1/openapi.json): Machine-readable description of the public read-only JSON API.
 - [Plugin manifest](https://www.revnous.com/.well-known/ai-plugin.json): Discovery card pointing to the API.
+- [MCP card](https://www.revnous.com/.well-known/mcp.json): MCP server discovery card (HTTP transport planned; REST/OpenAPI live now).
 - [Blogs API](https://www.revnous.com/api/v1/blogs): Published posts as JSON; single post at `/api/v1/blogs/{slug}`.
 - [Products API](https://www.revnous.com/api/v1/products): Active products as JSON; single product at `/api/v1/products/{id}`.
 - [Sitemap](https://www.revnous.com/sitemap.xml): Full list of indexable URLs.
