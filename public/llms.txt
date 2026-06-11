@@ -1,0 +1,80 @@
+# Revnous Blog & SEO Platform
+
+Revnous is a blog CMS and SEO optimization platform for marketing freelancers.
+
+## Overview
+
+Revnous provides tools for publishing well-formatted, SEO-optimized blog posts from an intuitive admin interface. Features include rich text editing with Tiptap, author profiles, structured data generation, and comprehensive SEO metadata management.
+
+## Key Features
+
+- **Rich Text Editor** — Tiptap-based editor with image uploads and formatting tools
+- **Author Profiles** — Associate blog posts with authors with public bios and social links
+- **SEO Schema** — Automatic JSON-LD generation (Article, FAQPage, BreadcrumbList)
+- **Metadata Fields** — Keywords, canonical URL overrides, custom OG images
+- **Product Linking** — Organize content by product with HABTM relationships
+- **Async Publishing** — Background job processing for notifications
+
+## Content Structure
+
+### Blog Posts
+
+Blog posts are the primary content type. Each post can be:
+- Assigned to one or more products
+- Linked to an author (admin user) with public profile
+- Tagged with keywords for SEO
+- Configured with custom OG images and canonical URLs
+- Queried via `/blog` (index) and `/blog/:slug` (detail)
+
+### Author Profiles
+
+Author information displayed on blog posts includes:
+- Display name
+- Bio
+- Job title / role
+- LinkedIn URL
+- Twitter/X URL
+- Avatar image
+
+### SEO & Structured Data
+
+All pages include:
+- Title, meta description (auto-derived or custom)
+- JSON-LD structured data (Article, FAQPage, breadcrumbs)
+- Canonical URL support (custom or request URL)
+- OG image overrides for social sharing
+- Sitemap.xml for crawlability
+
+## Technical Stack
+
+- **Backend** — Ruby on Rails 8.0, PostgreSQL, Solid Queue
+- **Frontend** — Stimulus.js, Tailwind CSS, Turbo
+- **Editor** — Tiptap rich text editor with image uploads
+- **Assets** — esbuild (JS), Tailwind CLI (CSS), Propshaft pipeline
+
+## Public Routes
+
+- `GET /` — Homepage with featured content
+- `GET /blog` — Blog index (paginated)
+- `GET /blog/:slug` — Blog detail with SEO metadata
+- `GET /products` — Product catalog
+- `GET /products/:slug` — Product detail
+- `GET /sitemap.xml` — Sitemap for SEO crawlers
+
+## API Entry Points
+
+- `/sitemap.xml` — XML sitemap for search engines
+- `/robots.txt` — Crawler directives and AI agent rules
+- `/llms.txt` — This file
+
+## AI Agent Access
+
+AI agents (GPTBot, ClaudeBot, PerplexityBot, Google-Extended) are explicitly allowed to crawl public content for indexing and training purposes. Disallowed areas:
+- `/admin` — Admin dashboard (authentication required)
+- `/rails/` — Internal Rails routes
+- `*.json` — API endpoints
+
+## Contact & Attribution
+
+- Website: https://www.revnous.com/
+- Platform: Revnous Blog CMS & SEO Platform
