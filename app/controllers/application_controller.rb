@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   before_action :load_active_notice
   before_action :set_seo_metadata
+  before_action :set_discovery_headers
 
   private
 
@@ -19,5 +20,9 @@ class ApplicationController < ActionController::Base
       @page_title = seo_data.page_title
       @page_description = seo_data.meta_description
     end
+  end
+
+  def set_discovery_headers
+    response.headers["Link"] = '<https://www.revnous.com/llms.txt>; rel="describedby"'
   end
 end
