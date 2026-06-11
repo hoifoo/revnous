@@ -26,9 +26,41 @@ class BlogsController < ApplicationController
     if @related_blogs.length < 3
       @related_blogs = Blog.published.where.not(id: @blog.id).limit(3).to_a
     end
+
+    respond_to do |format|
+      format.html
+      format.md { render_blog_markdown }
+    end
   end
 
   private
+
+  def render_blog_markdown
+    markdown = +"# #{@blog.title}\n\n"
+    markdown << "**Author:** #{@blog.author&.display_name || 'Revnous'}\n"
+    markdown << "**Published:** #{@blog.published_at&.strftime('%B %d, %Y') || @blog.created_at.strftime('%B %d, %Y')}\n"
+    markdown << "**Updated:** #{@blog.updated_at.strftime('%B %d, %Y')}\n\n"
+    markdown << "---\n\n"
+    markdown << "#{@blog.excerpt}\n\n" if @blog.excerpt.present?
+    markdown << "---\n\n"
+    markdown << "#{sanitized_blog_content}\n\n"
+    markdown << "---\n\n"
+    markdown << "**Keywords:** #{@blog.keywords}\n" if @blog.keywords.present?
+    markdown << "**Canonical URL:** #{@canonical_url}\n\n" if @canonical_url.present?
+    markdown << "**Source:** #{blog_url(@blog.slug)}\n"
+
+    render plain: markdown, content_type: "text/markdown; charset=utf-8"
+  end
+
+  def sanitized_blog_content
+    if @blog.body.present?
+      ActionController::Base.helpers.strip_tags(@blog.body).gsub(/\s+/, " ")
+    elsif @blog.content.present?
+      ActionController::Base.helpers.strip_tags(@blog.content.to_s).gsub(/\s+/, " ")
+    else
+      ""
+    end
+  end
 
   def og_image_for(blog)
     if blog.og_image.attached?
