@@ -1,6 +1,15 @@
-# Architecture
+# Architecture Overview
 
 **Analysis Date:** 2026-04-08
+
+## Quick Reference
+
+**Architecture documentation is now split into specialized documents:**
+
+- **[ARCHITECTURE-BACKEND.md](ARCHITECTURE-BACKEND.md)** — Rails controllers, models, database, services, async jobs, business logic
+- **[ARCHITECTURE-FRONTEND.md](ARCHITECTURE-FRONTEND.md)** — Stimulus controllers, JavaScript, CSS, ERB views, client-side interactivity
+
+---
 
 ## Pattern Overview
 
@@ -8,229 +17,96 @@
 
 **Key Characteristics:**
 - Layered Rails architecture (Controllers → Models → Views)
+- Server-rendered HTML with progressive enhancement via Stimulus
 - Admin namespace separation with authorization
 - Polymorphic content system (Products, Blogs, Case Studies, Legal Documents)
 - Multi-product support with product-scoped content
 - Hotwire stack (Turbo + Stimulus) for dynamic interactions
 - Job-based async processing (Solid Queue)
 - SEO-first design with metadata management
+- Tailwind CSS for styling
+- esbuild + Tailwind CLI for asset pipeline
 
-## Layers
+## Layers (Reference)
 
-**Presentation Layer:**
-- Purpose: Render HTML views and handle user interactions
-- Location: `app/views/`, `app/javascript/`
-- Contains: ERB templates, Stimulus controllers, CSS (Tailwind)
-- Depends on: Rails view helpers, models for data
-- Used by: Browsers, client devices
+### Backend Layers (see [ARCHITECTURE-BACKEND.md](ARCHITECTURE-BACKEND.md) for details)
 
-**Controller Layer:**
-- Purpose: Route requests, coordinate request/response, enforce authorization
-- Location: `app/controllers/`
-- Contains: Public controllers (`app/controllers/*.rb`), Admin controllers (`app/controllers/admin/*.rb`)
-- Depends on: Models, services, helpers
-- Used by: Rails router, request pipeline
+- **Controller** — Route requests, authorize, coordinate business logic
+- **Admin Authorization** — Enforce admin-only access via Admin::BaseController
+- **Model/Data** — ActiveRecord models, validations, scopes, associations
+- **Service** — External integrations (e.g., Telegram)
+- **Background Job** — Async work via Solid Queue
+- **Database** — PostgreSQL multi-database setup (primary, cache, queue, cable)
 
-**Admin Authorization Layer:**
-- Purpose: Enforce admin-only access and set admin context
-- Location: `app/controllers/admin/base_controller.rb`
-- Contains: Authentication check via `authenticate_user!`, admin role check via `ensure_admin!`
-- Depends on: Devise (authentication), User model
-- Used by: All admin controllers via inheritance
+### Frontend Layers (see [ARCHITECTURE-FRONTEND.md](ARCHITECTURE-FRONTEND.md) for details)
 
-**Model/Data Layer:**
-- Purpose: Encapsulate business logic and data persistence
-- Location: `app/models/`
-- Contains: ActiveRecord models, validations, scopes, associations
-- Depends on: PostgreSQL database, ActiveStorage (for file attachments)
-- Used by: Controllers, jobs
+- **View (ERB)** — Server-rendered templates with Stimulus integration
+- **Stimulus** — Client-side interactivity (progressive enhancement)
+- **JavaScript** — esbuild-bundled modules, Tiptap editor (coming)
+- **CSS** — Tailwind CSS utility-first styling
+- **Asset Pipeline** — Propshaft + esbuild + Tailwind CLI
 
-**Service Layer:**
-- Purpose: Encapsulate external integrations and complex operations
-- Location: `app/services/`
-- Contains: Integration with external APIs (currently Telegram via `Telegram` service)
-- Depends on: ENV configuration, HTTP libraries
-- Used by: Controllers, jobs
+## Data Flow Summary
 
-**Background Job Layer:**
-- Purpose: Handle async work without blocking request
-- Location: `app/jobs/`
-- Contains: Job classes for internal events (`InternalEventJob`), async operations
-- Depends on: Solid Queue adapter, services, models
-- Used by: Controllers when async work needed
-
-**Helper Layer:**
-- Purpose: Reusable view helpers and content generation
-- Location: `app/helpers/`
-- Contains: SEO helpers (`ApplicationHelper`), view-specific helpers
-- Depends on: Models, Rails helpers
-- Used by: View templates
-
-## Data Flow
-
-**Public Content Request (e.g., Blog Post):**
-
-1. Request arrives at Rails router (`config/routes.rb`)
-2. Routes to public controller (e.g., `BlogsController#show`)
-3. Controller queries model (`Blog.find_by(slug: params[:slug])`)
-4. Controller loads SEO metadata via `ApplicationController` before action (`set_seo_metadata`)
-5. Controller loads active notice via before action (`load_active_notice`)
-6. View renders with helpers (`page_title`, `page_description`, structured data helpers)
-7. Stimulus controllers attach behavior if needed
-8. Response sent to browser
+**Public Content Request:**
+Request → Rails router → Controller → Model query → View render → Response
+(See Backend doc for details)
 
 **Admin Content Creation:**
+Admin form (Stimulus) → Controller → Strong params → Model → Persist → Response
+(See Backend doc for details)
 
-1. Request arrives at admin route (e.g., `/admin/blogs`)
-2. Routes to admin controller (`Admin::BlogsController`)
-3. `Admin::BaseController` before actions execute:
-   - `authenticate_user!` (Devise) - verify user logged in
-   - `ensure_admin!` - verify user.admin == true
-   - `set_admin_context` - set @admin_context for layout
-4. Controller action executes (new, create, edit, update, destroy)
-5. Controller validates and persists via model
-6. Response redirects or re-renders form
-7. User sees admin layout with admin-specific styling
-
-**Async Job Processing (Contact Form):**
-
-1. User submits contact form with ALTCHA verification
-2. `ContactsController#create` verifies ALTCHA payload
-3. On success, enqueues `InternalEventJob.perform_later(message)`
-4. Returns redirect immediately (no blocking)
-5. Solid Queue worker picks up job async
-6. `InternalEventJob` calls `Telegram.send_message` to post to Telegram
-7. Notification delivered to admin
+**Async Job Processing:**
+Controller enqueues job → Solid Queue → Worker → Service → External API
+(See Backend doc for details)
 
 **State Management:**
+- Persistent: PostgreSQL via ActiveRecord
+- Session: Devise (encrypted cookies)
+- View-level: Instance variables from controller
+- Client-side: Stimulus (progressive enhancement only)
 
-- Database-backed: All persistent state in PostgreSQL via ActiveRecord
-- Session state: User authentication via Devise session/cookies
-- No client-side state management (Stimulus for progressive enhancement only)
-- View-level state: Instance variables set by controller actions
-- Job state: Solid Queue manages job queue and retry logic
+## Key Business Abstractions
 
-## Key Abstractions
-
-**Product:**
-- Purpose: Represents a product offering (core business entity)
-- Examples: `app/models/product.rb`, schema tables `products`, `pricing_plans`
-- Pattern: Aggregate root with many associations (pricing, legal docs, beta signups)
-- Relationships: has_many pricing_plans, has_many legal_documents, habtm blogs/case_studies
-
-**Polymorphic Content:**
-- Purpose: Manage different content types linked to products
-- Examples: Blogs, Case Studies, Legal Documents, Partners, Trusted Brands
-- Pattern: Independent models with product associations via join tables (HABTM)
-- Schema pattern: `blogs_products`, `case_studies_products` join tables
-
-**Legal Documents:**
-- Purpose: Versioned, scoped legal content (global or per-product)
-- Examples: Privacy Policies, Terms of Service
-- Pattern: Document versioning with active/inactive status
-- Scopes: `active`, `privacy_policies`, `terms_of_service`, `global`, `for_product`, `latest_version`
-
-**SEO Metadata:**
-- Purpose: Page-level SEO configuration outside of content
-- Examples: `app/models/seo_metadatum.rb`
-- Pattern: Centralized metadata storage keyed by page identifier (controller#action)
-- Load: `ApplicationController#set_seo_metadata` loads per request based on controller/action
-
-**Beta User Registration:**
-- Purpose: Collect early adopter signups per product
-- Examples: `app/models/beta_user.rb`
-- Pattern: Lightweight form submission to product-scoped signup pages
-- Relationships: belongs_to :product
+See [ARCHITECTURE-BACKEND.md](ARCHITECTURE-BACKEND.md#key-business-abstractions) for details on:
+- **Product** — Aggregate root, core business entity
+- **Polymorphic Content** — Blogs, Case Studies, Legal Documents, Partners
+- **SEO Metadata** — Page-level configuration keyed by controller#action
+- **Beta User Registration** — Early adopter signups per product
 
 ## Entry Points
 
-**Web Request Entry Points:**
+**Backend:**
+- `app/controllers/application_controller.rb` — Base controller, SEO setup
+- `app/controllers/home_controller.rb` — Homepage
+- `app/controllers/blogs_controller.rb` — Public blog
+- `app/controllers/admin/dashboard_controller.rb` — Admin entry
+- `config/application.rb` — Rails config
 
-**`app/controllers/application_controller.rb`:**
-- Location: Base controller
-- Triggers: Every request (inherited by all controllers)
-- Responsibilities:
-  - Load active notice (`load_active_notice` before action)
-  - Set SEO metadata per page (`set_seo_metadata` before action)
-  - Browser compatibility check (modern browsers only)
-
-**`app/controllers/home_controller.rb`:**
-- Location: Public homepage
-- Triggers: `GET /` (root route)
-- Responsibilities: Render homepage with featured content
-
-**`app/controllers/blogs_controller.rb`:**
-- Location: Public blog
-- Triggers: `GET /blog`, `GET /blog/:id`
-- Responsibilities: List/show blog posts with SEO
-
-**`app/controllers/admin/dashboard_controller.rb`:**
-- Location: Admin entry
-- Triggers: `GET /admin`
-- Responsibilities: Display admin dashboard
-
-**Configuration Entry Point:**
-
-**`config/application.rb`:**
-- Sets Rails 8.0 defaults
-- Configures Solid Queue as ActiveJob adapter
-- Autoloads lib/ directory
-
-**JavaScript Entry Point:**
-
-**`app/javascript/application.js`:**
-- Imports Turbo Rails for SPA-like behavior
-- Imports Stimulus controllers
-- Imports Trix and ActionText for rich text editing
-- Imports ALTCHA for CAPTCHA
+**Frontend:**
+- `app/javascript/application.js` — JS entry, Turbo + Stimulus + editor
+- `app/views/layouts/application.html.erb` — Base layout
+- `app/assets/stylesheets/application.tailwind.css` — CSS entry
 
 ## Error Handling
 
-**Strategy:** Rescues with user-friendly redirects and logging
-
-**Patterns:**
-
-**Controller Exception Handling:**
-- `contacts_controller.rb` example: `rescue => e` catches errors, logs to Rails.logger.error, redirects with flash alert
-- Error messages use neutral language ("Sorry, there was an error...") instead of exposing internals
-
-**Validation Errors:**
-- Model validations prevent invalid data at model layer
-- Controllers render forms with errors on validation failure
-- No global exception handler currently in place (falls back to Rails default error pages)
-
-**Async Job Errors:**
-- Solid Queue handles job retries with exponential backoff (configured in solid_queue config)
-- Failed jobs stored for admin inspection
+See [ARCHITECTURE-BACKEND.md](ARCHITECTURE-BACKEND.md#error-handling-strategy) for details:
+- Controller exception handling: `rescue` + logging + user-friendly redirect
+- Model validation errors: Prevent invalid data at model layer
+- Async job errors: Solid Queue retries with exponential backoff
 
 ## Cross-Cutting Concerns
 
-**Logging:**
-- Uses Rails.logger for error/info logging
-- Structured logs in production (via Rails default)
-- ALTCHA verification logs detailed steps for debugging
+See [ARCHITECTURE-BACKEND.md](ARCHITECTURE-BACKEND.md#cross-cutting-concerns) for:
+- **Authentication** — Devise gem (email/password, sessions)
+- **Authorization** — Admin boolean flag, namespace-based access
+- **Validation** — Model-level + form-level + CAPTCHA
+- **Logging** — Rails.logger (info/error levels)
 
-**Validation:**
-- Model-level: ActiveRecord validates presence, uniqueness, inclusion
-- Form-level: Controller permit whitelist via `params.require().permit()`
-- CAPTCHA validation: Custom verification in `ContactsController#verify_altcha_payload`
-
-**Authentication:**
-- Devise gem handles user auth (database_authenticatable, recoverable, rememberable, validatable)
-- Admin authorization: Custom `Admin::BaseController#ensure_admin!` checks user.admin? boolean
-- Public routes: No authentication required
-- All admin routes: Require authenticated admin user
-
-**Authorization:**
-- Role-based: Admin boolean flag on User model
-- Namespace-based: `/admin/*` routes inherit from `Admin::BaseController`
-- Simple two-tier: admin or not admin
-
-**Asset Pipeline:**
-- Propshaft for asset management
-- esbuild for JavaScript bundling (minified, tree-shaken, ESM format)
-- Tailwind CLI for CSS processing (minified)
-- Generated assets in `app/assets/builds/`
+See [ARCHITECTURE-FRONTEND.md](ARCHITECTURE-FRONTEND.md#performance--optimization) for:
+- **Asset Pipeline** — Propshaft + esbuild + Tailwind CLI
+- **CSS Tree-Shaking** — Tailwind removes unused utilities (~25 KB gzipped)
+- **JS Tree-Shaking** — esbuild removes dead code
 
 ---
 
