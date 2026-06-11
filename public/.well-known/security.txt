@@ -1,4 +1,5 @@
 # Revnous security contact (RFC 9116)
+Contact: mailto:hello@revnous.com
 Contact: https://www.revnous.com/contact-us
 Canonical: https://www.revnous.com/.well-known/security.txt
 Policy: https://www.revnous.com/terms-of-service
