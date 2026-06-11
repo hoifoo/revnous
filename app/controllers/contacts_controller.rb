@@ -21,7 +21,7 @@ class ContactsController < ApplicationController
     redirect_to root_path, notice: "Thank you for contacting us! We'll get back to you soon at #{@contact_params[:email]}."
   rescue => e
     Rails.logger.error("Contact form error: #{e.message}")
-    redirect_to root_path, alert: "Sorry, there was an error sending your message. Please try again or email us directly at contact@revnous.com."
+    redirect_to root_path, alert: "Sorry, there was an error sending your message. Please try again or email us directly at hello@revnous.com."
   end
 
   private
