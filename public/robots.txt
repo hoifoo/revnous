@@ -3,10 +3,11 @@
 # Default rules for all bots
 User-agent: *
 Allow: /
+Allow: /api/
+Allow: /.well-known/
 Disallow: /admin
 Disallow: /admin/*
 Disallow: /rails/
-Disallow: /*.json$
 
 # AI agent permissions
 User-agent: GPTBot
