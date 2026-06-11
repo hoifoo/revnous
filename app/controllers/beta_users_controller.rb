@@ -39,7 +39,7 @@ class BetaUsersController < ApplicationController
     end
   rescue => e
     Rails.logger.error("Beta user signup error: #{e.message}")
-    redirect_to beta_signup_path, alert: "Sorry, there was an error processing your request. Please try again or email us directly at contact@revnous.com."
+    redirect_to beta_signup_path, alert: "Sorry, there was an error processing your request. Please try again or email us directly at hello@revnous.com."
   end
 
   private

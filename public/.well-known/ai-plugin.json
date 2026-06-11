@@ -1,0 +1,15 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Revnous",
+  "name_for_model": "revnous",
+  "description_for_human": "Read published Revnous blog posts and active products.",
+  "description_for_model": "Read-only access to Revnous public content. Use to list and fetch published blog posts (by slug) and active products (by id). Only public, published content is exposed; there are no write operations and no authentication.",
+  "auth": { "type": "none" },
+  "api": {
+    "type": "openapi",
+    "url": "https://www.revnous.com/api/v1/openapi.json"
+  },
+  "logo_url": "https://www.revnous.com/logo.png",
+  "contact_email": "hello@revnous.com",
+  "legal_info_url": "https://www.revnous.com/terms-of-service"
+}

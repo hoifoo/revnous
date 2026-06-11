@@ -56,6 +56,15 @@ Rails.application.routes.draw do
     get "beta-signup", to: "beta_users#index", as: :product_beta_signup
   end
 
+  # Public read-only JSON API (for agents / integrations)
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :blogs, only: [ :index, :show ], param: :slug
+      resources :products, only: [ :index, :show ]
+      get "openapi", to: "docs#openapi"
+    end
+  end
+
   # Sitemap
   get "sitemap.xml", to: "sitemap#index", defaults: { format: :xml }
 

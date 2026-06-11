@@ -1,0 +1,11 @@
+json.id product.id
+json.name product.name
+json.product_type product.product_type
+json.short_description product.short_description
+json.featured product.featured
+json.position product.position
+json.external_url product.url
+json.url product_url(product)
+json.cover_photo_url product.cover_photo_url
+json.meta_title product.seo_title
+json.meta_description product.seo_description

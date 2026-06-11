@@ -37,7 +37,7 @@ class BlogsController < ApplicationController
 
   def render_blog_markdown
     markdown = +"# #{@blog.title}\n\n"
-    markdown << "**Author:** #{@blog.author&.display_name || 'Revnous'}\n"
+    markdown << "**Author:** #{@blog.author&.full_name || 'Revnous'}\n"
     markdown << "**Published:** #{@blog.published_at&.strftime('%B %d, %Y') || @blog.created_at.strftime('%B %d, %Y')}\n"
     markdown << "**Updated:** #{@blog.updated_at.strftime('%B %d, %Y')}\n\n"
     markdown << "---\n\n"
@@ -45,7 +45,7 @@ class BlogsController < ApplicationController
     markdown << "---\n\n"
     markdown << "#{sanitized_blog_content}\n\n"
     markdown << "---\n\n"
-    markdown << "**Keywords:** #{@blog.keywords}\n" if @blog.keywords.present?
+    markdown << "**Keywords:** #{@blog.keywords_list}\n" if @blog.keywords.present?
     markdown << "**Canonical URL:** #{@canonical_url}\n\n" if @canonical_url.present?
     markdown << "**Source:** #{blog_url(@blog.slug)}\n"
 
@@ -53,13 +53,9 @@ class BlogsController < ApplicationController
   end
 
   def sanitized_blog_content
-    if @blog.body.present?
-      ActionController::Base.helpers.strip_tags(@blog.body).gsub(/\s+/, " ")
-    elsif @blog.content.present?
-      ActionController::Base.helpers.strip_tags(@blog.content.to_s).gsub(/\s+/, " ")
-    else
-      ""
-    end
+    return "" if @blog.body.blank?
+
+    ActionController::Base.helpers.strip_tags(@blog.body).gsub(/\s+/, " ")
   end
 
   def og_image_for(blog)
