@@ -64,7 +64,8 @@ module ApplicationHelper
       "name" => "Revnous",
       "url" => root_url,
       "logo" => image_object_schema(asset_url("logo.png")),
-      "description" => "Revenue optimization tools for Shopify merchants",
+      "description" => "Revnous is a Berlin-based software studio that builds and scales its own B2B SaaS products and workflow-automation tools, including Shopify pricing and campaign apps for e-commerce merchants.",
+      "slogan" => "Automating the grind.",
       "sameAs" => [
         "https://www.linkedin.com/company/revnous",
         "https://x.com/revnous",
@@ -82,7 +83,7 @@ module ApplicationHelper
       "@id" => "#{root_url}#website",
       "url" => root_url,
       "name" => "Revnous",
-      "description" => "Revenue optimization tools for Shopify merchants",
+      "description" => "Revnous is a software studio building and scaling B2B SaaS products and automation tools for e-commerce and revenue teams.",
       "publisher" => { "@id" => "#{root_url}#organization" }
     }
 

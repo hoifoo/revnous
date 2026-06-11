@@ -1,8 +1,8 @@
 # Revnous
 
-> Revnous is a Berlin-based B2B micro-SaaS and workflow automation company. It builds pragmatic, low-friction software that eliminates manual data entry and streamlines revenue operations for B2B and e-commerce teams. Tagline: "Automating the grind."
+> Revnous is a Berlin-based software studio and bootstrapped venture builder. It designs, builds, and scales its own portfolio of B2B SaaS products and micro-startups — pragmatic, low-friction tools that automate revenue operations and eliminate manual work for B2B and e-commerce teams. Tagline: "Automating the grind."
 
-Revnous is the company, not a single product. It ships focused tools that solve one painful workflow each, rather than bloated enterprise suites. Product development is driven by real user feedback rather than assumptions, and the support experience is built to be fast, empathetic, and forgiving.
+Revnous is the company behind a growing portfolio of SaaS products, not a single app. Its mission is to launch and grow multiple self-funded software ventures, each solving one painful workflow well rather than shipping bloated enterprise suites. New products start from real customer problems, are validated with user feedback before scaling, and are backed by support built to be fast, empathetic, and forgiving.
 
 ## Products
 
