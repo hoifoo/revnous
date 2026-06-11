@@ -1,28 +1,19 @@
 # Revnous
 
-> Revnous is a bootstrapped, Berlin-based B2B micro-SaaS and workflow automation company. It builds pragmatic, low-friction software that eliminates manual data entry and streamlines revenue operations for B2B and e-commerce teams. Tagline: "Automating the grind."
+> Revnous is a Berlin-based B2B micro-SaaS and workflow automation company. It builds pragmatic, low-friction software that eliminates manual data entry and streamlines revenue operations for B2B and e-commerce teams. Tagline: "Automating the grind."
 
-Revnous is the company, not a single product. It ships focused tools that solve one painful workflow each, rather than bloated enterprise suites. The business runs a lean, profitable Product-Led Growth (PLG) model: freemium acquisition, very low customer acquisition cost, and conversion driven by product utility instead of sales pressure. It was founded by a senior tech lead with 17+ years of engineering experience.
-
-Operating philosophy is "We, not I" — empathy-driven, transparent, async-first, and feedback-led. Features are validated with real user feedback and small A/B-tested budgets ("The Mom Test") before scaling. Free users who make mistakes get instant second chances to build trust.
-
-Legal boundary: Revnous operates strictly outside HealthTech, Telemedicine, and Practice Management to stay compliant with the founder's non-compete (Wettbewerbsverbot). Structured as an Einzelunternehmen transitioning toward a UG.
+Revnous is the company, not a single product. It ships focused tools that solve one painful workflow each, rather than bloated enterprise suites. Product development is driven by real user feedback rather than assumptions, and the support experience is built to be fast, empathetic, and forgiving.
 
 ## Products
 
 - [Products overview](https://www.revnous.com/products): Catalog of Revnous tools and apps.
-- [Shopify Pricing & Campaign Automation](https://www.revnous.com/products): Flagship app. Automates e-commerce pricing campaigns, including a "Schedule Revert" that returns thousands of SKUs to original prices after weekend or Black Friday sales. 14% free-to-paid conversion, ~$4 customer acquisition cost, 5-star rated with instant high-empathy support.
-- [Case studies](https://www.revnous.com/case_studies): Real customer outcomes and traction stories.
+- [Shopify Pricing & Campaign Automation](https://www.revnous.com/products): Flagship app. Automates e-commerce pricing campaigns, including a "Schedule Revert" that returns thousands of SKUs to their original prices after weekend or Black Friday sales. 5-star rated with fast, hands-on customer support.
+- [Case studies](https://www.revnous.com/case_studies): Real customer outcomes and results.
 - [Services](https://www.revnous.com/services): Workflow automation and revenue-operations offerings.
-
-## Pipeline (exploratory)
-
-- Hybrid Mail Server API — logistics/admin automation bridging digital inputs to physical mail endpoints (currently paused to focus on SaaS scale).
-- Atlassian/Jira Marketplace apps — async, zero-setup Sprint Planning Poker with automated story-point sync for remote Agile teams.
 
 ## Content & insights
 
-- [Blog](https://www.revnous.com/blog): Practical articles on e-commerce, pricing, revenue operations, and PLG for B2B and Shopify merchants.
+- [Blog](https://www.revnous.com/blog): Practical articles on e-commerce, pricing, revenue operations, and growth for B2B and Shopify merchants.
 - [Blog posts (Markdown)](https://www.revnous.com/blog): Append `?format=md` to any post URL, or send `Accept: text/markdown`, to retrieve clean Markdown for agents.
 
 ## Engineering
