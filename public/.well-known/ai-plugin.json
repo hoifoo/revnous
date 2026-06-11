@@ -10,5 +10,6 @@
     "url": "https://www.revnous.com/api/v1/openapi.json"
   },
   "logo_url": "https://www.revnous.com/logo.png",
+  "contact_email": "hello@revnous.com",
   "legal_info_url": "https://www.revnous.com/terms-of-service"
 }
