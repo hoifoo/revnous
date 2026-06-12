@@ -82,6 +82,6 @@
       <%= yield %>
     </main>
     <%= render "shared/footer" %>
-    <div data-controller="cookie-consent" data-privacy-url="<%= privacy_policy_path %>"></div>
+    <div data-controller="cookie-consent" data-privacy-url="<%= privacy_policy_path %>" data-providers="<%= analytics_consent_config_json %>"></div>
   </body>
 </html>
