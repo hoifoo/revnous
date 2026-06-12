@@ -58,6 +58,20 @@ export default class extends Controller {
     })
 
     window.__cookieConsentInstance = this.consent
+
+    this.maybeResetForDebug()
+  }
+
+  // Debug helper: visiting any page with ?cookie_consent=reset clears the
+  // stored consent and reshows the banner, so the consent flow can be
+  // re-tested without manually clearing cookies/storage.
+  maybeResetForDebug() {
+    const param = new URLSearchParams(window.location.search).get("cookie_consent")
+    if (param !== "reset") return
+
+    if (this.consent.removeCookies) this.consent.removeCookies()
+    window.__analyticsConsent = {}
+    if (this.consent.showMessage) this.consent.showMessage()
   }
 
   // Parses the JSON provider config from data-providers. Fails safe to []
