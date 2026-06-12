@@ -25,13 +25,13 @@
         <a href="https://apps.shopify.com/pricing-schedule" 
            target="_blank" 
            class="px-8 py-4 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition font-medium text-lg"
-           onclick="gtag('event', 'start_trial_click', { 'button_location': 'solution_hero', 'solution_slug': '<%= @slug %>' });">
+           onclick="RevnousAnalytics.track('start_trial_click', { 'button_location': 'solution_hero', 'solution_slug': '<%= @slug %>' });">
           <%= @data[:cta_primary] %> →
         </a>
         <a href="https://calendar.app.google/ExeXXoFRYB52hu5S8" 
            target="_blank" 
            class="px-8 py-4 bg-transparent border-2 border-white text-white rounded-md hover:bg-white hover:text-gray-900 transition font-medium text-lg"
-           onclick="gtag('event', 'book_demo_click', { 'button_location': 'solution_hero', 'solution_slug': '<%= @slug %>' });">
+           onclick="RevnousAnalytics.track('book_demo_click', { 'button_location': 'solution_hero', 'solution_slug': '<%= @slug %>' });">
           <%= @data[:cta_secondary] %>
         </a>
       </div>
@@ -176,13 +176,13 @@
       <a href="https://apps.shopify.com/pricing-schedule" 
          target="_blank" 
          class="px-8 py-4 bg-white text-gray-900 rounded-md hover:bg-gray-100 transition font-medium text-lg"
-         onclick="gtag('event', 'start_trial_click', { 'button_location': 'solution_bottom_cta', 'solution_slug': '<%= @slug %>' });">
+         onclick="RevnousAnalytics.track('start_trial_click', { 'button_location': 'solution_bottom_cta', 'solution_slug': '<%= @slug %>' });">
         <%= @data[:cta_primary] %> →
       </a>
       <a href="https://calendar.app.google/ExeXXoFRYB52hu5S8" 
          target="_blank" 
          class="px-8 py-4 bg-transparent border-2 border-white text-white rounded-md hover:bg-white hover:text-gray-900 transition font-medium text-lg"
-         onclick="gtag('event', 'book_demo_click', { 'button_location': 'solution_bottom_cta', 'solution_slug': '<%= @slug %>' });">
+         onclick="RevnousAnalytics.track('book_demo_click', { 'button_location': 'solution_bottom_cta', 'solution_slug': '<%= @slug %>' });">
         Book a Demo
       </a>
     </div>
