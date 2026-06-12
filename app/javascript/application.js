@@ -2,6 +2,7 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import "./altcha"
+import "./lib/analytics"
 
 import { application } from "./controllers/application"
 

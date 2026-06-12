@@ -5,7 +5,7 @@ milestone_name: milestone
 status: executing
 stopped_at: context exhaustion at 75% (2026-05-24)
 last_updated: "2026-05-24T16:12:57.417Z"
-last_activity: 2026-05-24 -- Phase 03 execution started
+last_activity: 2026-06-12 -- Completed quick task 260612-wgp: config-driven analytics providers (GA live, Mixpanel dormant; browser checkpoint pending)
 progress:
   total_phases: 3
   completed_phases: 3
@@ -94,6 +94,8 @@ None yet.
 |---|-------------|------|--------|-----------|
 | 260522-9sh | Fix image upload placeholder to overlay on editor wrapper instead of editable ProseMirror content | 2026-05-22 | 7851ac3 | [260522-9sh-fix-image-upload-placeholder-to-overlay-](.planning/quick/260522-9sh-fix-image-upload-placeholder-to-overlay-/) |
 | 260522-ao2 | Fix admin blog View link condition and slug blank? auto-generation guard | 2026-05-22 | 81a8f9f | [260522-ao2-fix-admin-blog-view-link-and-slug-auto-g](.planning/quick/260522-ao2-fix-admin-blog-view-link-and-slug-auto-g/) |
+| 260612-vyn | Replace custom cookie banner with @metamorfosilab/cookies-consent (DSGVO: opt-in, granular, equal reject, GA consent-gated) | 2026-06-12 | 91a1c2b | [260612-vyn-cookie-consent-dsgvo](.planning/quick/260612-vyn-cookie-consent-dsgvo/) |
+| 260612-wgp | Config-driven analytics providers (JSON registry; GA live, Mixpanel dormant w/ EU residency); unified track() + public /cookies disclosure | 2026-06-12 | bdc3a94 | [260612-wgp-analytics-providers-config](.planning/quick/260612-wgp-analytics-providers-config/) |
 
 ## Deferred Items
 

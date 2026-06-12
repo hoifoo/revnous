@@ -1,0 +1,31 @@
+{
+  "providers": [
+    {
+      "key": "google_analytics",
+      "name": "Google Analytics",
+      "vendor": "Google Ireland Ltd.",
+      "category": "analytics",
+      "active": true,
+      "description": "Measures site usage (pages, events) so we can improve UX. Data is not sold; used only for product/UX development.",
+      "config": { "measurement_id": "G-6ZPXSBZYL8", "anonymize_ip": true },
+      "cookies": [
+        { "name": "_ga", "purpose": "Distinguish users", "retention": "13 months" },
+        { "name": "_ga_*", "purpose": "Persist session state", "retention": "13 months" }
+      ],
+      "privacy": { "processor": "Google", "transfer": "EU-US Data Privacy Framework", "policy_url": "https://policies.google.com/privacy" }
+    },
+    {
+      "key": "mixpanel",
+      "name": "Mixpanel",
+      "vendor": "Mixpanel, Inc.",
+      "category": "analytics",
+      "active": false,
+      "description": "Product analytics for understanding feature usage. Data is not sold; used only for product/UX development.",
+      "config": { "token": null, "api_host": "https://api-eu.mixpanel.com", "region": "eu", "ip": false },
+      "cookies": [
+        { "name": "mp_*", "purpose": "Mixpanel distinct id + state", "retention": "12 months" }
+      ],
+      "privacy": { "processor": "Mixpanel", "transfer": "EU-US Data Privacy Framework", "policy_url": "https://mixpanel.com/legal/privacy-policy/" }
+    }
+  ]
+}

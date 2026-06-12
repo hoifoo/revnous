@@ -12,6 +12,7 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.18",
+    "@metamorfosilab/cookies-consent": "^0.2.9",
     "@rails/activestorage": "^8.1.300",
     "@tailwindcss/cli": "^4.1.14",
     "@tailwindcss/typography": "^0.5.19",
@@ -27,6 +28,7 @@
     "@tiptap/extensions": "^3.23.5",
     "@tiptap/starter-kit": "^3.23.5",
     "altcha": "^2.2.4",
+    "mixpanel-browser": "^2.80.0",
     "tailwindcss": "^4.1.14"
   }
 }

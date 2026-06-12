@@ -53,6 +53,12 @@
       <link rel="preload" href="<%= asset_path('application.js') %>" as="script">
     <% end %>
 
+    <!-- Safe no-op gtag/dataLayer stub so inline onclick="gtag(...)" handlers never throw before consent -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function(){ dataLayer.push(arguments); };
+    </script>
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module", defer: true %>
   </head>
@@ -76,23 +82,6 @@
       <%= yield %>
     </main>
     <%= render "shared/footer" %>
-    <%= render "shared/cookie_consent" %>
-
-    <!-- Google Analytics loaded after main content -->
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-
-      // Set default consent to denied
-      gtag('consent', 'default', {
-        'analytics_storage': 'denied',
-        'ad_storage': 'denied',
-        'wait_for_update': 500
-      });
-
-      gtag('js', new Date());
-      gtag('config', 'G-6ZPXSBZYL8');
-    </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6ZPXSBZYL8"></script>
+    <div data-controller="cookie-consent" data-privacy-url="<%= privacy_policy_path %>" data-cookies-url="<%= cookies_path %>" data-providers="<%= analytics_consent_config_json %>"></div>
   </body>
 </html>

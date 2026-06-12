@@ -15,3 +15,6 @@ application.register("keywords-input", KeywordsInputController)
 
 import FaqBuilderController from "./faq_builder_controller"
 application.register("faq-builder", FaqBuilderController)
+
+import CookieConsentController from "./cookie_consent_controller"
+application.register("cookie-consent", CookieConsentController)
