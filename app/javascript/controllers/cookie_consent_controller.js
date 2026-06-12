@@ -25,11 +25,14 @@ export default class extends Controller {
       },
     ]
 
+    const analyticsNames = analyticsCookies.map((cookie) => cookie.title).filter(Boolean)
+
     if (analyticsCookies.length > 0) {
+      const namesList = analyticsNames.length > 0 ? ` We use ${this.formatList(analyticsNames)}.` : ""
       cookies.push({
         name: "analytics",
         title: "Analytics",
-        description: "Helps us understand how visitors use our site so we can improve it.",
+        description: `Helps us understand how visitors use our site so we can improve it.${namesList}`,
         checked: false,
         cookies: analyticsCookies,
       })
@@ -42,7 +45,7 @@ export default class extends Controller {
       buttons: ["accept", "reject", "settings"],
       content: {
         title: "We value your privacy",
-        message: "We use cookies to improve your experience on our site and, with your consent, to understand how visitors use our site via analytics tools. You can accept or reject analytics cookies, or manage your preferences in settings.",
+        message: this.buildMessage(analyticsNames),
         btnAccept: "Accept",
         btnReject: "Reject",
         btnSettings: "Settings",
@@ -72,6 +75,24 @@ export default class extends Controller {
     if (this.consent.removeCookies) this.consent.removeCookies()
     window.__analyticsConsent = {}
     if (this.consent.showMessage) this.consent.showMessage()
+  }
+
+  // Builds the banner message, naming the active analytics tools and linking
+  // the full Cookie Policy disclosure page. Both are derived from config so no
+  // copy changes are needed when a provider is added/enabled.
+  buildMessage(analyticsNames) {
+    const tools = analyticsNames.length > 0 ? this.formatList(analyticsNames) : "analytics tools"
+    const cookiesUrl = this.element.dataset.cookiesUrl
+    const link = cookiesUrl
+      ? ` See the <a href="${cookiesUrl}">full list of tools we use</a>.`
+      : ""
+    return `We use cookies to improve your experience and, with your consent, to understand how visitors use our site via ${tools}. You can accept or reject analytics cookies, or manage your preferences in settings.${link}`
+  }
+
+  // Joins names into a readable list: "A", "A and B", "A, B and C".
+  formatList(names) {
+    if (names.length === 1) return names[0]
+    return `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`
   }
 
   // Parses the JSON provider config from data-providers. Fails safe to []
