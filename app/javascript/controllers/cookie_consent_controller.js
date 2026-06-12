@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { CookiesConsent, manageGoogleAnalytics } from "@metamorfosilab/cookies-consent"
+import { CookiesConsent, manageGoogleAnalytics, darkTheme } from "@metamorfosilab/cookies-consent"
 import { resolveManager } from "../lib/analytics_providers"
 
 // Connects to data-controller="cookie-consent"
@@ -42,6 +42,7 @@ export default class extends Controller {
       expirationDays: 365,
       sameSite: "lax",
       position: "bottom",
+      theme: darkTheme,
       buttons: ["accept", "reject", "settings"],
       content: {
         title: "We value your privacy",
