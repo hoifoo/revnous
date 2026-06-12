@@ -28,6 +28,7 @@
     "@tiptap/extensions": "^3.23.5",
     "@tiptap/starter-kit": "^3.23.5",
     "altcha": "^2.2.4",
+    "mixpanel-browser": "^2.80.0",
     "tailwindcss": "^4.1.14"
   }
 }
