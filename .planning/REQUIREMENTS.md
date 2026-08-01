@@ -83,30 +83,36 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TOC-01 | TBD | Pending |
-| TOC-02 | TBD | Pending |
-| TOC-03 | TBD | Pending |
-| TOC-04 | TBD | Pending |
-| LAYOUT-01 | TBD | Pending |
-| LAYOUT-02 | TBD | Pending |
-| LAYOUT-03 | TBD | Pending |
-| LAYOUT-04 | TBD | Pending |
-| INTX-01 | TBD | Pending |
-| INTX-02 | TBD | Pending |
-| INTX-03 | TBD | Pending |
-| INTX-04 | TBD | Pending |
-| A11Y-01 | TBD | Pending |
-| A11Y-02 | TBD | Pending |
-| A11Y-03 | TBD | Pending |
-| ADMIN-01 | TBD | Pending |
-| ADMIN-02 | TBD | Pending |
-| ADMIN-03 | TBD | Pending |
+| TOC-01 | Phase 1 | Pending |
+| TOC-02 | Phase 1 | Pending |
+| TOC-03 | Phase 1 | Pending |
+| TOC-04 | Phase 2 | Pending |
+| LAYOUT-01 | Phase 2 | Pending |
+| LAYOUT-02 | Phase 3 | Pending |
+| LAYOUT-03 | Phase 2 | Pending |
+| LAYOUT-04 | Phase 1 | Pending |
+| INTX-01 | Phase 3 | Pending |
+| INTX-02 | Phase 3 | Pending |
+| INTX-03 | Phase 3 | Pending |
+| INTX-04 | Phase 2 | Pending |
+| A11Y-01 | Phase 2 | Pending |
+| A11Y-02 | Phase 3 | Pending |
+| A11Y-03 | Phase 3 | Pending |
+| ADMIN-01 | Phase 4 | Pending |
+| ADMIN-02 | Phase 4 | Pending |
+| ADMIN-03 | Phase 4 | Pending |
 
 **Coverage:**
 - v1 requirements: 18 total
-- Mapped to phases: 0 (pending roadmap creation)
-- Unmapped: 18 ⚠️ (expected — roadmap not yet created)
+- Mapped to phases: 18 ✓
+- Unmapped: 0
+
+**Per phase:**
+- Phase 1 — TOC Domain Core & Regression Baseline: 4 (TOC-01, TOC-02, TOC-03, LAYOUT-04)
+- Phase 2 — Public Rendering & Two-Column Layout: 5 (TOC-04, LAYOUT-01, LAYOUT-03, A11Y-01, INTX-04)
+- Phase 3 — Reading Navigation Behavior: 6 (LAYOUT-02, INTX-01, INTX-02, INTX-03, A11Y-02, A11Y-03)
+- Phase 4 — Admin TOC Control: 3 (ADMIN-01, ADMIN-02, ADMIN-03)
 
 ---
 *Requirements defined: 2026-08-01*
-*Last updated: 2026-08-01 after initial definition*
+*Last updated: 2026-08-01 after roadmap creation (traceability mapped)*

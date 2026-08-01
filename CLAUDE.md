@@ -1,18 +1,18 @@
 <!-- GSD:project-start source:PROJECT.md -->
 ## Project
 
-**Blog CMS & SEO Overhaul**
+**Blog Layout Upgrade — Table of Contents & Reading UX**
 
-A set of targeted improvements to the Revnous admin blog section that replace the default Trix/ActionText editor with Tiptap, add full author profile support linked to admin users, and extend the SEO/schema tooling with keywords, FAQ schema, canonical URL, and OG image override fields. The goal is to make the blog a capable, SEO-first publishing tool for a marketing freelancer without needing developer involvement for routine content.
+An enhancement to the Revnous public blog that adds an optional, auto-generated Table of Contents to individual blog posts — a sticky sidebar (collapsible dropdown on mobile) that scroll-spies the active section and smooth-scrolls on click, matching the pattern on views4you.com's blog. Paired with a reading-experience UX pass (typography, spacing, active-section highlighting) on the blog show page. Admin gets a per-post toggle plus the ability to override/reorder/hide auto-generated TOC entries.
 
-**Core Value:** Marketing team can publish well-formatted, fully SEO-optimized blog posts from the admin UI without touching code or workarounds.
+**Core Value:** A reader on a long blog post can see the article's structure at a glance and jump straight to any section — without the marketing team touching code or affecting how any existing post looks.
 
 ### Constraints
 
-- **Tech stack**: Must stay on Rails/Stimulus/esbuild — no React/Vue frontend frameworks
-- **Editor storage**: Tiptap output stored as sanitized HTML in a plain `text` column (not ActionText) to simplify rendering and avoid `<action-text-attachment>` dependencies on the public side
-- **Image uploads**: Use ActiveStorage direct uploads; Tiptap image extension configured to POST to existing Rails blob endpoint
-- **No external SEO plugins**: All SEO/schema logic stays server-side in Rails helpers — no third-party SEO gem
+- **Tech stack**: Rails/Stimulus/esbuild only — no React/Vue for the TOC/scroll-spy behavior (matches project-wide constraint)
+- **Backward compatibility**: TOC must be strictly opt-in (default off); existing posts must render identically until an admin explicitly enables it
+- **No new editor storage format**: TOC generation reads the existing sanitized `body` HTML column — no schema change to how content itself is stored
+- **Scope discipline**: Gem extraction and multi-page posts are explicitly parked; do not let this project's plan grow to cover them
 <!-- GSD:project-end -->
 
 <!-- GSD:stack-start source:codebase/STACK.md -->
@@ -209,123 +209,65 @@ A set of targeted improvements to the Revnous admin blog section that replace th
 <!-- GSD:architecture-start source:ARCHITECTURE.md -->
 ## Architecture
 
+## Quick Reference
+- **[ARCHITECTURE-BACKEND.md](ARCHITECTURE-BACKEND.md)** — Rails controllers, models, database, services, async jobs, business logic
+- **[ARCHITECTURE-FRONTEND.md](ARCHITECTURE-FRONTEND.md)** — Stimulus controllers, JavaScript, CSS, ERB views, client-side interactivity
 ## Pattern Overview
 - Layered Rails architecture (Controllers → Models → Views)
+- Server-rendered HTML with progressive enhancement via Stimulus
 - Admin namespace separation with authorization
 - Polymorphic content system (Products, Blogs, Case Studies, Legal Documents)
 - Multi-product support with product-scoped content
 - Hotwire stack (Turbo + Stimulus) for dynamic interactions
 - Job-based async processing (Solid Queue)
 - SEO-first design with metadata management
-## Layers
-- Purpose: Render HTML views and handle user interactions
-- Location: `app/views/`, `app/javascript/`
-- Contains: ERB templates, Stimulus controllers, CSS (Tailwind)
-- Depends on: Rails view helpers, models for data
-- Used by: Browsers, client devices
-- Purpose: Route requests, coordinate request/response, enforce authorization
-- Location: `app/controllers/`
-- Contains: Public controllers (`app/controllers/*.rb`), Admin controllers (`app/controllers/admin/*.rb`)
-- Depends on: Models, services, helpers
-- Used by: Rails router, request pipeline
-- Purpose: Enforce admin-only access and set admin context
-- Location: `app/controllers/admin/base_controller.rb`
-- Contains: Authentication check via `authenticate_user!`, admin role check via `ensure_admin!`
-- Depends on: Devise (authentication), User model
-- Used by: All admin controllers via inheritance
-- Purpose: Encapsulate business logic and data persistence
-- Location: `app/models/`
-- Contains: ActiveRecord models, validations, scopes, associations
-- Depends on: PostgreSQL database, ActiveStorage (for file attachments)
-- Used by: Controllers, jobs
-- Purpose: Encapsulate external integrations and complex operations
-- Location: `app/services/`
-- Contains: Integration with external APIs (currently Telegram via `Telegram` service)
-- Depends on: ENV configuration, HTTP libraries
-- Used by: Controllers, jobs
-- Purpose: Handle async work without blocking request
-- Location: `app/jobs/`
-- Contains: Job classes for internal events (`InternalEventJob`), async operations
-- Depends on: Solid Queue adapter, services, models
-- Used by: Controllers when async work needed
-- Purpose: Reusable view helpers and content generation
-- Location: `app/helpers/`
-- Contains: SEO helpers (`ApplicationHelper`), view-specific helpers
-- Depends on: Models, Rails helpers
-- Used by: View templates
-## Data Flow
-- Database-backed: All persistent state in PostgreSQL via ActiveRecord
-- Session state: User authentication via Devise session/cookies
-- No client-side state management (Stimulus for progressive enhancement only)
-- View-level state: Instance variables set by controller actions
-- Job state: Solid Queue manages job queue and retry logic
-## Key Abstractions
-- Purpose: Represents a product offering (core business entity)
-- Examples: `app/models/product.rb`, schema tables `products`, `pricing_plans`
-- Pattern: Aggregate root with many associations (pricing, legal docs, beta signups)
-- Relationships: has_many pricing_plans, has_many legal_documents, habtm blogs/case_studies
-- Purpose: Manage different content types linked to products
-- Examples: Blogs, Case Studies, Legal Documents, Partners, Trusted Brands
-- Pattern: Independent models with product associations via join tables (HABTM)
-- Schema pattern: `blogs_products`, `case_studies_products` join tables
-- Purpose: Versioned, scoped legal content (global or per-product)
-- Examples: Privacy Policies, Terms of Service
-- Pattern: Document versioning with active/inactive status
-- Scopes: `active`, `privacy_policies`, `terms_of_service`, `global`, `for_product`, `latest_version`
-- Purpose: Page-level SEO configuration outside of content
-- Examples: `app/models/seo_metadatum.rb`
-- Pattern: Centralized metadata storage keyed by page identifier (controller#action)
-- Load: `ApplicationController#set_seo_metadata` loads per request based on controller/action
-- Purpose: Collect early adopter signups per product
-- Examples: `app/models/beta_user.rb`
-- Pattern: Lightweight form submission to product-scoped signup pages
-- Relationships: belongs_to :product
+- Tailwind CSS for styling
+- esbuild + Tailwind CLI for asset pipeline
+## Layers (Reference)
+### Backend Layers (see [ARCHITECTURE-BACKEND.md](ARCHITECTURE-BACKEND.md) for details)
+- **Controller** — Route requests, authorize, coordinate business logic
+- **Admin Authorization** — Enforce admin-only access via Admin::BaseController
+- **Model/Data** — ActiveRecord models, validations, scopes, associations
+- **Service** — External integrations (e.g., Telegram)
+- **Background Job** — Async work via Solid Queue
+- **Database** — PostgreSQL multi-database setup (primary, cache, queue, cable)
+### Frontend Layers (see [ARCHITECTURE-FRONTEND.md](ARCHITECTURE-FRONTEND.md) for details)
+- **View (ERB)** — Server-rendered templates with Stimulus integration
+- **Stimulus** — Client-side interactivity (progressive enhancement)
+- **JavaScript** — esbuild-bundled modules, Tiptap editor (coming)
+- **CSS** — Tailwind CSS utility-first styling
+- **Asset Pipeline** — Propshaft + esbuild + Tailwind CLI
+## Data Flow Summary
+- Persistent: PostgreSQL via ActiveRecord
+- Session: Devise (encrypted cookies)
+- View-level: Instance variables from controller
+- Client-side: Stimulus (progressive enhancement only)
+## Key Business Abstractions
+- **Product** — Aggregate root, core business entity
+- **Polymorphic Content** — Blogs, Case Studies, Legal Documents, Partners
+- **SEO Metadata** — Page-level configuration keyed by controller#action
+- **Beta User Registration** — Early adopter signups per product
 ## Entry Points
-- Location: Base controller
-- Triggers: Every request (inherited by all controllers)
-- Responsibilities:
-- Location: Public homepage
-- Triggers: `GET /` (root route)
-- Responsibilities: Render homepage with featured content
-- Location: Public blog
-- Triggers: `GET /blog`, `GET /blog/:id`
-- Responsibilities: List/show blog posts with SEO
-- Location: Admin entry
-- Triggers: `GET /admin`
-- Responsibilities: Display admin dashboard
-- Sets Rails 8.0 defaults
-- Configures Solid Queue as ActiveJob adapter
-- Autoloads lib/ directory
-- Imports Turbo Rails for SPA-like behavior
-- Imports Stimulus controllers
-- Imports Trix and ActionText for rich text editing
-- Imports ALTCHA for CAPTCHA
+- `app/controllers/application_controller.rb` — Base controller, SEO setup
+- `app/controllers/home_controller.rb` — Homepage
+- `app/controllers/blogs_controller.rb` — Public blog
+- `app/controllers/admin/dashboard_controller.rb` — Admin entry
+- `config/application.rb` — Rails config
+- `app/javascript/application.js` — JS entry, Turbo + Stimulus + editor
+- `app/views/layouts/application.html.erb` — Base layout
+- `app/assets/stylesheets/application.tailwind.css` — CSS entry
 ## Error Handling
-- `contacts_controller.rb` example: `rescue => e` catches errors, logs to Rails.logger.error, redirects with flash alert
-- Error messages use neutral language ("Sorry, there was an error...") instead of exposing internals
-- Model validations prevent invalid data at model layer
-- Controllers render forms with errors on validation failure
-- No global exception handler currently in place (falls back to Rails default error pages)
-- Solid Queue handles job retries with exponential backoff (configured in solid_queue config)
-- Failed jobs stored for admin inspection
+- Controller exception handling: `rescue` + logging + user-friendly redirect
+- Model validation errors: Prevent invalid data at model layer
+- Async job errors: Solid Queue retries with exponential backoff
 ## Cross-Cutting Concerns
-- Uses Rails.logger for error/info logging
-- Structured logs in production (via Rails default)
-- ALTCHA verification logs detailed steps for debugging
-- Model-level: ActiveRecord validates presence, uniqueness, inclusion
-- Form-level: Controller permit whitelist via `params.require().permit()`
-- CAPTCHA validation: Custom verification in `ContactsController#verify_altcha_payload`
-- Devise gem handles user auth (database_authenticatable, recoverable, rememberable, validatable)
-- Admin authorization: Custom `Admin::BaseController#ensure_admin!` checks user.admin? boolean
-- Public routes: No authentication required
-- All admin routes: Require authenticated admin user
-- Role-based: Admin boolean flag on User model
-- Namespace-based: `/admin/*` routes inherit from `Admin::BaseController`
-- Simple two-tier: admin or not admin
-- Propshaft for asset management
-- esbuild for JavaScript bundling (minified, tree-shaken, ESM format)
-- Tailwind CLI for CSS processing (minified)
-- Generated assets in `app/assets/builds/`
+- **Authentication** — Devise gem (email/password, sessions)
+- **Authorization** — Admin boolean flag, namespace-based access
+- **Validation** — Model-level + form-level + CAPTCHA
+- **Logging** — Rails.logger (info/error levels)
+- **Asset Pipeline** — Propshaft + esbuild + Tailwind CLI
+- **CSS Tree-Shaking** — Tailwind removes unused utilities (~25 KB gzipped)
+- **JS Tree-Shaking** — esbuild removes dead code
 <!-- GSD:architecture-end -->
 
 <!-- GSD:skills-start source:skills/ -->
