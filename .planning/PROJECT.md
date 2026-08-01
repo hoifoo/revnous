@@ -20,17 +20,18 @@ A reader on a long blog post can see the article's structure at a glance and jum
 
 ### Active
 
-- [ ] Blog post has a per-post toggle (default OFF) to enable Table of Contents
-- [ ] TOC entries auto-generate from H2/H3 headings in the sanitized `body` HTML
-- [ ] Admin can override generated TOC: relabel, reorder, or hide individual entries
-- [ ] Each heading gets a stable, unique anchor `id` for deep-linking
+- [ ] Blog post (and `Article` STI subtype) has a per-post toggle (default OFF) to enable Table of Contents
+- [ ] TOC entries auto-generate from H2/H3 headings only in the sanitized `body` HTML (legacy H1-only content simply produces no TOC until rewritten — acceptable since the feature is opt-in)
+- [ ] TOC suppressed entirely (no sidebar, no layout shift) when fewer than 3 visible entries remain after admin hides
+- [ ] Admin can override generated TOC: relabel, reorder, or hide individual entries, stored as a `jsonb` column keyed by anchor (not spliced into `body` itself)
+- [ ] Each heading gets a stable, unique anchor `id` (`toc-` prefixed, deduped, blank/CJK/emoji-safe) injected at render time, after sanitization — never added to the sanitizer's attribute allowlist
 - [ ] TOC renders as a sticky sidebar next to the article body on desktop/tablet
 - [ ] TOC collapses into a tappable "Contents" dropdown above the article on mobile widths
-- [ ] Clicking a TOC entry smooth-scrolls to the corresponding section
-- [ ] Active section is highlighted in the TOC as the reader scrolls (scroll-spy)
-- [ ] Reading-experience pass on blog show page: typography/spacing refinements alongside the TOC layout change
-- [ ] Existing published posts render exactly as before when TOC is off (zero visual/layout regression)
-- [ ] Admin UI (blog edit form) exposes the TOC toggle and entry-override controls
+- [ ] Clicking a TOC entry smooth-scrolls to the corresponding section and moves focus to it (keyboard/screen-reader users)
+- [ ] Active section is highlighted in the TOC as the reader scrolls (scroll-spy via IntersectionObserver)
+- [ ] Reading-experience pass (typography/spacing) applies only to the new TOC-on two-column layout — the TOC-off layout is untouched
+- [ ] Existing published posts (and any post with TOC off) render exactly as before — zero visual/layout regression, verified with a golden-master test
+- [ ] Admin UI (blog edit form) exposes the TOC toggle and entry-override controls, mirroring the existing `faq_builder` pattern
 
 ### Out of Scope
 
@@ -61,6 +62,11 @@ A reader on a long blog post can see the article's structure at a glance and jum
 | Scroll-spy + sticky sidebar + smooth scroll, mobile collapses to dropdown | Matches confirmed reference pattern from views4you.com | — Pending |
 | Multi-page posts (`/blog/:slug/:sub-page`) deferred | User's own idea, explicitly flagged as a future project not this one | — Pending |
 | Gem/CMS extraction deferred to separate project | User: "extraction can be done in separate projects" — keep this project focused on the TOC feature | — Pending |
+| Heading scope is H2/H3 only, not in-body H1 | Research found 100% of dev-DB posts have zero H2/H3 (legacy Trix used H1); including H1 would require title-vs-section disambiguation. Accepted the tradeoff — feature is opt-in, legacy posts wait until rewritten | — Pending |
+| Typography/spacing pass scoped to TOC-on layout only | PROJECT.md originally required both a global typography pass and zero regression when TOC is off — contradictory. Resolved: reading-experience polish only applies to the new two-column layout | — Pending |
+| `Article < Blog` STI subtype included in TOC scope | Inherits column/template automatically; no reason to special-case it | — Pending |
+| Anchor IDs injected at render time (never persisted to `body`, never added to sanitizer allowlist) | `show.html.erb` re-sanitizes at render with an allowlist lacking `id` — persisting IDs in `body` would still get stripped. Injecting post-sanitization avoids a backfill migration and avoids opening a DOM-clobbering surface | — Pending |
+| Admin overrides stored as `jsonb` keyed by anchor, following the `keywords` column pattern | Matches existing house style; avoids the ~30 lines of custom writer/parser ceremony the `faq_schema` text-column pattern requires | — Pending |
 
 ## Evolution
 
