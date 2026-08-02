@@ -5,6 +5,7 @@ status: draft
 shadcn_initialized: false
 preset: none
 created: 2026-08-02
+revised: 2026-08-02
 ---
 
 # Phase 2 — UI Design Contract
@@ -38,9 +39,23 @@ created: 2026-08-02
 
 ---
 
+## Visual Hierarchy
+
+**The article body is the primary visual anchor — the single focal point of the blog show page. The TOC sidebar is strictly secondary.**
+
+This is the ordering rule that resolves every ambiguity below it:
+
+1. **Primary (focal point): the article body.** It owns the largest type on the page (18px body / 30px H2 / 24px H3 via `prose-lg`), the darkest text (gray-900), the widest track (`minmax(0,1fr)`, ~656px rendered), and the highest contrast (17.4:1). Nothing in this phase may out-weight it.
+2. **Secondary: the TOC sidebar.** It is deliberately quieter — smaller type (14–16px), a fixed and narrower 256px track, gray-500/gray-900 at rest, and **no surface of its own** (no background fill, no border, no card, no shadow). It reads as a margin note beside the article, not as a second panel competing with it.
+3. **Tertiary: the permalink glyph.** `opacity: 0` at rest; it does not exist visually until a reader hovers or focuses its heading.
+
+Practical consequences the executor must not violate: the sidebar gets no card treatment; TOC entries are not pink at rest (a column of 10+ accent-colored links would out-shout the article and invert this hierarchy); and the article's own heading sizes are never reduced to "make room" for the sidebar.
+
+---
+
 ## Spacing Scale
 
-Declared values (all multiples of 4):
+Declared values — all multiples of 4, all members of the standard set {4, 8, 16, 24, 32, 48, 64}:
 
 | Token | Value | Usage in this phase |
 |-------|-------|---------------------|
@@ -50,8 +65,11 @@ Declared values (all multiples of 4):
 | lg | 24px | — (reserved; not used) |
 | xl | 32px | Sticky sidebar top offset (`lg:top-8`, D-07); heading `scroll-margin-top` (`prose-headings:scroll-mt-8`) |
 | 2xl | 48px | Grid column gap between article and sidebar (`lg:gap-12`); article H3 top margin (`prose-h3:mt-12`, D-14) |
-| 3xl | 64px | Sticky sidebar max-height subtraction (`max-h-[calc(100vh-4rem)]`) |
-| 4xl | 80px | Article H2 top margin (`prose-h2:mt-20`, D-14) — reinforces section breaks now that a sidebar tracks them |
+| 3xl | 64px | Article H2 top margin (`prose-h2:mt-16`, D-14); sticky sidebar max-height subtraction (`max-h-[calc(100vh-4rem)]`) |
+
+**Exceptions: none.** Every declared value is both a multiple of 4 and a member of the standard spacing set. No off-scale value is authorized anywhere in this phase.
+
+**D-14 heading rhythm — why 64px / 48px are the right numbers.** `prose-lg` ships `h2 { margin-top: 56px }` and `h3 { margin-top: 40px }` `[VERIFIED: node_modules/@tailwindcss/typography/src/styles.js:468, :474]`. Stepping to `mt-16` (64px) and `mt-12` (48px) is a uniform **+8px** on both — additive per D-14, visible as a firmer section break, and it lands both values on the standard scale (`3xl` and `2xl`) instead of inventing a token. Do **not** use `mt-20` (80px): it is off-scale, and at 30px H2 type an 80px gap starts reading as a page break rather than a section break.
 
 **Fixed layout dimensions** (not spacing tokens, but locked here so the planner does not invent alternatives):
 
@@ -64,8 +82,6 @@ Declared values (all multiples of 4):
 | TOC-on page container | **`max-w-5xl`** (TOC-off stays `max-w-4xl`) | See ⚠️ below |
 
 ⚠️ **`max-w-5xl` is a recommendation carried from RESEARCH Open Question 1 (assumptions A6/A7), not a user-locked decision.** Arithmetic: 1024px container − 64px padding − 256px sidebar − 48px gap = **656px** article column, so the typography plugin's own `max-width: 65ch` (~620px) binds with ~36px slack — which is how D-13 gets satisfied *by prose* rather than incidentally by the grid. At `max-w-4xl` the article column drops to 528px, narrower than 65ch, and D-13 becomes meaningless. **This widens the TOC-on hero, title, image, and excerpt too** (they share the line-28 container). Confirm at the UI review gate before implementation; it is one class and trivially reversible.
-
-Exceptions: none — every declared value is a multiple of 4.
 
 ---
 
@@ -80,7 +96,7 @@ Declared scale for this phase (3 sizes, 2 weights):
 | Entry (H2) | 16px (`text-base`) | 400 | 1.5 (24px) | Top-level TOC entries |
 | Body | 18px | 400 | 1.7778 (32px) | Article body — **inherited unchanged** from `prose-lg` |
 
-**Article heading sizes are inherited, not redeclared.** `prose-lg` ships h2 at 30px and h3 at 24px `[VERIFIED: node_modules/@tailwindcss/typography/src/styles.js]`. This phase changes **only their top margins** (D-14). Any plan task that alters an article heading `font-size` is out of contract — that would break the TOC-off/TOC-on visual kinship and is not what LAYOUT-03 authorizes.
+**Article heading sizes are inherited, not redeclared.** `prose-lg` ships h2 at 30px and h3 at 24px `[VERIFIED: node_modules/@tailwindcss/typography/src/styles.js]`. This phase changes **only their top margins** (D-14). Any plan task that alters an article heading `font-size` is out of contract — that would break the TOC-off/TOC-on visual kinship, and it would invert the Visual Hierarchy rule above by shrinking the focal point.
 
 **Permalink glyph** inherits its heading's size and weight; it introduces no new type token.
 
@@ -104,7 +120,7 @@ Declared scale for this phase (3 sizes, 2 weights):
 1. TOC entry link `:hover` and `:focus-visible` text color (D-08)
 2. Permalink `#` affordance `:hover` and `:focus-visible` text color (D-15)
 
-Nothing else. TOC entries are **gray at rest, pink only on hover/focus** — a sidebar of 10+ pink links would put the accent well past 10% and flatten the hierarchy D-06 establishes. The active-entry treatment is **reserved for Phase 3** (INTX-02/A11Y-01's `aria-current` half); Phase 2 must not pre-paint an "active" state it cannot compute.
+Nothing else. TOC entries are **gray at rest, pink only on hover/focus** — a sidebar of 10+ pink links would put the accent well past 10% and invert the Visual Hierarchy rule by making the secondary column the loudest thing on screen. The active-entry treatment is **reserved for Phase 3** (INTX-02/A11Y-01's `aria-current` half); Phase 2 must not pre-paint an "active" state it cannot compute.
 
 **Contrast (verified, WCAG 2.1 AA):**
 
@@ -150,7 +166,7 @@ Every user-facing string this phase ships. Author-authored heading text flowing 
 
 **`role="list"` on the `<ol>` is required** because `list-none` sets `list-style-type: none`, which drops list semantics in Safari/VoiceOver.
 
-**DOM order:** the sidebar renders **before** the article in the DOM and is placed visually right via `lg:col-start-2 lg:row-start-1` — so screen-reader and keyboard users meet the TOC ahead of the article (WCAG 1.3.2 reading sequence). Do **not** use flexbox `order` to achieve this.
+**DOM order:** the sidebar renders **before** the article in the DOM and is placed visually right via `lg:col-start-2 lg:row-start-1` — so screen-reader and keyboard users meet the TOC ahead of the article (WCAG 1.3.2 reading sequence). Do **not** use flexbox `order` to achieve this. This is a reading-sequence decision only; it does not promote the sidebar above the article in the visual hierarchy.
 
 ---
 
@@ -218,6 +234,8 @@ Named here so the executor does not "helpfully" ship them:
 - Admin toggle, relabel, reorder UI — Phase 4 (Phase 2 **reads** the `hidden` flag only, and casts it with `ActiveModel::Type::Boolean` rather than testing truthiness)
 - Widening the *shared* container instead of branching it — ROADMAP criterion 3 names this exact failure mode
 - Nested `<ol>` for H3 hierarchy — flat list with indent satisfies D-06; nesting is TOCV2-01
+- Any off-scale spacing value, including `mt-20` / 80px for the D-14 heading rhythm
+- Any sidebar surface treatment (background, border, shadow, card) that would compete with the article for focal weight
 - Reading progress bar, back-to-top, print styles, numbered entries, reading time — all v2 POLISH
 - Any change to `Blog::ALLOWED_TAGS` / `ALLOWED_ATTRIBUTES` — Phase 1 D-03 exists precisely to avoid it
 
@@ -229,7 +247,7 @@ No `spec/system` infrastructure exists (Capybara + Selenium installed, unconfigu
 
 **Request-spec verifiable (automate):** sidebar present/absent, entry count, threshold at exactly 2 / 3 / 4 visible entries, the exact `aria-label="Table of contents"` string, permalink `href` matching its heading `id`, `label_html` free of a leaked `#`, nested-`<a>` stripping, and **golden masters green without regeneration**.
 
-**Manual QA checklist (write it down):** sticky travel at `lg`, permalink hover-reveal, the 65ch measure, the 1024px breakpoint transition, and no horizontal scroll on the `code_post` / `tables_post` fixtures.
+**Manual QA checklist (write it down):** sticky travel at `lg`, permalink hover-reveal, the 65ch measure, the 1024px breakpoint transition, the H2/H3 top-margin step (64px / 48px), and no horizontal scroll on the `code_post` / `tables_post` fixtures.
 
 Run `yarn build:css` before verification — this phase introduces new Tailwind classes, and request specs resolve `application.css` through Propshaft.
 
@@ -245,3 +263,12 @@ Run `yarn build:css` before verification — this phase introduces new Tailwind 
 - [ ] Dimension 6 Registry Safety: PASS
 
 **Approval:** pending
+
+---
+
+## Revision Log
+
+| Date | Change | Trigger |
+|------|--------|---------|
+| 2026-08-02 | Removed off-scale `4xl = 80px` token; D-14 H2 top margin moved to `prose-h2:mt-16` (64px, reuses `3xl`). Spacing Exceptions row now asserts standard-set membership, not just multiple-of-4. `mt-20` added to Out of Contract. | Checker Dimension 5 — BLOCK |
+| 2026-08-02 | Added `## Visual Hierarchy` section naming the article body as the primary visual anchor / focal point, sidebar secondary, permalink tertiary; cross-referenced from Typography, Color, and Component Inventory. | Checker Dimension 2 — FLAG |
