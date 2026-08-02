@@ -42,7 +42,7 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 01-03-PLAN.md — Golden-master baseline freezing today's TOC-off rendering across five curated fixtures
+- [x] 01-03-PLAN.md — Golden-master baseline freezing today's TOC-off rendering across five curated fixtures
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
@@ -101,7 +101,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. TOC Domain Core & Regression Baseline | 2/4 | In Progress|  |
+| 1. TOC Domain Core & Regression Baseline | 3/4 | In Progress|  |
 | 2. Public Rendering & Two-Column Layout | 0/TBD | Not started | - |
 | 3. Reading Navigation Behavior | 0/TBD | Not started | - |
 | 4. Admin TOC Control | 0/TBD | Not started | - |
