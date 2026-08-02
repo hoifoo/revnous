@@ -4,8 +4,8 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 stopped_at: Phase 1 context gathered
-last_updated: "2026-08-02T11:57:13.274Z"
-last_activity: 2026-08-02 -- Phase 01 planning complete
+last_updated: "2026-08-02T11:58:25.621Z"
+last_activity: 2026-08-02 -- Phase 01 execution started
 progress:
   total_phases: 4
   completed_phases: 0
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-08-01)
 
 **Core value:** A reader on a long blog post can see the article's structure at a glance and jump straight to any section — without the marketing team touching code or affecting how any existing post looks.
-**Current focus:** Phase 1 — TOC Domain Core & Regression Baseline
+**Current focus:** Phase 01 — toc-domain-core-regression-baseline
 
 ## Current Position
 
-Phase: 1 of 4 (TOC Domain Core & Regression Baseline)
-Plan: 0 of TBD in current phase
-Status: Ready to execute
-Last activity: 2026-08-02 -- Phase 01 planning complete
+Phase: 01 (toc-domain-core-regression-baseline) — EXECUTING
+Plan: 1 of 4
+Status: Executing Phase 01
+Last activity: 2026-08-02 -- Phase 01 execution started
 
 Progress: [░░░░░░░░░░] 0%
 
