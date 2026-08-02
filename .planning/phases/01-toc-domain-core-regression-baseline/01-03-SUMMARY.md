@@ -127,3 +127,7 @@ None - no external service configuration required.
 ---
 *Phase: 01-toc-domain-core-regression-baseline*
 *Completed: 2026-08-02*
+
+## Self-Check: PASSED
+
+All created files verified present on disk (`spec/support/golden_master.rb`, `spec/requests/blogs_golden_master_spec.rb`, 10 files under `spec/fixtures/golden_master/`). All task and metadata commits (`1c10214`, `c58a83c`, `37a464a`) verified present in `git log`.
