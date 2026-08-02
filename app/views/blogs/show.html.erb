@@ -73,7 +73,10 @@
 
     <!-- Content -->
     <div class="prose prose-lg max-w-none mb-16 <%= 'prose-paragraph-relaxed' if @blog.spacing == 'relaxed' %>">
-      <%= sanitize @blog.body, tags: Blog::ALLOWED_TAGS, attributes: Blog::ALLOWED_ATTRIBUTES %>
+      <%= blog_body_with_toc_anchors(
+            @blog,
+            sanitize(@blog.body, tags: Blog::ALLOWED_TAGS, attributes: Blog::ALLOWED_ATTRIBUTES)
+          ) %>
     </div>
 
     <%= render "faq_section" %>
