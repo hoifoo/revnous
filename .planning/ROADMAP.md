@@ -37,8 +37,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 Plans:
 **Wave 1**
 
-- [ ] 01-01-PLAN.md — Add `toc_enabled`/`toc_overrides` columns with a proven zero-row-touch migration and the admin-only write seam
-- [ ] 01-02-PLAN.md — `Blog::TableOfContents` PORO: H2/H3 derivation, unique `toc-` anchors, inline-markup labels
+- [x] 01-01-PLAN.md — Add `toc_enabled`/`toc_overrides` columns with a proven zero-row-touch migration and the admin-only write seam
+- [x] 01-02-PLAN.md — `Blog::TableOfContents` PORO: H2/H3 derivation, unique `toc-` anchors, inline-markup labels
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
@@ -101,7 +101,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. TOC Domain Core & Regression Baseline | 0/4 | Not started | - |
+| 1. TOC Domain Core & Regression Baseline | 2/4 | In Progress|  |
 | 2. Public Rendering & Two-Column Layout | 0/TBD | Not started | - |
 | 3. Reading Navigation Behavior | 0/TBD | Not started | - |
 | 4. Admin TOC Control | 0/TBD | Not started | - |
