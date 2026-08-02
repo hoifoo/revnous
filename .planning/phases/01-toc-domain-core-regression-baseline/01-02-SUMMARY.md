@@ -101,3 +101,11 @@ None - no external service configuration required.
 ---
 *Phase: 01-toc-domain-core-regression-baseline*
 *Completed: 2026-08-02*
+
+## Self-Check: PASSED
+
+- FOUND: app/models/blog/table_of_contents.rb
+- FOUND: spec/models/blog/table_of_contents_spec.rb
+- FOUND: .planning/phases/01-toc-domain-core-regression-baseline/01-02-SUMMARY.md
+- FOUND commit: bf139fe
+- FOUND commit: d2b622d
