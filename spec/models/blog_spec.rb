@@ -232,4 +232,48 @@ RSpec.describe Blog, type: :model do
       expect(blog.body).to include('alt="x"')
     end
   end
+
+  describe "TOC columns (TOC-01, D-05, D-06)" do
+    it "defaults toc_enabled to false" do
+      blog = create(:blog)
+      expect(blog.reload.toc_enabled).to eq(false)
+    end
+
+    it "defaults toc_overrides to {}" do
+      blog = create(:blog)
+      expect(blog.reload.toc_overrides).to eq({})
+    end
+
+    it "round-trips an explicit toc_enabled value" do
+      blog = create(:blog, toc_enabled: true)
+      expect(blog.reload.toc_enabled).to eq(true)
+    end
+
+    it "defaults toc_enabled and toc_overrides for Article (STI)" do
+      article = Article.create!(title: "Article Title", slug: "toc-article-defaults", body: "<p>x</p>", published_at: 1.day.ago)
+      expect(article.reload.toc_enabled).to eq(false)
+      expect(article.reload.toc_overrides).to eq({})
+    end
+  end
+
+  describe "id attributes are never persisted to body (D-03, Pitfall 7)" do
+    it "strips id attributes from headings on save for Blog" do
+      blog = create(:blog, body: '<h2 id="evil">T</h2><p id="x">y</p>')
+      body = blog.reload.body
+      expect(body).not_to include('id=')
+      expect(body).not_to include('evil')
+    end
+
+    it "strips id attributes from headings on save for Article (STI)" do
+      article = Article.create!(title: "Article Title", slug: "toc-article-id-strip",
+                                 body: '<h2 id="evil">T</h2><p id="x">y</p>', published_at: 1.day.ago)
+      body = article.reload.body
+      expect(body).not_to include('id=')
+      expect(body).not_to include('evil')
+    end
+
+    it "excludes id from Blog::ALLOWED_ATTRIBUTES" do
+      expect(Blog::ALLOWED_ATTRIBUTES).not_to include('id')
+    end
+  end
 end
