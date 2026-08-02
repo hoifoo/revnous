@@ -28,7 +28,13 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. The rendered `/blog/:slug` response body — not just the model attribute — contains matching `id` attributes on exactly those H2/H3 headings, injected downstream of the last sanitizer, with `Blog::ALLOWED_ATTRIBUTES` unchanged and no `id` in any sanitizer allowlist
   3. Every post carries a `toc_enabled` boolean defaulting to false and a `toc_overrides` jsonb store, with no backfill: existing rows' `body`, `updated_at`, `seo_description`, `.md` export, and `api/v1/blogs/show.json` output are all byte-for-byte unchanged
   4. A golden-master request spec captures the current HTML of a TOC-off blog show page and passes, so any later layout change that regresses an existing post fails CI
-**Plans**: TBD
+**Plans**: 4 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Add `toc_enabled`/`toc_overrides` columns with a proven zero-row-touch migration and the admin-only write seam
+- [ ] 01-02-PLAN.md — `Blog::TableOfContents` PORO: H2/H3 derivation, unique `toc-` anchors, inline-markup labels
+- [ ] 01-03-PLAN.md — Golden-master baseline freezing today's TOC-off rendering across five curated fixtures
+- [ ] 01-04-PLAN.md — Render-time anchor injection with a TOC-off short-circuit, plus the full regression gate
 
 ### Phase 2: Public Rendering & Two-Column Layout
 **Goal**: A reader on a TOC-enabled post sees the article's structure in a sticky sidebar and can jump to any section with plain anchor links — while every other post on the site looks exactly as it does today
@@ -74,7 +80,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. TOC Domain Core & Regression Baseline | 0/TBD | Not started | - |
+| 1. TOC Domain Core & Regression Baseline | 0/4 | Not started | - |
 | 2. Public Rendering & Two-Column Layout | 0/TBD | Not started | - |
 | 3. Reading Navigation Behavior | 0/TBD | Not started | - |
 | 4. Admin TOC Control | 0/TBD | Not started | - |
