@@ -102,3 +102,7 @@ None - no external service configuration required.
 ---
 *Phase: 01-toc-domain-core-regression-baseline*
 *Completed: 2026-08-02*
+
+## Self-Check: PASSED
+
+All created/modified files verified present on disk; all task and metadata commits (`92983bb`, `2f25e5f`, `dcb18bb`) verified present in `git log`.
