@@ -149,3 +149,13 @@ The STATE.md Blockers/Concerns entry — "Tiptap StarterKit Heading dropping unk
 ---
 *Phase: 01-toc-domain-core-regression-baseline*
 *Completed: 2026-08-02*
+
+## Self-Check: PASSED
+
+- FOUND: app/helpers/blogs_helper.rb
+- FOUND: spec/requests/blogs_toc_spec.rb
+- FOUND: .planning/phases/01-toc-domain-core-regression-baseline/01-04-SUMMARY.md
+- FOUND commit: 0f1ade9
+- FOUND commit: 920ec0d
+- FOUND commit: e6c5088
+- FOUND commit: c36e6dc
