@@ -1,0 +1,23 @@
+<% if entries.any? %>
+  <div class="hidden lg:block lg:col-start-2 lg:row-start-1 lg:self-start lg:sticky lg:top-8 lg:max-h-[calc(100vh-4rem)] lg:overflow-y-auto">
+    <nav aria-label="Table of contents">
+      <p class="text-sm font-semibold uppercase tracking-wide text-gray-900 mb-4">Table of Contents</p>
+      <ol role="list" class="list-none space-y-2 pl-0">
+        <% entries.each do |entry| %>
+          <li class="<%= entry.level == 3 ? 'pl-4' : '' %>">
+            <% link_classes = [
+                 'block no-underline transition-colors rounded-sm',
+                 'hover:text-pink-600',
+                 'focus-visible:text-pink-600 focus-visible:ring-2',
+                 'focus-visible:ring-pink-600 focus-visible:ring-offset-2',
+                 (entry.level == 3 ? 'text-sm text-gray-500' : 'text-base text-gray-900')
+               ].join(' ') %>
+            <%= link_to "##{entry.anchor}", class: link_classes do %>
+              <%= sanitize(entry.label_html, tags: %w[strong em code], attributes: []) %>
+            <% end %>
+          </li>
+        <% end %>
+      </ol>
+    </nav>
+  </div>
+<% end %>
