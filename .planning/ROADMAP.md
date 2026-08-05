@@ -14,7 +14,7 @@ The blog gains an opt-in, auto-generated Table of Contents built from a single d
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: TOC Domain Core & Regression Baseline** - Anchor-id contract, schema columns, and a golden-master spec locking today's rendering (completed 2026-08-02)
-- [ ] **Phase 2: Public Rendering & Two-Column Layout** - Server-rendered sticky sidebar TOC with typography pass scoped to the TOC-on layout
+- [x] **Phase 2: Public Rendering & Two-Column Layout** - Server-rendered sticky sidebar TOC with typography pass scoped to the TOC-on layout (completed 2026-08-05)
 - [ ] **Phase 3: Reading Navigation Behavior** - Scroll-spy, focus-managed smooth scroll, sidebar tracking, mobile Contents disclosure
 - [ ] **Phase 4: Admin TOC Control** - Per-post toggle plus relabel/reorder/hide overrides with orphan handling
 
@@ -74,7 +74,7 @@ Plans:
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 02-03-PLAN.md — Request-spec coverage for sidebar/threshold/a11y/permalinks, manual QA checklist, human verification gate
+- [x] 02-03-PLAN.md — Request-spec coverage for sidebar/threshold/a11y/permalinks, manual QA checklist, human verification gate
 
 ### Phase 3: Reading Navigation Behavior
 
@@ -115,7 +115,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. TOC Domain Core & Regression Baseline | 4/4 | Complete   | 2026-08-02 |
-| 2. Public Rendering & Two-Column Layout | 2/3 | In Progress|  |
+| 2. Public Rendering & Two-Column Layout | 3/3 | Complete   | 2026-08-05 |
 | 3. Reading Navigation Behavior | 0/TBD | Not started | - |
 | 4. Admin TOC Control | 0/TBD | Not started | - |
 
