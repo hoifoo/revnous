@@ -70,7 +70,7 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 02-02-PLAN.md — Sticky sidebar partial, byte-safe conditional two-column grid, TOC-on typography pass, permalink hover CSS
+- [x] 02-02-PLAN.md — Sticky sidebar partial, byte-safe conditional two-column grid, TOC-on typography pass, permalink hover CSS
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
@@ -115,7 +115,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. TOC Domain Core & Regression Baseline | 4/4 | Complete   | 2026-08-02 |
-| 2. Public Rendering & Two-Column Layout | 1/3 | In Progress|  |
+| 2. Public Rendering & Two-Column Layout | 2/3 | In Progress|  |
 | 3. Reading Navigation Behavior | 0/TBD | Not started | - |
 | 4. Admin TOC Control | 0/TBD | Not started | - |
 
