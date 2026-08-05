@@ -65,22 +65,24 @@ verification layer for everything statically unreachable by a request spec.
 Work through all 16 items in a desktop browser at 1280px, then repeat items 12 and 13
 while narrowing the window through the 1024px breakpoint.
 
-- [ ] 1. At a 1280px viewport, the sidebar sits to the RIGHT of the article and the article text does not run under it.
-- [ ] 2. Scrolling the post: the sidebar stays pinned 32px from the viewport top and travels with the scroll. If it scrolls away instead, inspect computed `align-self` on the sidebar — a `stretch` value means `lg:self-start` was lost.
-- [ ] 3. Clicking a sidebar entry jumps to that section and the URL gains the `#toc-…` hash. Note explicitly: smooth scrolling is NOT expected in this phase and its absence is not a defect — the global handler in `_navigation.html.erb` binds on `DOMContentLoaded` and never fires on a Turbo Drive visit.
-- [ ] 4. The jumped-to heading is not flush against the viewport top — `prose-headings:scroll-mt-8` gives it 32px of clearance.
-- [ ] 5. Hovering an H2 or H3 in the article reveals a gray `#` glyph after the heading text that fades in over ~150ms; it turns pink on hover and is invisible again on mouse-out.
-- [ ] 6. Tabbing through the article reaches each permalink and reveals the glyph on focus with a visible focus indicator.
-- [ ] 7. Tabbing through the sidebar shows a visible pink focus ring on each entry, and the entry text turns pink.
-- [ ] 8. H3 sidebar entries are indented 16px and render smaller and lighter (gray) than H2 entries.
-- [ ] 9. Article line length: measure the rendered `div.prose` content width — expect roughly 620-660px, bound by the typography plugin's 65ch, not by the grid track.
-- [ ] 10. Heading rhythm in DevTools: `margin-top` computes to 64px on article H2 and 48px on article H3.
-- [ ] 11. Container width sanity check (RESEARCH Open Question 1, assumptions A6/A7): the TOC-on page uses `max-w-5xl`, which also widens the hero, title, featured image, and excerpt relative to a TOC-off post. Confirm this is the intended look. It is one class and trivially reversible.
-- [ ] 12. Narrow the viewport below 1024px: the sidebar disappears completely with no gap, no placeholder, no dropdown, and no layout shift in the article.
-- [ ] 13. On the wide-content post at 1280px: no horizontal page scrollbar appears despite the `<pre>` and `<table>`.
-- [ ] 14. Enable the OS reduced-motion setting and confirm the permalink appears instantly with no fade.
-- [ ] 15. Open the TOC-off post side by side with a pre-change screenshot or the previous deploy: it looks identical, `max-w-4xl` container, no permalink glyphs, no sidebar.
-- [ ] 16. Run an accessibility audit (browser devtools or axe) on the TOC-on post and confirm no new violation relating to nav landmarks, list semantics, contrast, or `aria-hidden` on a focusable element. Note that "two nav landmarks, one unnamed" refers to the pre-existing site header nav and is explicitly out of scope for this phase.
+- [x] 1. At a 1280px viewport, the sidebar sits to the RIGHT of the article and the article text does not run under it.
+- [x] 2. Scrolling the post: the sidebar stays pinned 32px from the viewport top and travels with the scroll. If it scrolls away instead, inspect computed `align-self` on the sidebar — a `stretch` value means `lg:self-start` was lost.
+- [x] 3. Clicking a sidebar entry jumps to that section and the URL gains the `#toc-…` hash. Note explicitly: smooth scrolling is NOT expected in this phase and its absence is not a defect — the global handler in `_navigation.html.erb` binds on `DOMContentLoaded` and never fires on a Turbo Drive visit.
+- [x] 4. The jumped-to heading is not flush against the viewport top — `prose-headings:scroll-mt-8` gives it 32px of clearance.
+- [x] 5. Hovering an H2 or H3 in the article reveals a gray `#` glyph after the heading text that fades in over ~150ms; it turns pink on hover and is invisible again on mouse-out.
+- [x] 6. Tabbing through the article reaches each permalink and reveals the glyph on focus with a visible focus indicator.
+- [x] 7. Tabbing through the sidebar shows a visible pink focus ring on each entry, and the entry text turns pink.
+- [x] 8. H3 sidebar entries are indented 16px and render smaller and lighter (gray) than H2 entries.
+- [x] 9. Article line length: measure the rendered `div.prose` content width — expect roughly 620-660px, bound by the typography plugin's 65ch, not by the grid track.
+- [x] 10. Heading rhythm in DevTools: `margin-top` computes to 64px on article H2 and 48px on article H3.
+- [x] 11. Container width sanity check (RESEARCH Open Question 1, assumptions A6/A7): the TOC-on page uses `max-w-5xl`, which also widens the hero, title, featured image, and excerpt relative to a TOC-off post. Confirm this is the intended look. It is one class and trivially reversible. **Verdict: approved as-is — `max-w-5xl` kept.**
+- [x] 12. Narrow the viewport below 1024px: the sidebar disappears completely with no gap, no placeholder, no dropdown, and no layout shift in the article.
+- [x] 13. On the wide-content post at 1280px: no horizontal page scrollbar appears despite the `<pre>` and `<table>`.
+- [x] 14. Enable the OS reduced-motion setting and confirm the permalink appears instantly with no fade.
+- [x] 15. Open the TOC-off post side by side with a pre-change screenshot or the previous deploy: it looks identical, `max-w-4xl` container, no permalink glyphs, no sidebar.
+- [x] 16. Run an accessibility audit (browser devtools or axe) on the TOC-on post and confirm no new violation relating to nav landmarks, list semantics, contrast, or `aria-hidden` on a focusable element. Note that "two nav landmarks, one unnamed" refers to the pre-existing site header nav and is explicitly out of scope for this phase.
+
+**Sign-off:** All 16 items approved by the developer on 2026-08-05. See `02-03-SUMMARY.md` for the recorded verdict.
 
 ## Known non-defects in this phase
 

@@ -38,10 +38,10 @@ key-decisions:
 patterns-established:
   - "Contextual Nokogiri child-combinator selection (node.css('> li')) for scoping direct-child counts inside a landmark, avoiding descendant-selector overcounts"
 
-requirements-completed: []  # Plan not yet complete — Task 3 (human-verify checkpoint) is pending; see below
+requirements-completed: [TOC-04, "LAYOUT-01", "LAYOUT-03", "A11Y-01 (Partial)", "INTX-04"]
 
 # Metrics
-duration: ~55min (Tasks 1-2 only; Task 3 checkpoint pending)
+duration: ~55min (Tasks 1-2) + human checkpoint
 completed: 2026-08-05
 ---
 
@@ -78,7 +78,7 @@ Each task was committed atomically:
 
 1. **Task 1: Extend the request spec with Phase 2 coverage** - `ada4dc6` (test)
 2. **Task 2: Write the manual QA checklist and correct A11Y-01 traceability** - `2103b5c` (docs)
-3. **Task 3: Walk the manual QA checklist in a browser** - **NOT STARTED** (`checkpoint:human-verify`, see below)
+3. **Task 3: Walk the manual QA checklist in a browser** - `checkpoint:human-verify` — **APPROVED** by developer 2026-08-05. All 16 items ticked in `02-MANUAL-QA.md`. Verbatim developer response: **"approved"**.
 
 _Note: worktree-mode execution — plan metadata commit (this SUMMARY) is committed separately by this agent; STATE.md/ROADMAP.md are owned by the orchestrator._
 
@@ -143,30 +143,18 @@ None. This plan adds zero production code and crosses no new trust boundary — 
 
 ## Next Phase Readiness
 
-### CHECKPOINT PENDING — Task 3 not started
+### CHECKPOINT CLEARED — Task 3 complete
 
-**This plan is NOT complete.** Task 3 is a `checkpoint:human-verify` gate requiring a human to walk all 16 items in `02-MANUAL-QA.md` in an actual browser — sticky positioning, hover-reveal timing, measured pixel widths, and the breakpoint transition are not observable from this agent session and must not be simulated or auto-approved per the execution protocol.
+Developer walked all 16 items in `02-MANUAL-QA.md` in an actual browser and responded **"approved"** on 2026-08-05. All 16 checklist items ticked and committed. Item 11 (`max-w-5xl` TOC-on container width, RESEARCH Open Question 1 / assumptions A6/A7) verdict: **approved as-is, `max-w-5xl` kept** — no code change required.
 
-**What's ready for the checkpoint:**
-- `.planning/phases/02-public-rendering-two-column-layout/02-MANUAL-QA.md` exists with its setup section and all 16 unchecked items
-- `yarn build:css` has already been run in this worktree (assets are current for Task 1's spec run); re-run it if this worktree's branch is merged/rebased before the walkthrough, since the merge could reintroduce a stale `application.css`
-- Two fixture-creation snippets are provided in the checklist's Setup section (a 5+-heading TOC-on post with a wide `<pre>` and a `<table>`, plus a TOC-off comparison post) — nothing has been created yet in any shared/dev database; the developer creates these when they start the walkthrough
-
-**What the checkpoint needs from the developer:**
-1. Run `yarn build:css`, then `bin/rails server`
-2. Follow the Setup section in `02-MANUAL-QA.md` to create the two fixture posts and note their URLs
-3. Walk all 16 checklist items at 1280px, repeating items 12-13 while narrowing through 1024px
-4. Pay particular attention to item 11 (the `max-w-5xl` TOC-on container width, carried from RESEARCH Open Question 1 assumptions A6/A7 — not a locked decision, one-class change if wrong)
-5. Tick each item in `02-MANUAL-QA.md` and report back: either "approved" to accept the layout as shipped, or which item failed and what was observed
-
-**Once the developer responds:** a continuation agent should tick the confirmed items in `02-MANUAL-QA.md`, commit that file, record the developer's verbatim verdict on item 11 in this SUMMARY, and only then proceed to mark this plan's requirements (`TOC-04, LAYOUT-01, LAYOUT-03, A11Y-01, INTX-04` — A11Y-01 as Partial per the traceability correction above) complete and hand off to the orchestrator for STATE.md/ROADMAP.md updates.
+Plan 02-03 is now complete. Requirements closed by this plan: `TOC-04, LAYOUT-01, LAYOUT-03, A11Y-01 (Partial — Phase 2 nav wrapper only, aria-current deferred to Phase 3), INTX-04`.
 
 - No architectural or scope concerns in Tasks 1-2's work
-- Phase 3 (client behavior — scroll-spy, smooth scroll, mobile dropdown, `aria-current`) is unblocked to plan against the same server-rendered `<nav aria-label="Table of contents">` / `role="list"` / `#toc-` anchor contract Plans 02-01/02-02 shipped, once this checkpoint clears
+- Phase 3 (client behavior — scroll-spy, smooth scroll, mobile dropdown, `aria-current`) is unblocked to plan against the same server-rendered `<nav aria-label="Table of contents">` / `role="list"` / `#toc-` anchor contract Plans 02-01/02-02 shipped
 
 ---
 *Phase: 02-public-rendering-two-column-layout*
-*Completed: Tasks 1-2 only — 2026-08-05; Task 3 pending*
+*Completed: 2026-08-05 (all 3 tasks)*
 
 ## Self-Check: PASSED
 
