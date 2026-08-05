@@ -132,3 +132,13 @@ None.
 ---
 *Phase: 02-public-rendering-two-column-layout*
 *Completed: 2026-08-05*
+
+## Self-Check: PASSED
+
+- FOUND: app/helpers/blogs_helper.rb
+- FOUND: spec/helpers/blogs_helper_spec.rb
+- FOUND: .planning/phases/02-public-rendering-two-column-layout/02-01-SUMMARY.md
+- FOUND commit: c5cf7ac (test: threshold/hide-filter RED)
+- FOUND commit: 4b37a34 (feat: blog_article GREEN)
+- FOUND commit: 2cb3539 (test: permalink decoration RED)
+- FOUND commit: e265d16 (feat: decorate_permalinks! GREEN)
