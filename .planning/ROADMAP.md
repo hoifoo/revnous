@@ -60,8 +60,21 @@ Plans:
   3. Typography and spacing refinements (measure, heading rhythm, vertical spacing) are visible only in the TOC-on two-column layout; the TOC-off page is pixel-identical to today because the two layouts are separate container branches, not a widened shared container
   4. The TOC is wrapped in `<nav aria-label="Table of contents">` and each H2/H3 in the article exposes a permalink affordance linking to its own anchor
 
-**Plans**: TBD
+**Plans**: 3 plans
 **UI hint**: yes
+
+Plans:
+**Wave 1**
+
+- [ ] 02-01-PLAN.md — Single-parse `ArticleContent` value object: hide-override filtering, 3-entry suppression threshold, heading permalink injection
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 02-02-PLAN.md — Sticky sidebar partial, byte-safe conditional two-column grid, TOC-on typography pass, permalink hover CSS
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
+- [ ] 02-03-PLAN.md — Request-spec coverage for sidebar/threshold/a11y/permalinks, manual QA checklist, human verification gate
 
 ### Phase 3: Reading Navigation Behavior
 
@@ -102,7 +115,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. TOC Domain Core & Regression Baseline | 4/4 | Complete   | 2026-08-02 |
-| 2. Public Rendering & Two-Column Layout | 0/TBD | Not started | - |
+| 2. Public Rendering & Two-Column Layout | 0/3 | Planned | - |
 | 3. Reading Navigation Behavior | 0/TBD | Not started | - |
 | 4. Admin TOC Control | 0/TBD | Not started | - |
 
