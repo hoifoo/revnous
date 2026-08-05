@@ -95,12 +95,14 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INTX-02 | Phase 3 | Pending |
 | INTX-03 | Phase 3 | Pending |
 | INTX-04 | Phase 2 | Pending |
-| A11Y-01 | Phase 2 | Pending |
+| A11Y-01 | Phase 2 | Partial — `<nav aria-label="Table of contents">` wrapper delivered in Phase 2; `aria-current` half delivered by Phase 3's scroll-spy |
 | A11Y-02 | Phase 3 | Pending |
 | A11Y-03 | Phase 3 | Pending |
 | ADMIN-01 | Phase 4 | Pending |
 | ADMIN-02 | Phase 4 | Pending |
 | ADMIN-03 | Phase 4 | Pending |
+
+A11Y-01 spans two phases (Phase 2 delivers the nav landmark, Phase 3 delivers `aria-current`) and must not be marked complete at the end of Phase 2.
 
 **Coverage:**
 - v1 requirements: 18 total
