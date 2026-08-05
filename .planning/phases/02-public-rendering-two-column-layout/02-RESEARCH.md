@@ -606,38 +606,38 @@ Why plain CSS rather than utilities: revealing a child on **parent** hover needs
 | A7 | Widening the TOC-on container at all is within the user's intent | Open Question 1 | If the user expected the hero/title to stay at `max-w-4xl`, the article column drops to ~528px. Needs confirmation |
 | A8 | Adding `max-height`/`overflow-y-auto` to the sticky sidebar belongs in Phase 2 rather than Phase 3 | Pitfall 8 / Open Question 6 | Scope-boundary disagreement only; the CSS is 2 classes either way |
 
-## Open Questions
+## Open Questions (RESOLVED — 6/8 implemented in plans, 2 routed to Plan 02-03's human checkpoint)
 
-1. **Does the TOC-on branch widen its container, and to what?** *(highest-impact unresolved item)*
+1. **Does the TOC-on branch widen its container, and to what?** *(UNRESOLVED — routed to 02-03-PLAN.md's human-verify checkpoint, item 11 of the manual QA checklist)*
    - **What we know:** `show.html.erb:28` wraps hero, title, image, excerpt, body, FAQ, author card, and share section in a single `max-w-4xl mx-auto px-4 sm:px-6 lg:px-8`. At `lg`, that is 896px minus 64px padding = **832px of content box**. Subtracting a 16rem (256px) sidebar and a 3rem (48px) gap leaves the article at **528px** — narrower than the plugin's own 65ch (~620px), so D-13's "constrained to prose-lg's max-width" would be satisfied only incidentally, by the grid rather than by prose. CONTEXT.md's D-01–D-04 never addressed the container width; ROADMAP criterion 3 explicitly blesses "separate container branches," so widening the TOC-on branch **is** permitted.
    - **What's unclear:** Whether the user anticipated that the TOC-on hero/title/image also widen. Widening only the content row while leaving the hero at `max-w-4xl` would misalign the article's left edge against the title's — both are `mx-auto` centered at different widths.
    - **Recommendation:** Branch the container on line 28 (`max-w-5xl` when TOC-on, `max-w-4xl` otherwise). At 1024px content box minus 64px padding minus 256px sidebar minus 48px gap = **656px** article column, so the plugin's 65ch binds with ~36px slack — D-13 satisfied *by prose*, everything stays aligned, and no horizontal overflow at exactly the `lg` breakpoint (the container clamps to viewport width there). Flag this to the user during planning; it is one class and trivially reversible, but it is user-visible.
 
-2. **Flat `<ol>` or nested `<ol>` for H3 entries?**
+2. **RESOLVED — Flat `<ol>` or nested `<ol>` for H3 entries?** Shipped flat, per recommendation, in 02-02-PLAN.md.
    - **What we know:** D-06 locks the *visual* treatment (indent + smaller/lighter). It does not specify markup. `Blog::TableOfContents#entries` is a flat, ordered array with a `level` field.
    - **What's unclear:** Nested lists convey hierarchy to screen readers for free at identical visual cost, but need a grouping pass plus an edge case for an H3 that precedes any H2 (possible — nothing forces authors to start with H2).
    - **Recommendation:** Ship flat (Example 4) for Phase 2. It satisfies D-06 and A11Y-01 exactly, and TOCV2-01 already parks hierarchy work. Note nesting as a candidate if a11y review later asks for it.
 
-3. **Where does `aria-current` come from?**
+3. **RESOLVED — Where does `aria-current` come from?** A11Y-01 scoped to the `<nav aria-label>` half for Phase 2 only, per recommendation; `aria-current` deferred to Phase 3. REQUIREMENTS.md traceability corrected accordingly by 02-03-PLAN.md Task 2.
    - **What we know:** A11Y-01's full text includes "with the active entry marked `aria-current`," but "active entry" only exists once scroll-spy does. ROADMAP's Phase 2 criterion 4 mentions only the `<nav aria-label>` wrapper and the permalink affordance. INTX-02 (scroll-spy) is Phase 3.
    - **Recommendation:** Phase 2 delivers the `<nav aria-label="Table of contents">` half; Phase 3 delivers `aria-current="location"` (the correct token for "current item in a set of links"). The planner should mark A11Y-01 as **partially** covered so REQUIREMENTS.md traceability doesn't claim it as done at the end of this phase.
 
-4. **How is the sticky/hover behavior verified with no system-spec infrastructure?**
+4. **RESOLVED — How is the sticky/hover behavior verified with no system-spec infrastructure?** Implemented per recommendation: request specs for statically-verifiable behavior plus a written manual QA checklist (`02-MANUAL-QA.md`), both delivered in 02-03-PLAN.md.
    - **What we know:** `capybara` 3.40 and `selenium-webdriver` 4.36 are in the `:test` group, but `spec/rails_helper.rb` contains **zero** Capybara/system configuration and `spec/system/` does not exist `[VERIFIED: grep + ls]`. STATE.md already logs this as an open blocker for Phase 3.
    - **Recommendation:** Phase 2 should verify everything statically-verifiable with request specs (sidebar present/absent, entry count, threshold at exactly 2/3/4, `<nav aria-label>` string, permalink `href` matches heading `id`, golden masters green) and cover sticky/hover/measure with a short written manual QA checklist. Standing up `spec/system` is real infrastructure work that Phase 3 needs more than Phase 2 does — don't spend Phase 2's budget on it unless the planner deliberately front-loads it.
 
-5. **Is the permalink focusable?**
+5. **RESOLVED — Is the permalink focusable?** Shipped focusable (option a), per D-15 and Example 2, in 02-01/02-02-PLAN.md.
    - **What we know:** D-15 says "fades in on hover/focus," which implies it takes focus. But a focusable, tabbable link adds one tab stop per heading, and its accessible name becomes part of the heading's accessible name.
    - **Two coherent designs:**
      - **(a) Focusable** — `<a class="toc-permalink" href="#…" aria-label="Permalink to X"><span aria-hidden="true">#</span></a>`. Matches D-15. Heading is announced as "Getting Started, Permalink to Getting Started, heading level 2" (verbose but not wrong).
      - **(b) Mouse-only, GitHub's actual pattern** — `aria-hidden="true" tabindex="-1"`. Zero a11y-tree noise, no extra tab stops; keyboard users navigate via the sidebar instead. But contradicts D-15's "focus."
    - **Recommendation:** (a), since D-15 is a locked decision. Example 2 implements it. Do **not** combine `aria-hidden` with a focusable element.
 
-6. **Does the sticky sidebar get `max-height` + `overflow-y-auto` in this phase?** See Pitfall 8. Recommendation: yes — it is 2 CSS classes, it fixes a visible Phase 2 defect on long posts, and it leaves INTX-03's actual substance (auto-scrolling the *active* entry into view) intact for Phase 3.
+6. **RESOLVED — Does the sticky sidebar get `max-height` + `overflow-y-auto` in this phase?** Yes, per recommendation — included in the sidebar CSS in 02-02-PLAN.md.
 
-7. **Should `prose-headings:scroll-mt-8` be added now?** Once permalinks exist, clicking one lands the heading flush against the viewport top. `scroll-margin-top` is nominally INTX-01's (Phase 3) territory, but it is pure CSS with no JS dependency and directly improves the anchor-jump UX this phase ships. Recommendation: include it, and note the overlap in the plan so Phase 3 doesn't duplicate it.
+7. **RESOLVED — Should `prose-headings:scroll-mt-8` be added now?** Yes, per recommendation — included in 02-02-PLAN.md; overlap with Phase 3's INTX-01 noted in the plan.
 
-8. **views4you.com reference verification.** STATE.md logs the site returned HTTP 403 to automated fetch. I did not re-attempt (it would not change any of the technical findings above). The decisions in CONTEXT.md (D-01, D-05–D-08, D-15) already encode the user's description of that reference, so precise spacing/sizing should be settled visually during the UI review gate rather than by research.
+8. **UNRESOLVED — views4you.com reference verification.** STATE.md logs the site returned HTTP 403 to automated fetch. Routed to 02-03-PLAN.md's human-verify checkpoint (same manual QA checklist item 11 as Question 1) since precise spacing/sizing is settled visually, not by research.
 
 ## Environment Availability
 
