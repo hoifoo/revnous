@@ -104,3 +104,24 @@
   z-index: 31;
   pointer-events: none;
 }
+
+.toc-permalink {
+  margin-left: 0.35em;
+  text-decoration: none;
+  color: #6b7280;
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+}
+
+.prose h2:hover .toc-permalink,
+.prose h3:hover .toc-permalink,
+.toc-permalink:focus-visible {
+  opacity: 1;
+  color: #db2777;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toc-permalink {
+    transition: none;
+  }
+}
