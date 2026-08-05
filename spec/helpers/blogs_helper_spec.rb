@@ -154,5 +154,87 @@ RSpec.describe BlogsHelper, type: :helper do
         expect(helper.blog_article(blog).toc_entries.size).to eq(3)
       end
     end
+
+    describe "heading permalinks (INTX-04)" do
+      let(:body) { "<h2>Intro</h2><h3>Detail</h3><h2>Outro</h2>" }
+
+      it "injects exactly one toc-permalink anchor per H2/H3 heading" do
+        blog = build(:blog, toc_enabled: true, body: body)
+
+        html = helper.blog_article(blog).html
+
+        expect(html.scan('class="toc-permalink"').length).to eq(3)
+      end
+
+      it "builds each permalink href from its own heading's id" do
+        blog = build(:blog, toc_enabled: true, body: body)
+
+        html = helper.blog_article(blog).html
+
+        expect(html).to include('href="#toc-intro"')
+        expect(html).to include('href="#toc-detail"')
+        expect(html).to include('href="#toc-outro"')
+      end
+
+      it "sets aria-label to Permalink to <heading text>" do
+        blog = build(:blog, toc_enabled: true, body: body)
+
+        html = helper.blog_article(blog).html
+
+        expect(html).to include('aria-label="Permalink to Intro"')
+      end
+
+      it "puts the glyph in an inner aria-hidden span, never on the anchor itself" do
+        blog = build(:blog, toc_enabled: true, body: body)
+
+        html = helper.blog_article(blog).html
+
+        expect(html).to include('<span aria-hidden="true">#</span>')
+        expect(html).not_to match(/<a[^>]*class="toc-permalink"[^>]*aria-hidden/)
+      end
+
+      it "does not contaminate entry labels or text with the permalink glyph" do
+        blog = build(:blog, toc_enabled: true, body: body)
+
+        article = helper.blog_article(blog)
+
+        article.toc_entries.each do |entry|
+          expect(entry.text).not_to end_with("#")
+          expect(entry.label_html).not_to include("toc-permalink")
+        end
+      end
+
+      it "leaves the heading's opening tag untouched" do
+        blog = build(:blog, toc_enabled: true, body: body)
+
+        html = helper.blog_article(blog).html
+
+        expect(html).to include('<h2 id="toc-intro">')
+      end
+
+      it "preserves entities such as &amp; in the heading body" do
+        blog = build(:blog, toc_enabled: true, body: "<h2>Foo &amp; Bar</h2><h3>Detail</h3><h2>Outro</h2>")
+
+        html = helper.blog_article(blog).html
+
+        expect(html).to include("&amp;")
+      end
+
+      it "injects no toc-permalink when the entry list is suppressed" do
+        blog = build(:blog, toc_enabled: true, body: "<h2>Intro</h2><h3>Detail</h3>")
+
+        html = helper.blog_article(blog).html
+
+        expect(html).not_to include("toc-permalink")
+      end
+
+      it "gives no permalink to headings without a toc- id" do
+        blog = build(:blog, toc_enabled: false, body: body)
+
+        html = helper.blog_article(blog).html
+
+        expect(html).not_to include("toc-permalink")
+      end
+    end
   end
 end
