@@ -66,7 +66,7 @@ Plans:
 Plans:
 **Wave 1**
 
-- [ ] 02-01-PLAN.md — Single-parse `ArticleContent` value object: hide-override filtering, 3-entry suppression threshold, heading permalink injection
+- [x] 02-01-PLAN.md — Single-parse `ArticleContent` value object: hide-override filtering, 3-entry suppression threshold, heading permalink injection
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
@@ -115,7 +115,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. TOC Domain Core & Regression Baseline | 4/4 | Complete   | 2026-08-02 |
-| 2. Public Rendering & Two-Column Layout | 0/3 | Planned | - |
+| 2. Public Rendering & Two-Column Layout | 1/3 | In Progress|  |
 | 3. Reading Navigation Behavior | 0/TBD | Not started | - |
 | 4. Admin TOC Control | 0/TBD | Not started | - |
 
