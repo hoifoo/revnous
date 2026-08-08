@@ -89,8 +89,27 @@ Plans:
   4. On mobile widths the TOC is a tappable "Contents" disclosure above the article that opens and closes via keyboard and Escape, reports state with `aria-expanded`, auto-closes after an entry is selected, and returns focus predictably
   5. Page-level scrolling behavior is untouched site-wide: no `scroll-behavior: smooth` on the root, and observers/listeners are torn down on Turbo navigation so repeated visits leave nothing running
 
-**Plans**: TBD
+**Plans**: 6 plans
 **UI hint**: yes
+
+Plans:
+**Wave 1**
+
+- [ ] 03-01-PLAN.md — Stand up `spec/system` (Capybara + headless Chrome) plus the page-level `scroll-behavior: auto` guard
+- [ ] 03-02-PLAN.md — Mobile `<details>` Contents disclosure, sidebar Stimulus targets, and the reserved active-entry rail
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 03-03-PLAN.md — The `toc` Stimulus controller: scroll-spy band, capture-phase click ownership, focus moves, containment, teardown
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
+- [ ] 03-04-PLAN.md — Scroll-spy correctness (top/mid/bottom/deep-link) and sidebar containment system specs
+- [ ] 03-05-PLAN.md — Jump offset/motion/focus and mobile disclosure keyboard system specs
+
+**Wave 4** *(blocked on Wave 3 completion)*
+
+- [ ] 03-06-PLAN.md — Manual QA checklist, legacy-handler follow-up tracking, and human verification gate
 
 ### Phase 4: Admin TOC Control
 
@@ -116,7 +135,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. TOC Domain Core & Regression Baseline | 4/4 | Complete   | 2026-08-02 |
 | 2. Public Rendering & Two-Column Layout | 3/3 | Complete   | 2026-08-05 |
-| 3. Reading Navigation Behavior | 0/TBD | Not started | - |
+| 3. Reading Navigation Behavior | 0/6 | Planned | - |
 | 4. Admin TOC Control | 0/TBD | Not started | - |
 
 ## Coverage
