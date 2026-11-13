@@ -7,7 +7,7 @@ Revnous is the company behind a growing portfolio of SaaS products, not a single
 ## Products
 
 - [Products overview](https://www.revnous.com/products): Catalog of Revnous tools and apps.
-- [Shopify Pricing & Campaign Automation](https://www.revnous.com/products): Flagship app. Automates e-commerce pricing campaigns, including a "Schedule Revert" that returns thousands of SKUs to their original prices after weekend or Black Friday sales. 5-star rated with fast, hands-on customer support.
+- [Shopify Pricing & Campaign Automation](https://www.revnous.com/products): Flagship app. Automates e-commerce pricing campaigns, including a "Schedule Revert" that returns thousands of SKUs to their original prices after weekend or Black Friday sales. Used by 100+ Shopify merchants (130K+ product price schedules, 740K+ variant price changes automated). Includes an AI assistant that sets up campaigns from plain-language prompts. Rated 4.8/5 on the [Shopify App Store](https://apps.shopify.com/pricing-schedule/reviews), where reviewers highlight fast, hands-on customer support.
 - [Case studies](https://www.revnous.com/case_studies): Real customer outcomes and results.
 - [Services](https://www.revnous.com/services): Workflow automation and revenue-operations offerings.
 
@@ -47,4 +47,4 @@ Polyglot, "right tool for the job" philosophy prioritizing stability, low server
 
 - [Beta signups](https://www.revnous.com/beta-signup): Early-access program for upcoming products.
 
-Last updated: 2026-06-11.
+Last updated: 2026-11-13.
