@@ -29,13 +29,23 @@
     </div>
 
     <div>
-      <%= form.label :conversion_rate, class: "block text-sm font-medium text-gray-700 mb-2" %>
-      <%= form.text_field :conversion_rate, class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-transparent" %>
+      <%= form.label :conversion_rate, "Primary stat", class: "block text-sm font-medium text-gray-700 mb-2" %>
+      <%= form.text_field :conversion_rate, class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-transparent", placeholder: "e.g. 3 hours" %>
     </div>
 
     <div>
-      <%= form.label :revenue_increase, class: "block text-sm font-medium text-gray-700 mb-2" %>
+      <%= form.label :primary_stat_label, "Primary stat label", class: "block text-sm font-medium text-gray-700 mb-2" %>
+      <%= form.text_field :primary_stat_label, class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-transparent", placeholder: "e.g. To undo an ended campaign" %>
+    </div>
+
+    <div>
+      <%= form.label :revenue_increase, "Secondary stat", class: "block text-sm font-medium text-gray-700 mb-2" %>
       <%= form.text_field :revenue_increase, class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-transparent" %>
+    </div>
+
+    <div>
+      <%= form.label :secondary_stat_label, "Secondary stat label", class: "block text-sm font-medium text-gray-700 mb-2" %>
+      <%= form.text_field :secondary_stat_label, class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-transparent" %>
     </div>
 
     <div>
@@ -74,6 +84,21 @@
   <div>
     <%= form.label :results, class: "block text-sm font-medium text-gray-700 mb-2" %>
     <%= form.text_area :results, rows: 4, class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-transparent" %>
+  </div>
+
+  <div>
+    <%= form.label :key_results, "Key results (one per line)", class: "block text-sm font-medium text-gray-700 mb-2" %>
+    <%= form.text_area :key_results, rows: 4, class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-transparent" %>
+  </div>
+
+  <div>
+    <%= form.label :quote, "Customer quote (verbatim review only)", class: "block text-sm font-medium text-gray-700 mb-2" %>
+    <%= form.text_area :quote, rows: 3, class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-transparent" %>
+  </div>
+
+  <div>
+    <%= form.label :quote_attribution, "Quote attribution", class: "block text-sm font-medium text-gray-700 mb-2" %>
+    <%= form.text_field :quote_attribution, class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-transparent", placeholder: "Store name, Country · Shopify App Store review" %>
   </div>
 
   <div>

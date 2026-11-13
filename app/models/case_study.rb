@@ -13,4 +13,16 @@ class CaseStudy < ApplicationRecord
       nil
     end
   end
+
+  def key_results_list
+    key_results.to_s.lines.map(&:strip).reject(&:blank?)
+  end
+
+  def highlights
+    [
+      [ conversion_rate, primary_stat_label ],
+      [ revenue_increase, secondary_stat_label ],
+      [ product_features, "Feature used" ]
+    ].select { |value, _| value.present? }
+  end
 end

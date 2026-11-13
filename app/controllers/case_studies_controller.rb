@@ -27,7 +27,10 @@ class CaseStudiesController < ApplicationController
   end
 
   def show
-    @case_study = CaseStudy.find(params[:id])
+    @case_study = CaseStudy.find_by(id: params[:id])
+    # Old case study URLs stay indexed after content replacements; send them to the list.
+    return redirect_to case_studies_path, status: :moved_permanently unless @case_study
+
     @related_case_studies = CaseStudy.where.not(id: @case_study.id)
                                       .where(industry: @case_study.industry)
                                       .limit(3)
