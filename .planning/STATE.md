@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-08-01)
 Phase: 03 (reading-navigation-behavior) — EXECUTING
 Plan: 1 of 6
 Status: Executing Phase 03
-Last activity: 2026-08-08 -- Phase 03 execution started
+Last activity: 2026-11-13 - Completed quick task 261113-qxp: Replace demo social-proof claims with real Revnous stats and reviews
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -81,6 +81,12 @@ None yet.
 - `rootMargin` reading band for scroll-spy is LOW confidence — tune in-browser during Phase 3
 - Tiptap StarterKit Heading dropping unknown `id` attributes on round-trip is unverified (MEDIUM confidence) — quick manual check during Phase 1
 - views4you.com reference UX returned HTTP 403 to automated fetch — verify visually during Phase 2/3 if precise interaction details matter
+
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 261113-qxp | Replace demo social-proof claims with real Revnous stats and reviews | 2026-11-13 | fbf9baa | [261113-qxp-replace-demo-social-proof-claims-with-re](./quick/261113-qxp-replace-demo-social-proof-claims-with-re/) |
 
 ## Deferred Items
 
