@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-08-01)
 Phase: 03 (reading-navigation-behavior) — EXECUTING
 Plan: 1 of 6
 Status: Executing Phase 03
-Last activity: 2026-11-13 - Completed quick task 261113-qxp: Replace demo social-proof claims with real Revnous stats and reviews
+Last activity: 2026-11-13 - Completed quick task 261113-r80: Replace demo case studies with real feature playbooks via data migration
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -87,6 +87,7 @@ None yet.
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 261113-qxp | Replace demo social-proof claims with real Revnous stats and reviews | 2026-11-13 | fbf9baa | [261113-qxp-replace-demo-social-proof-claims-with-re](./quick/261113-qxp-replace-demo-social-proof-claims-with-re/) |
+| 261113-r80 | Replace demo case studies with real feature playbooks via data migration | 2026-11-13 | 08784ed | [261113-r80-replace-demo-case-studies-with-real-feat](./quick/261113-r80-replace-demo-case-studies-with-real-feat/) |
 
 ## Deferred Items
 
