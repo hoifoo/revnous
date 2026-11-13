@@ -154,7 +154,7 @@
 <% if @trusted_brands.any? %>
 <div class="bg-white py-16">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <p class="text-center text-sm text-gray-600 mb-8">Trusted by 66,000+ brands</p>
+    <p class="text-center text-sm text-gray-600 mb-8">Trusted by <%= SocialProof::MERCHANTS_LABEL %></p>
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center opacity-60">
       <% @trusted_brands.each do |brand| %>
         <div class="flex justify-center">
