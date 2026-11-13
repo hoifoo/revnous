@@ -4,8 +4,8 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 stopped_at: Phase 03 UI-SPEC approved
-last_updated: "2026-08-08T08:45:58.308Z"
-last_activity: 2026-08-08 -- Phase 03 planning complete
+last_updated: "2026-08-08T08:49:16.768Z"
+last_activity: 2026-08-08 -- Phase 03 execution started
 progress:
   total_phases: 4
   completed_phases: 2
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-08-01)
 
 **Core value:** A reader on a long blog post can see the article's structure at a glance and jump straight to any section — without the marketing team touching code or affecting how any existing post looks.
-**Current focus:** Phase 3 — reading navigation behavior
+**Current focus:** Phase 03 — reading-navigation-behavior
 
 ## Current Position
 
-Phase: 3
-Plan: Not started
-Status: Ready to execute
-Last activity: 2026-08-08 -- Phase 03 planning complete
+Phase: 03 (reading-navigation-behavior) — EXECUTING
+Plan: 1 of 6
+Status: Executing Phase 03
+Last activity: 2026-08-08 -- Phase 03 execution started
 
 Progress: [░░░░░░░░░░] 0%
 
