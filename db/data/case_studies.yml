@@ -1,0 +1,260 @@
+# Case studies shown on /case_studies and the homepage (ad_active: true).
+# Loaded by db/migrate/20261113190100_replace_demo_case_studies.rb and db/seeds.rb.
+#
+# Rules for this file:
+# - Each entry is a playbook built on a real, shipped Pricing Schedule feature.
+# - No invented customers and no invented results. Stats describe what the
+#   product does, not outcomes we cannot verify.
+# - Quotes are verbatim Shopify App Store reviews
+#   (https://apps.shopify.com/pricing-schedule/reviews), attributed to the store.
+# - key_results: one bullet per line.
+
+- name: "A Black Friday Sale That Starts and Ends on Its Own"
+  industry: "General Retail"
+  product_features: "Scheduled Sales"
+  ad_active: true
+  conversion_rate: "0"
+  primary_stat_label: "Price edits made by hand at midnight"
+  revenue_increase: "Auto"
+  secondary_stat_label: "Original prices restored when the sale ends"
+  description: >-
+    A storewide Black Friday sale that goes live at 00:00 on Friday in the store's own
+    time zone and puts every original price back at midnight on Monday. No alarms, no
+    spreadsheets.
+  challenge: >-
+    Black Friday weekend brings the most traffic of the year, and changing prices is the
+    riskiest part of it. Editing hundreds of products by hand at midnight is slow and easy
+    to get wrong. Forget to switch prices back on Tuesday morning, and the store sells at a
+    discount nobody planned for days.
+  solution: >-
+    One campaign covers the whole weekend. The merchant targets all products, sets a
+    percentage off, and picks the start and end times in the store's time zone. Revnous
+    writes the sale price and the compare-at price, so every product page shows the
+    crossed-out original. When the end time arrives, the app restores each variant to the
+    exact price it had before the sale. An email confirms when the campaign starts and when
+    it ends.
+  results: >-
+    The sale runs on schedule while the team focuses on orders and customer questions.
+    Revnous stores the old and new price of every variant, so the revert writes back the
+    real original price instead of recalculating it.
+  key_results: |-
+    Sale starts and ends in the store's own time zone
+    Compare-at prices show the discount on every product page
+    Original prices restored automatically at the end time
+    Email confirmation when the campaign starts and when it ends
+  quote: >-
+    This app has saved us a lot of time when running discounts and scheduled sales. Instead
+    of changing prices manually, we can plan everything in advance and let the app handle
+    it. Simple to use, reliable, and very practical for managing campaigns.
+  quote_attribution: "SlothBedding, Türkiye · Shopify App Store review"
+  image_url: "https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=800&h=600&fit=crop"
+
+- name: "Setting Up a Sale by Asking Shopify Sidekick"
+  industry: "All Industries"
+  product_features: "AI Assistant"
+  ad_active: true
+  conversion_rate: "1 sentence"
+  primary_stat_label: "To draft a complete campaign"
+  revenue_increase: "You approve"
+  secondary_stat_label: "Nothing goes live until you confirm"
+  description: >-
+    A merchant types one sentence into Shopify Sidekick, and Revnous turns it into a sale
+    campaign with the products, discount, and schedule already filled in, ready to confirm.
+  challenge: >-
+    Setting up a sale means picking products, choosing a discount, and getting the start
+    and end times right. For a busy store owner, that is one more screen to learn before a
+    promotion can go out.
+  solution: >-
+    Revnous works with Shopify Sidekick, the AI assistant built into the Shopify admin. The
+    merchant writes something like "20% off the Winter collection from Friday 9am to Monday
+    midnight." Sidekick drafts the campaign with Revnous, checks it against the same rules
+    the app uses, and opens a confirmation page. The page lists the target, the discount,
+    the dates, and a live count of matching products. A campaign can target a collection,
+    the whole store, or filters such as tags, vendor, product type, price range, and date
+    added. Live campaigns can also be paused, resumed, or ended from Sidekick.
+  results: >-
+    A new campaign takes one sentence and one confirmation. Sidekick validates drafts with
+    the app's own rules, so a campaign that looks right in the conversation also saves
+    without errors.
+  key_results: |-
+    Campaigns drafted from a plain-language request
+    Live count of matching products before anything changes
+    Pause, resume, or end a campaign from the conversation
+    Same rules and limits as campaigns created in the app
+  quote: ""
+  quote_attribution: ""
+  image_url: "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=800&h=600&fit=crop"
+
+- name: "Clearing Out a Seasonal Collection"
+  industry: "Home & Living"
+  product_features: "Collection Campaigns"
+  ad_active: true
+  conversion_rate: "1"
+  primary_stat_label: "Collection discounted, nothing else touched"
+  revenue_increase: "Synced"
+  secondary_stat_label: "Products added mid-sale can join the campaign"
+  description: >-
+    A home goods store discounts last season's collection for two weeks without touching
+    full-price products anywhere else in the catalog.
+  challenge: >-
+    End-of-season stock has to move before the new range arrives, but the discount must stay
+    inside one collection. Editing products one by one, and remembering which ones changed,
+    is how bestsellers end up marked down by mistake.
+  solution: >-
+    The merchant picks the collection, sets a percentage or fixed amount off, and schedules
+    a two-week window. Only products in that collection are repriced. Revnous keeps the
+    campaign in sync with the catalog: products added to the collection after the sale
+    starts can join it, and products that leave the collection go back to full price. At the
+    end, every changed variant reverts to its original price.
+  results: >-
+    The markdown stays inside the collection it was meant for and ends on the planned date.
+    The rest of the catalog keeps selling at full price.
+  key_results: |-
+    Percentage or fixed-amount discount on a single collection
+    Products added during the sale can be synced into it
+    Products that leave the collection go back to full price
+    Automatic revert at the end of the season
+  quote: "I've been able to create pricing for collections and products which works well."
+  quote_attribution: "GrünGedacht, Germany · Shopify App Store review"
+  image_url: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop"
+
+- name: "Passing On a Supplier Price Increase"
+  industry: "Electronics"
+  product_features: "Bulk Price Updates"
+  ad_active: true
+  conversion_rate: "1 filter"
+  primary_stat_label: "Selects every product from the vendor"
+  revenue_increase: "Preview"
+  secondary_stat_label: "Matching products counted before you apply"
+  description: >-
+    When a supplier raises its prices, an electronics store updates every product from that
+    vendor in one step. The change is permanent and shows no sale styling.
+  challenge: >-
+    Supplier cost changes rarely come with time to spare. Updating a vendor's products one by
+    one leaves part of the catalog at the old price for days, and a CSV round-trip risks
+    overwriting prices that were already correct.
+  solution: >-
+    The merchant filters by vendor and chooses a price update instead of a sale, so no
+    compare-at price is added. Prices go up by a percentage or a fixed amount, or to an exact
+    price. Before anything is written, a live preview shows how many products match. If a
+    price range is part of the filter, variants outside that range can be left untouched. The
+    change applies immediately or at a scheduled time, and with no end date the new prices
+    stay in place.
+  results: >-
+    The whole vendor range moves to its new prices in one update, with no spreadsheet and no
+    products missed.
+  key_results: |-
+    Filter by vendor, product type, tags, or price range
+    Raise prices by a percentage or fixed amount, or set an exact price
+    Live count of matching products before applying
+    No compare-at price, so it reads as a regular price change
+  quote: >-
+    I’ve started using Revnous Bulk Pricing Editor to schedule price changes and sales in my
+    store, and it’s made things so much easier. No more doing price updates manually every
+    time. I just plan my campaigns ahead and let it run. Works smoothly, and even the free
+    plan is super useful!
+  quote_attribution: "Sadece Satranç, Türkiye · Shopify App Store review"
+  image_url: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop"
+
+- name: "A Weekend Flash Sale on One Price Range"
+  industry: "Fashion & Apparel"
+  product_features: "Smart Product Filters"
+  ad_active: true
+  conversion_rate: "6"
+  primary_stat_label: "Product filters you can combine"
+  revenue_increase: "Per variant"
+  secondary_stat_label: "Only sizes inside the price range change"
+  description: >-
+    A fashion store runs a weekend flash sale on items priced between $20 and $50, while new
+    arrivals stay at full price.
+  challenge: >-
+    Not everything belongs in a flash sale. New launches should keep their full price. A
+    jacket whose larger sizes cost more should not have every size discounted when only some
+    of them fall inside the promotion's price range.
+  solution: >-
+    The merchant combines filters: price between $20 and $50, a tag excluded (for example
+    "new-arrival"), and only products created before a cutoff date. Vendor, product type, and
+    inventory filters are available too. A live preview shows how many products match. Where
+    a product has variants both inside and outside the range, the merchant chooses whether
+    the sale covers the whole product or only the matching variants. The sale is scheduled
+    from Friday evening to Sunday night and reverts on its own.
+  results: >-
+    The discount lands only where it was meant to. New arrivals and out-of-range sizes keep
+    their full price, and the weekend ends without anyone touching prices.
+  key_results: |-
+    Combine tags, vendor, product type, price, date added, and inventory
+    Exclude tags to keep new arrivals at full price
+    Discount only the variants inside the price range
+    Scheduled start and automatic end
+  quote: ""
+  quote_attribution: ""
+  image_url: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&h=600&fit=crop"
+
+- name: "Undoing a Campaign That Ended Too Soon"
+  industry: "All Industries"
+  product_features: "Campaign Controls"
+  ad_active: true
+  conversion_rate: "3 hours"
+  primary_stat_label: "To undo an ended campaign"
+  revenue_increase: "Live chat"
+  secondary_stat_label: "With the team that builds the app"
+  description: >-
+    A merchant ends a sale by mistake and gets it running again in a couple of clicks, with
+    the same sale prices back in place.
+  challenge: >-
+    Mistakes happen under pressure: ending the wrong campaign, ending one a day early, or
+    keeping sale prices that should have been reverted. Rebuilding a campaign from scratch
+    takes time, and the sale is offline in the meantime.
+  solution: >-
+    Revnous gives merchants control of a live campaign at every stage. They can pause and
+    resume it, end it and restore the original prices, or end it and keep the new prices.
+    After ending and reverting a campaign, they can undo that for up to three hours, and the
+    campaign reopens with the same sale prices it had before. For anything else, the
+    campaign page has a "Something wrong with this campaign?" link that opens a chat with
+    the Revnous team, with email support alongside it.
+  results: >-
+    A mistaken click costs minutes instead of a rebuilt campaign. When something needs a
+    person, merchants reach the team that builds the app.
+  key_results: |-
+    Pause and resume a live campaign at any time
+    End and restore prices, or end and keep the new prices
+    Undo an ended campaign for up to three hours
+    In-app chat and email support from the Revnous team
+  quote: >-
+    Works as smooth as a butter and Customer service was super fast. I would definitely
+    recommend using this app.
+  quote_attribution: "Tiny Tales, India · Shopify App Store review"
+  image_url: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=800&h=600&fit=crop"
+
+- name: "Seeing What a Sale Actually Did"
+  industry: "All Industries"
+  product_features: "Campaign Reports"
+  ad_active: false
+  conversion_rate: "30 days"
+  primary_stat_label: "Pre-sale baseline for comparison"
+  revenue_increase: "Per campaign"
+  secondary_stat_label: "Orders on the products in the sale"
+  description: >-
+    After a promotion ends, a store checks how orders for the discounted products compared
+    with the month before the sale.
+  challenge: >-
+    A sale feels busy, but busy is not a number. Without a baseline, it is hard to tell
+    whether the discount brought extra orders or gave away margin on orders that would have
+    come anyway.
+  solution: >-
+    Every campaign has its own report. Revnous counts orders for the products in the
+    campaign during the sale and compares the daily average with the 30 days before it
+    started, for the same products. The report also shows estimated revenue and which
+    products took part, so the next promotion can be planned on evidence instead of
+    guesswork.
+  results: >-
+    The merchant can see whether the campaign lifted daily orders on the discounted products,
+    and decide what to repeat, change, or drop next time.
+  key_results: |-
+    A report for every campaign
+    Daily orders during the sale compared with the 30 days before
+    The same products on both sides of the comparison
+    Estimated revenue for the campaign period
+  quote: ""
+  quote_attribution: ""
+  image_url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
