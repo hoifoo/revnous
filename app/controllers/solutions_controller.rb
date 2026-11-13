@@ -38,12 +38,12 @@ class SolutionsController < ApplicationController
       cta_primary: "Schedule My First Sale",
       cta_secondary: "See How It Works",
       meta_title: "Automate Shopify Flash Sales | Schedule Price Changes",
-      meta_description: "Schedule flash sales that start and end automatically. No midnight panic. Prices revert when sales end. Used by 66,000+ stores.",
+      meta_description: "Schedule flash sales that start and end automatically. No midnight panic. Prices revert when sales end. Rated #{SocialProof::RATING_LABEL}.",
       related_keywords: [ "shopify scheduled sales", "automatic flash sales", "shopify price scheduler" ],
       seo_footer_links: [
         { text: "How to Run a Black Friday Campaign", url: "/blogs" },
         { text: "Flash Sale Best Practices", url: "/blogs" },
-        { text: "Case Study: 3X Revenue with Scheduled Sales", url: "/case-studies" }
+        { text: "Sales Campaign Case Studies", url: "/case-studies" }
       ]
     },
 
@@ -77,7 +77,7 @@ class SolutionsController < ApplicationController
         "Apply math operations: +10%, -$5, round to .99, etc.",
         "Preview changes, then apply instantly to your store"
       ],
-      social_proof: "Processing 50M+ price updates monthly for Shopify merchants",
+      social_proof: "#{SocialProof::VARIANT_CHANGES} variant price changes automated for Shopify merchants",
       cta_primary: "Edit Prices Now",
       cta_secondary: "Watch Demo",
       meta_title: "Shopify Bulk Price Editor | Update Thousands of Products Fast",
