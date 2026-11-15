@@ -15,7 +15,7 @@ class Admin::CaseStudiesController < Admin::BaseController
     if @case_study.save
       redirect_to admin_case_studies_path, notice: "Case study created successfully."
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -26,7 +26,7 @@ class Admin::CaseStudiesController < Admin::BaseController
     if @case_study.update(case_study_params)
       redirect_to admin_case_studies_path, notice: "Case study updated successfully."
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

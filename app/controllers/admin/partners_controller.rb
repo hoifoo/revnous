@@ -15,7 +15,7 @@ class Admin::PartnersController < Admin::BaseController
     if @partner.save
       redirect_to admin_partners_path, notice: "Partner created successfully."
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -26,7 +26,7 @@ class Admin::PartnersController < Admin::BaseController
     if @partner.update(partner_params)
       redirect_to admin_partners_path, notice: "Partner updated successfully."
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

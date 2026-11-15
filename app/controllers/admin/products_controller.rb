@@ -15,7 +15,7 @@ class Admin::ProductsController < Admin::BaseController
     if @product.save
       redirect_to admin_products_path, notice: "Product created successfully."
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -26,7 +26,7 @@ class Admin::ProductsController < Admin::BaseController
     if @product.update(product_params)
       redirect_to admin_products_path, notice: "Product updated successfully."
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

@@ -16,7 +16,7 @@ class Admin::PricingPlansController < Admin::BaseController
     if @pricing_plan.save
       redirect_to admin_pricing_plans_path, notice: "Pricing plan created successfully."
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -29,7 +29,7 @@ class Admin::PricingPlansController < Admin::BaseController
     if @pricing_plan.update(pricing_plan_params)
       redirect_to admin_pricing_plans_path, notice: "Pricing plan updated successfully."
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

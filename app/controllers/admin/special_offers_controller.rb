@@ -16,7 +16,7 @@ class Admin::SpecialOffersController < Admin::BaseController
     if @special_offer.save
       redirect_to admin_special_offers_path, notice: "Special offer created successfully."
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -29,7 +29,7 @@ class Admin::SpecialOffersController < Admin::BaseController
     if @special_offer.update(special_offer_params)
       redirect_to admin_special_offers_path, notice: "Special offer updated successfully."
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

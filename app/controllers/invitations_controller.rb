@@ -34,7 +34,7 @@ class InvitationsController < ApplicationController
       redirect_to admin_root_path, notice: "Welcome! Your admin account has been created."
     else
       @user = user
-      render :setup, status: :unprocessable_entity
+      render :setup, status: :unprocessable_content
     end
   end
 

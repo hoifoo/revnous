@@ -17,7 +17,7 @@ class Admin::InvitationsController < Admin::BaseController
       InvitationMailer.invite(@invitation).deliver_later
       redirect_to admin_invitations_path, notice: "Invitation sent to #{@invitation.email}."
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
