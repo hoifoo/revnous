@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-08-01)
 Phase: 03 (reading-navigation-behavior) — EXECUTING
 Plan: 1 of 6
 Status: Executing Phase 03
-Last activity: 2026-11-13 - Completed quick task 261113-r80: Replace demo case studies with real feature playbooks via data migration
+Last activity: 2026-11-15 - Completed quick task 261115-hig: Upgrade Rails 8.0.3 to 8.1.4.1 to clear brakeman EOL CI failure
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -88,6 +88,7 @@ None yet.
 |---|-------------|------|--------|-----------|
 | 261113-qxp | Replace demo social-proof claims with real Revnous stats and reviews | 2026-11-13 | fbf9baa | [261113-qxp-replace-demo-social-proof-claims-with-re](./quick/261113-qxp-replace-demo-social-proof-claims-with-re/) |
 | 261113-r80 | Replace demo case studies with real feature playbooks via data migration | 2026-11-13 | 08784ed | [261113-r80-replace-demo-case-studies-with-real-feat](./quick/261113-r80-replace-demo-case-studies-with-real-feat/) |
+| 261115-hig | Upgrade Rails 8.0.3 to 8.1.4.1 to clear brakeman EOLRails CI failure | 2026-11-15 | 55b69b5 | [261115-hig-upgrade-rails-8-0-3-to-8-1-to-clear-brak](./quick/261115-hig-upgrade-rails-8-0-3-to-8-1-to-clear-brak/) |
 
 ## Deferred Items
 
