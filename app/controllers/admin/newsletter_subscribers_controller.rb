@@ -15,7 +15,7 @@ class Admin::NewsletterSubscribersController < Admin::BaseController
     if @newsletter_subscriber.save
       redirect_to admin_newsletter_subscribers_path, notice: "Subscriber added successfully."
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -26,7 +26,7 @@ class Admin::NewsletterSubscribersController < Admin::BaseController
     if @newsletter_subscriber.update(newsletter_subscriber_params)
       redirect_to admin_newsletter_subscribers_path, notice: "Subscriber updated successfully."
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

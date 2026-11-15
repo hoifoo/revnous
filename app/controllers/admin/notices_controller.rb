@@ -15,7 +15,7 @@ class Admin::NoticesController < Admin::BaseController
     if @notice.save
       redirect_to admin_notices_path, notice: "Notice created successfully."
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -26,7 +26,7 @@ class Admin::NoticesController < Admin::BaseController
     if @notice.update(notice_params)
       redirect_to admin_notices_path, notice: "Notice updated successfully."
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

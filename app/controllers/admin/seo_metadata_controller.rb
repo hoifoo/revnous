@@ -16,7 +16,7 @@ module Admin
       if @seo_metadatum.save
         redirect_to admin_seo_metadata_path, notice: "SEO Metadata was successfully created."
       else
-        render :new, status: :unprocessable_entity
+        render :new, status: :unprocessable_content
       end
     end
 
@@ -27,7 +27,7 @@ module Admin
       if @seo_metadatum.update(seo_metadatum_params)
         redirect_to admin_seo_metadata_path, notice: "SEO Metadata was successfully updated."
       else
-        render :edit, status: :unprocessable_entity
+        render :edit, status: :unprocessable_content
       end
     end
 

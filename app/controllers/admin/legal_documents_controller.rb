@@ -15,7 +15,7 @@ class Admin::LegalDocumentsController < Admin::BaseController
     if @legal_document.save
       redirect_to admin_legal_documents_path, notice: "Legal document created successfully."
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -26,7 +26,7 @@ class Admin::LegalDocumentsController < Admin::BaseController
     if @legal_document.update(legal_document_params)
       redirect_to admin_legal_documents_path, notice: "Legal document updated successfully."
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

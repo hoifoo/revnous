@@ -35,7 +35,7 @@ class BetaUsersController < ApplicationController
       @products = Product.active.ordered
       @product = Product.find_by(id: @beta_user_params[:product_id])
       flash.now[:alert] = @beta_user.errors.full_messages.join(", ")
-      render :index, status: :unprocessable_entity
+      render :index, status: :unprocessable_content
     end
   rescue => e
     Rails.logger.error("Beta user signup error: #{e.message}")
